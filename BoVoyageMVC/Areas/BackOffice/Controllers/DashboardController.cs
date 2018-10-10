@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BoVoyageMVC.Controllers
+namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
+    [Authorize(Roles = "Commercial")]
     public class DashboardController : Controller
     {
         public ActionResult Index()
