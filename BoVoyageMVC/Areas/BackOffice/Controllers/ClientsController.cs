@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BoVoyageMVC.Controllers;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [RouteArea("BackOffice")]
     [Authorize(Roles = "Commercial")]
-    public class ClientsController : Controller
+    public class ClientsController : BaseController
     {
         // GET: BackOffice/Clients
         public ActionResult Index()

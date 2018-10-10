@@ -8,15 +8,15 @@ using System.Web;
 using System.Web.Mvc;
 using BoVoyageMVC.Models;
 using BoVoyageMVC.Tools;
+using BoVoyageMVC.Controllers;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [RouteArea("BackOffice")]
     [Authorize(Roles = "Commercial")]
-    public class VoyagesController : Controller
+    public class VoyagesController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
+       
         // GET: BackOffice/Voyages
         public ActionResult Index()
         {
@@ -56,7 +56,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         {
             if (voyage.ReturnDate <= voyage.DepartureDate)
 
-            {// Display("Date retour est invalide"); //
+            {
+                Display("Date retour est invalide"); 
             }
             if (ModelState.IsValid)
             {
@@ -131,13 +132,5 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
