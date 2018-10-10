@@ -7,13 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BoVoyageMVC.Models;
+using BoVoyageMVC.Controllers;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Commercial")]
-    public class AssurancesController : Controller
+    public class AssurancesController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: BackOffice/Assurances
         public ActionResult Index()
@@ -116,13 +117,6 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }
