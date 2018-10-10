@@ -1,20 +1,17 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using BoVoyageMVC.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using BoVoyageMVC.Models;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace BoVoyageMVC.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
-    {
+    public class AccountController : BaseController
+    {    
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -22,7 +19,7 @@ namespace BoVoyageMVC.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +31,9 @@ namespace BoVoyageMVC.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +117,7 @@ namespace BoVoyageMVC.Controllers
             // Si un utilisateur entre des codes incorrects pendant un certain intervalle, le compte de cet utilisateur 
             // est alors verrouillé pendant une durée spécifiée. 
             // Vous pouvez configurer les paramètres de verrouillage du compte dans IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,13 +152,23 @@ namespace BoVoyageMVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    var client = new Client
+                    {
+                        Title = model.Title, LastName = model.LastName, FisrtName = model.FisrtName,
+                        Address = model.Address, PhoneNumber = model.PhoneNumber, BirthDate = model.BirthDate,
+                        UserId = user.Id
+                    };
+                    db.Clients.Add(client);
+                    db.SaveChanges();
+                    UserManager.AddToRole(user.Id, "Client");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
                     // Envoyer un message électronique avec ce lien
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+                    Display("Client enregistré");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -171,7 +178,21 @@ namespace BoVoyageMVC.Controllers
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
         }
-
+        [Authorize(Roles ="Client")]
+        [ChildActionOnly]
+        public string GetCurrentUserName()
+        {
+            var user = UserManager.FindByEmail(User.Identity.GetUserName());
+            var client = db.Clients.SingleOrDefault(x=>x.UserId == user.Id);
+            if (client != null)
+            {
+                return client.FisrtName;
+            }
+            else
+            {
+                return "";
+            }
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

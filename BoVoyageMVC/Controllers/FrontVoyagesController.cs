@@ -16,6 +16,7 @@ namespace BoVoyageMVC.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: FrontVoyages
+        [Route("Voyages")]
         public ActionResult Index()
         {
             var voyages = db.Voyages.Include(v => v.AgenceVoyage).Include(v => v.Destination);

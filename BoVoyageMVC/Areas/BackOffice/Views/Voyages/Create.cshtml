@@ -85,22 +85,21 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @*<script>
+    @Scripts.Render("~/bundles/jquery")
+    <script>
 
-            $(function () {
-                $('#DepartureDate').datetimepicker({
-                    lang: 'fr',
-
-                    format: 'd/m/y H:i'
-                });
-                $('#ReturnDate').datetimepicker({
-                    lang: 'fr',
-
-                    format: 'd/m/y H:i'
-                });
-
-                tinymce.init({ selector: '#Description'});
+        $(function () {
+            $('#DepartureDate').datetimepicker({
+                lang: 'fr',
+                format: 'd/M/20y H:i'
             });
-        </script>*@
+            $('#ReturnDate').datetimepicker({
+                lang: 'fr',
+                format: 'd/M/20y H:i'
+            });
+
+            tinymce.init({ selector: '#Description', lang: 'fr' });
+        });
+    </script>
 }
 
