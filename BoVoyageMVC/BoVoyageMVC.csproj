@@ -595,6 +595,7 @@
     <Content Include="Views\Participants\Edit.cshtml" />
     <Content Include="Views\Participants\Index.cshtml" />
     <Content Include="Views\FrontClients\Index.cshtml" />
+    <Content Include="Views\Manage\EditClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

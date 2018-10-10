@@ -12,7 +12,7 @@ namespace BoVoyageMVC.Controllers
         protected ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View(db.Voyages.Include("Destinations"));
+            return View(db.Voyages.Include("Destination").ToList());
         }
         [Route("A-propos")]
         public ActionResult About()
