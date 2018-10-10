@@ -12,7 +12,7 @@ namespace BoVoyageMVC.Controllers
         {
             return View();
         }
-
+        [Route("A-propos")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
