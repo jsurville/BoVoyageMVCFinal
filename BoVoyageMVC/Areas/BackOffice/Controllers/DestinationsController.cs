@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -66,7 +67,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Destination destination = db.Destinations.Find(id);
+            Destination destination = db.Destinations.Include("Images").SingleOrDefault(x => x.Id == id);
             if (destination == null)
             {
                 return HttpNotFound();
@@ -79,15 +80,38 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Continent,Country,Region,Description")] Destination destination)
+        public ActionResult Edit([Bind(Include = "Id,Continent,Country,Region,Description,Images")] Destination destination)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(destination).State = EntityState.Modified;
+                destination = db.Destinations.Include("Images").SingleOrDefault(x => x.Id == destination.Id);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(destination);
+        }
+
+
+        [HttpPost]
+        public ActionResult AddPicture(HttpPostedFileBase picture, int id)
+        {
+            if (picture?.ContentLength > 0)
+            {
+                var tp = new Image();
+                tp.ContentType = picture.ContentType;
+                tp.Name = picture.FileName;
+                tp.DestinationId = id;
+
+                using (var reader = new BinaryReader(picture.InputStream))
+                {
+                    tp.Content = reader.ReadBytes(picture.ContentLength);
+                }
+                db.Images.Add(tp);
+                db.SaveChanges();
+                return RedirectToAction("edit", "destinations", new { id = id });
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // GET: BackOffice/Destinations/Delete/5

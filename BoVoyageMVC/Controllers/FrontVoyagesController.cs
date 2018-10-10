@@ -24,6 +24,7 @@ namespace BoVoyageMVC.Controllers
         }
 
         // GET: FrontVoyages/Details/5
+        [Route("voyage-details")]  
         public ActionResult Details(int? id)
         {
             if (id == null)

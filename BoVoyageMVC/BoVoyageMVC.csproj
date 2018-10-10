@@ -246,6 +246,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\Extension.cs" />
     <Compile Include="Tools\Message.cs" />
+    <Compile Include="Validators\RouteDetailsAttribute.cs" />
     <Compile Include="Validators\DateAttribute.cs" />
     <Compile Include="Validators\AgeAttribute.cs" />
   </ItemGroup>
