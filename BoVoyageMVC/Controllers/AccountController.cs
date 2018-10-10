@@ -178,7 +178,21 @@ namespace BoVoyageMVC.Controllers
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
         }
-
+        [Authorize(Roles ="Client")]
+        [ChildActionOnly]
+        public string GetCurrentUserName()
+        {
+            var user = UserManager.FindByEmail(User.Identity.GetUserName());
+            var client = db.Clients.SingleOrDefault(x=>x.UserId == user.Id);
+            if (client != null)
+            {
+                return client.FisrtName;
+            }
+            else
+            {
+                return "";
+            }
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

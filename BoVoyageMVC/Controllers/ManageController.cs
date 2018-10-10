@@ -11,7 +11,7 @@ using BoVoyageMVC.Models;
 namespace BoVoyageMVC.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -73,6 +73,28 @@ namespace BoVoyageMVC.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        public ActionResult EditClient()
+        {
+            var user = UserManager.FindByEmail(User.Identity.GetUserName());
+            var client = db.Clients.SingleOrDefault(x => x.UserId == user.Id);
+            return View(client);
+        }
+
+        // POST: FrontClients/Edit/5
+        [HttpPost]
+        public ActionResult EditClient(int id, Client client)
+        {
+            try
+            {
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         //

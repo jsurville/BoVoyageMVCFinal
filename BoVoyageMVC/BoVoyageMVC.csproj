@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201810101116559_ImageCommercialAdd.Designer.cs">
       <DependentUpon>201810101116559_ImageCommercialAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810101436246_ajoutertypeData.cs" />
+    <Compile Include="Migrations\201810101436246_ajoutertypeData.Designer.cs">
+      <DependentUpon>201810101436246_ajoutertypeData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
@@ -240,6 +244,8 @@
     <Compile Include="Models\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Tools\Extension.cs" />
+    <Compile Include="Tools\Message.cs" />
     <Compile Include="Validators\DateAttribute.cs" />
     <Compile Include="Validators\AgeAttribute.cs" />
   </ItemGroup>
@@ -589,6 +595,7 @@
     <Content Include="Views\Participants\Edit.cshtml" />
     <Content Include="Views\Participants\Index.cshtml" />
     <Content Include="Views\FrontClients\Index.cshtml" />
+    <Content Include="Views\Manage\EditClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -616,6 +623,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810101116559_ImageCommercialAdd.resx">
       <DependentUpon>201810101116559_ImageCommercialAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810101436246_ajoutertypeData.resx">
+      <DependentUpon>201810101436246_ajoutertypeData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

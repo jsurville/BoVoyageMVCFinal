@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -54,9 +55,8 @@ namespace BoVoyageMVC.Controllers
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
-            {
-                // TODO: Add update logic here
-
+            {           
+                
                 return RedirectToAction("Index");
             }
             catch
