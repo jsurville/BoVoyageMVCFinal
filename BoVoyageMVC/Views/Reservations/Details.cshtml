@@ -1,0 +1,58 @@
+﻿@model BoVoyageMVC.Models.DossierReservation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DossierReservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voyage.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voyage.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreditCardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreditCardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EtatDossier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EtatDossier)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
