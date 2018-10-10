@@ -19,8 +19,8 @@ namespace BoVoyageMVC.Controllers
         [Route("Voyages")]
         public ActionResult Index()
         {
-            var voyages = db.Voyages.Include(v => v.AgenceVoyage).Include(v => v.Destination);
-            return View(voyages.ToList());
+            var voyages = db.Voyages.Include(x => x.AgenceVoyage).Include(y => y.Destination).ToList();
+            return View(voyages);
         }
 
         // GET: FrontVoyages/Details/5

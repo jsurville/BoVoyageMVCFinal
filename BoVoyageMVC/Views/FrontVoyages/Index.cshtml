@@ -1,18 +1,17 @@
-﻿@model IEnumerable<BoVoyageMVC.Models.Voyage>
+﻿@model ICollection<BoVoyageMVC.Models.Voyage>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Nos Voyages";
+    
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+
+@*<table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AgenceVoyage.Name)
+            @Html.DisplayNameFor(model => model.Destination)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Destination.Continent)
@@ -33,37 +32,26 @@
             @Html.DisplayNameFor(model => model.Margin)
         </th>
         <th></th>
-    </tr>
+    </tr>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AgenceVoyage.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Destination.Continent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartureDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReturnDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxCapacity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Margin)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+@foreach (var item in Model)
+{
 
-</table>
+<div class="row">
+    <div id="voyages" class="col-md-3 alert alert-success" style="margin-bottom:15px">
+        <h2> @Html.DisplayFor(modelItem => item.Destination.Continent) </h2>
+        Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
+        <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice) </h3>
+
+    </div>
+</div>
+  
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </div>
+    
+    }
+
+ 
