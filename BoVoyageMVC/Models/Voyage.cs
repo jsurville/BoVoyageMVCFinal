@@ -12,12 +12,14 @@ namespace BoVoyageMVC.Models
 	{
 		public int Id { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name ="Date Aller")]
 		[Required(ErrorMessage = "Le champ {0} est obligatoire.")]
 		[Index("IX_DatesAgenceDestination", 1, IsUnique = true)]
         [Date(1,15, ErrorMessage = "La Date de départ doit se situer entre demain et dans 15 jours")]
 		public DateTime DepartureDate { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Date Retour")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
 		[Index("IX_DatesAgenceDestination", 2, IsUnique = true)]
