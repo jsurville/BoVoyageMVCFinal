@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoVoyageMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,10 @@ namespace BoVoyageMVC.Controllers
 {
     public class HomeController : Controller
     {
+        protected ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View();
+            return View(db.Voyages.Include("Destinations"));
         }
         [Route("A-propos")]
         public ActionResult About()

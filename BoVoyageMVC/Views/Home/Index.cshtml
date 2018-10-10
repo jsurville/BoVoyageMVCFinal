@@ -1,26 +1,40 @@
-﻿@{
+﻿
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div >
+<div>
     <h1>BoVoyage</h1>
+    <div class="row" style="margin: 0 auto; display:block; width: 100%;">
+        <div class="col-lg-3">
+            <select multiple></select>
+        </div>
+        <div class="col-lg-3">
+            <select multiple></select>
+        </div>
+        <div class="col-lg-3">
+            <select multiple></select>
+        </div>
+        <div class="col-lg-3 btn-success">Lancer la recherche</div>
+    </div>
 </div>
 
 <div class="row">
     <div class="col-md-4">
         <h2>Les meilleurs prix!</h2>
         <div class="row">
-            @for (int i = 0;i <5 ;i++)
-            { 
-            <div class="container" style="margin: 3px">
-                <img src="https://picsum.photos/310/100">
-                <div class="text-block" style="position: absolute;bottom: 20px;
-                            right: 20px;background-color: black;
+            @for (int i = 0; i < 5; i++)
+            {
+                <div class="container" style="margin: 3px">
+                    <img src="https://picsum.photos/310/100">
+                    <div class="text-block" style="position: absolute;
+                            right: 10px;background-color: black;
                             color: white;padding-left: 20px;padding-right: 20px;">
-                    <h4>Titre</h4>
-                    <p>prix</p>
+                        <h4>Titre</h4>
+                        <p>prix</p>
+                    </div>
                 </div>
-            </div>
             }
         </div>
 
@@ -47,15 +61,15 @@
         <div class="row">
             @for (int i = 0; i < 5; i++)
             {
-            <div class="container" style="margin: 3px">
-                <img src="https://picsum.photos/310/100">
-                <div class="text-block" style="position: absolute;bottom: 20px;
+                <div class="container" style="margin: 3px">
+                    <img src="https://picsum.photos/310/100">
+                    <div class="text-block" style="position: absolute;bottom: 20px;
                             right: 20px;background-color: black;
                             color: white;padding-left: 20px;padding-right: 20px;">
-                    <h4>Titre</h4>
-                    <p>prix</p>
+                        <h4>Titre</h4>
+                        <p>prix</p>
+                    </div>
                 </div>
-            </div>
             }
         </div>
     </div>

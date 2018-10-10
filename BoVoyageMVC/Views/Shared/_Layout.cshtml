@@ -21,7 +21,7 @@
                 @Html.ActionLink("BoVoyage", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">                                 
+                <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Rechercher un voyage", "Index", "FrontVoyages")</li>
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                     <li>@Html.ActionLink("Nous contacter", "Contact", "Home")</li>
@@ -40,6 +40,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/css")
     @RenderSection("scripts", required: false)
 </body>
 </html>
