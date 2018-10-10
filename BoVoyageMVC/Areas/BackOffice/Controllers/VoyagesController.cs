@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BoVoyageMVC.Models;
+using BoVoyageMVC.Tools;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
@@ -22,7 +23,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             var voyages = db.Voyages.Include(v => v.AgenceVoyage).Include(v => v.Destination);
             return View(voyages.ToList());
         }
-
+        
         // GET: BackOffice/Voyages/Details/5
         public ActionResult Details(int? id)
         {
@@ -30,7 +31,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Find(id);
+            Voyage voyage = db.Voyages.Include("Destination").SingleOrDefault(x=>x.Id == id);
             if (voyage == null)
             {
                 return HttpNotFound();
@@ -53,6 +54,10 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DepartureDate,ReturnDate,MaxCapacity,UnitPrice,Margin,AgenceVoyageId,DestinationId")] Voyage voyage)
         {
+            if (voyage.ReturnDate <= voyage.DepartureDate)
+
+            {// Display("Date retour est invalide"); //
+            }
             if (ModelState.IsValid)
             {
                 db.Voyages.Add(voyage);
