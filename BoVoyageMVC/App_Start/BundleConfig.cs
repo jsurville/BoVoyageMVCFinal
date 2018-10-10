@@ -28,7 +28,8 @@ namespace BoVoyageMVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                       "~/Content/jquery.datetimepicker.css"));
+                       "~/Content/jquery.datetimepicker.css",
+                       "~/Content/Social.css"));
         }
     }
 }
