@@ -46,8 +46,10 @@ namespace BoVoyageMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,LastName,FisrtName,Email,PhoneNumber,SendDate,Message")] ContactMessage contactMessage)
+        public ActionResult Create([Bind(Include = "Id,Title,LastName,FisrtName,Email,PhoneNumber,Message")] ContactMessage contactMessage)
         {
+            contactMessage.SendDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.ContactMessages.Add(contactMessage);
