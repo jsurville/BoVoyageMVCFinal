@@ -79,6 +79,7 @@ namespace BoVoyageMVC.Controllers
         {
             var user = UserManager.FindByEmail(User.Identity.GetUserName());
             var client = db.Clients.SingleOrDefault(x => x.UserId == user.Id);
+            client.EmailDisplay = user.Email;
             return View(client);
         }
 
