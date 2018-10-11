@@ -3,39 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BoVoyageMVC.Controller;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Commercial")]
-    public class CommercialsController : Controller
+    public class CommercialsController : BaseController
     {
         // GET: BackOffice/Commercials
         public ActionResult Index()
         {
-            return View();
+            var commercials = db.Commercials;
+            return View(commercials.ToList());
+            
         }
 
 
         // GET: BackOffice/Commercials/Create
         public ActionResult Create()
-        {
-            return View();
+        {            
+            return View(); 
         }
 
         // POST: BackOffice/Commercials/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include = "Id,Title,LastName,FirstName,Address,PhoneNumber,Birthday")] Commercial commercial)
         {
-            try
-            {
-                // TODO: Add insert logic here
+        if (commercial.BirthDate > DateTime.Now) 
 
+            {
+                Display("Date de naissance est invalide");
+            }
+            if (ModelState.IsValid)
+            {
+                db.Commercials.Add(commercial);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+             return View(commercial);
         }
 
         // GET: BackOffice/Commercials/Edit/5

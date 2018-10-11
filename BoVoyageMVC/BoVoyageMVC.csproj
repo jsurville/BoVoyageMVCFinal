@@ -651,6 +651,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\BackOffice\FileUsers\" />
     <Folder Include="Areas\BackOffice\Views\Clients\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

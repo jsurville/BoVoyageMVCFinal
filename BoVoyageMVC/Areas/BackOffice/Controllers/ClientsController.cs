@@ -40,27 +40,39 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         // GET: BackOffice/Clients/Create
         public ActionResult Create()
         {
-           
-            return View();
+            UserRegistration registration = new UserRegistration();
+            return View(registration);
         }
 
         // POST: BackOffice/Clients/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Title,LastName,FirstName,Address,PhoneNumber,BirthDate")] Client client)
+        public ActionResult Create(UserRegistration registration)
         {
-            if (client.BirthDate <= DateTime.Now)
-
-            {
-                Display("Date de naissance est invalide");
-            }
+            TextWriter text = null;
+                       
+            
             if (ModelState.IsValid)
             {
-                db.Clients.Add(client);
+                db.UserRegistrations.Add(registration);
                 db.SaveChanges();
+                string Jsonvalue = JsonConvert.SerializeObject(registration);
                 return RedirectToAction("Index");
+                string currentFile = "d:\\FileUsers\\text.txt";
+                If (System.IO.File.Exists(currentFile))
+                    {
+                    text = new StreamWriter(currentFile);
+                    }
+                else
+                {
+                    text = new StreamWriter(currentFile, append: true);
+                }
+                text.WriteLine(JsonValue);
+                text.Close();
+                return RedirectToAction("Index");
+
             }
    
-                return View();
+                return View(registration);
             
         }
 
@@ -101,6 +113,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             //return RedirectToAction("Index", "Home");
 
         }
+
 
 
 
