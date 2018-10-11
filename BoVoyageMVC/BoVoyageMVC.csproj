@@ -245,6 +245,10 @@
     <Compile Include="Migrations\201810110813276_changeDestination.Designer.cs">
       <DependentUpon>201810110813276_changeDestination.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810110911458_changeDestination2.cs" />
+    <Compile Include="Migrations\201810110911458_changeDestination2.Designer.cs">
+      <DependentUpon>201810110911458_changeDestination2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
@@ -675,6 +679,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810110813276_changeDestination.resx">
       <DependentUpon>201810110813276_changeDestination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810110911458_changeDestination2.resx">
+      <DependentUpon>201810110911458_changeDestination2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
