@@ -11,7 +11,7 @@ using BoVoyageMVC.Models;
 namespace BoVoyageMVC.Controllers
 {
     
-    public class FrontVoyagesController : Controller
+    public class FrontVoyagesController : BaseController
     {
         protected ApplicationDbContext db = new ApplicationDbContext();
 
@@ -39,6 +39,18 @@ namespace BoVoyageMVC.Controllers
             return View(voyage);
         }
 
+        // GET: FrontVoyages/Search/
+      // [Route("Search")]
+        public ActionResult Search()
+        {
+            var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
+            if (voyages?.Count() ==0)
+            {
+                Display("Aucun Résultat ");
+            }
+            return View(voyages);
+            
+        }
 
         protected override void Dispose(bool disposing)
         {
