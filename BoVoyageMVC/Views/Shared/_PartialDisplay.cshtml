@@ -1,0 +1,13 @@
+﻿@using BoVoyageMVC.Tools;
+@{
+    Layout = null;
+    var message = TempData["MESSAGE"] as Message;
+}
+
+@if (message != null)
+{
+    <div id="message" style="color:blueviolet; float:right" class="alert alert-@(message.MessageType ==  MessageType.SUCCES ? "success" : "danger") container ">
+        @* opération ternaire pour appliquer le bon type de class bootstrap en fonction du type demessage définit par la class Message.cs *@
+        @message.Text
+    </div>
+}

@@ -6,11 +6,8 @@
     ViewBag.IdVoyage = Model.Id;
 }
 
-
-<h2>Details</h2>
-
 <div>
-    <h4>Voyage</h4>
+    <h2>Voyage en @Model.Destination.Country</h2>
     <hr />
     <dl class="dl-horizontal">
 
@@ -28,9 +25,11 @@
 
         <dd>
             @Model.DepartureDate.ToShortDateString()
-           
-        </dd>
 
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
         <dd>
             @Model.ReturnDate.ToShortDateString()
         </dd>

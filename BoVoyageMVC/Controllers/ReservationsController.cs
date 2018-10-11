@@ -11,9 +11,8 @@ using BoVoyageMVC.Models;
 namespace BoVoyageMVC.Controllers
 {
     //[Route("MonCompte")]
-    public class ReservationsController : Controller
-    {
-        private ApplicationDbContext db = new ApplicationDbContext();
+    public class ReservationsController : BaseController
+    {       
 
         // GET: Reservations
         public ActionResult Index()
@@ -41,10 +40,18 @@ namespace BoVoyageMVC.Controllers
 
         // GET: Reservations/Book
         [Authorize(Roles = "Client")]
-        public ActionResult Book()
+        public ActionResult Book(int id, int? clientId)
         {
-            
-            return View();
+            var voyage = db.Voyages.Find(id);
+            if (voyage == null)
+                return HttpNotFound();
+            if(clientId == null || clientId == 0)
+                return RedirectToAction("Index","Home");
+            var dossierReservation = new DossierReservation();
+            dossierReservation.VoyageId = id;
+            dossierReservation.Voyage = voyage;
+            dossierReservation.ClientId = (int)clientId;
+            return View(dossierReservation);
         }
 
 
@@ -143,15 +150,6 @@ namespace BoVoyageMVC.Controllers
             db.DossiersReservations.Remove(dossierReservation);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

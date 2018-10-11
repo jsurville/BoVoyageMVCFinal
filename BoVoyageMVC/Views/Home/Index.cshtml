@@ -8,14 +8,18 @@
     <h1>BoVoyage</h1>
 </div>
 
+
+
 <div class="tab">
     <button class="tablinks" onclick="openCity(event, 'bestPrice')">Les moins chers</button>
     <button class="tablinks" onclick="openCity(event, 'soon')">Depart imminent</button>
     <button class="tablinks" onclick="openCity(event, 'popular')">Top5 des destinations</button>
 </div>
 
+
 <div id="bestPrice" class="tabcontent">
     <div class="row">
+
         @{IEnumerable<BoVoyageMVC.Models.Voyage> topBestPrice = Model.OrderBy(x => x.UnitPublicPrice);
 
 
@@ -34,15 +38,21 @@
                     <h5>@topBestPrice.ElementAt(i).Destination.Region</h5>
                     <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
                     <p>@Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
-                      new { region = topBestPrice.ElementAt(i).Destination.Region,
-                          country = topBestPrice.ElementAt(i).Destination.Country,
-                          id = topBestPrice.ElementAt(i).Id },
-                      new { @class = "btn btn-primary",
-                          @style = "float:right",
-                          @data = topBestPrice.ElementAt(i).Destination.Country })</p>
+    new
+    {
+        region = topBestPrice.ElementAt(i).Destination.Region,
+        country = topBestPrice.ElementAt(i).Destination.Country,
+        id = topBestPrice.ElementAt(i).Id
+    },
+    new
+    {
+        @class = "btn btn-primary",
+        @style = "float:right",
+        @data = topBestPrice.ElementAt(i).Destination.Country
+    })</p>
                 </div>
             </div>
-        } 
+                        }
         }
     </div>
 </div>
@@ -69,15 +79,21 @@
                         <h5>@topSoon.ElementAt(i).Destination.Region</h5>
                         <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
                         <p>@Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
-                          new { region = topSoon.ElementAt(i).Destination.Region,
-                              country = topSoon.ElementAt(i).Destination.Country,
-                              id = topSoon.ElementAt(i).Id },
-                          new { @class = "btn btn-primary",
-                              @style = "float:right",
-                              @data = topSoon.ElementAt(i).Destination.Country })</p>
+    new
+    {
+        region = topSoon.ElementAt(i).Destination.Region,
+        country = topSoon.ElementAt(i).Destination.Country,
+        id = topSoon.ElementAt(i).Id
+    },
+    new
+    {
+        @class = "btn btn-primary",
+        @style = "float:right",
+        @data = topSoon.ElementAt(i).Destination.Country
+    })</p>
                     </div>
                 </div>
-            }
+                            }
         }
     </div>
 </div>
@@ -86,7 +102,7 @@
     <div class="row">
         @{IEnumerable<BoVoyageMVC.Models.Voyage> topPopular = Model.OrderBy(x => x.Destination.Country);
 
-           
+
 
 
             for (int i = 0; i < 5; i++)
@@ -105,18 +121,24 @@
                             <p class="price">@topPopular.ElementAt(i).UnitPublicPrice</p>
                             <p>
                                 @Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
-                           new { region = topPopular.ElementAt(i).Destination.Region,
-                               country = topPopular.ElementAt(i).Destination.Country,
-                               id = topPopular.ElementAt(i).Id },
-                           new { @class = "btn btn-primary",
-                               @style = "float:right",
-                               @data = topPopular.ElementAt(i).Destination.Country })
+                                        new
+                                        {
+                                            region = topPopular.ElementAt(i).Destination.Region,
+                                            country = topPopular.ElementAt(i).Destination.Country,
+                                            id = topPopular.ElementAt(i).Id
+                                        },
+                                        new
+                                        {
+                                            @class = "btn btn-primary",
+                                            @style = "float:right",
+                                            @data = topPopular.ElementAt(i).Destination.Country
+                                        })
                         </p>
                     </div>
                 </div>
-            }
+                                }
             }
         </div>
 </div>
-
+                                
 

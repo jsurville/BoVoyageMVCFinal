@@ -191,7 +191,7 @@ namespace BoVoyageMVC.Controllers
         }
         [Authorize(Roles = "Client")]
         [ChildActionOnly]
-        public string GetCurrentUserName()
+        public string GetCurrentClientName()
         {
             var user = UserManager.FindByEmail(User.Identity.GetUserName());
             var client = db.Clients.SingleOrDefault(x => x.UserId == user.Id);
@@ -204,6 +204,21 @@ namespace BoVoyageMVC.Controllers
                 return "";
             }
         }
+
+        public int GetCurrentClientId()
+        {
+            var user = UserManager.FindByEmail(User.Identity.GetUserName());
+            var client = db.Clients.SingleOrDefault(x => x.UserId == user.Id);
+            if (client != null)
+            {
+                return client.Id;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
