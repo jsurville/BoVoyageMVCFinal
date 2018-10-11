@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace BoVoyageMVC.Controllers
 {
     [RouteArea("")]
-    public class FrontClientsController : Controller
+    public class FrontClientsController : BaseController
     {
         // GET: FrontClients
         public ActionResult Index()
