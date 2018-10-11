@@ -40,17 +40,30 @@ namespace BoVoyageMVC.Controllers
         }
 
         // GET: FrontVoyages/Search/
-      // [Route("Search")]
-        public ActionResult Search()
+         [Route("Search")]
+        
+        public ActionResult Search(string search)
         {
-            var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
-            if (voyages?.Count() ==0)
+            if (search == null)
             {
-                Display("Aucun Résultat ");
+                return RedirectToRoute("Index");
             }
-            return View(voyages);
+                ICollection<Voyage> voyages = db.Voyages.Include("Destination").Include(y => y.Destination.Images).Where(x => x.Destination.Continent.Contains(search) || x.Destination.Country.Contains(search) || x.Destination.Description.Contains(search)).ToList();
+                //var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
+                if (voyages?.Count() == 0)
+                {
+                    Display("Aucun Résultat ");
+                }
+                else
+                {
+                    return View(voyages);
+                }
+                return RedirectToRoute("Index", "Home");
             
+            //return RedirectToAction("Index", "Home");
+
         }
+
 
         protected override void Dispose(bool disposing)
         {

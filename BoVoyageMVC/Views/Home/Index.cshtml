@@ -17,19 +17,22 @@
         </div>
     </form>
 
-    <form>
-        <div class="form-group col-3">
-            <label for="Destiçnation">Destination</label>
-            <input rows="3" type="text" class="form-control" id="Destination" />
-        </div>
 
+    <form action="@Url.Action("Search", "FrontVoyages")" method="post" enctype="multipart/form-data">
+        @* enctype form-data pour envoyer un fichier  *@
+        @*@Html.HiddenFor(x => x.ID)*@
+        <div class="form-group">
+            <label for="if">Destination</label>
+            <input type="text" id="destination" name="search" /> @*dans l'input, la valeur envoyée dans la requête post est donnée par le name*@
+        </div>
+        <button type="submit" class="btn btn-info"> Rechercher</button>
     </form>
 
-    <div class="form-group actions">
-        <div class="col-md-offset-2 col-md-10">
-            @Html.ActionLink("Rechercher", "Search", "FrontVoyages",null, new {@class="btn btn-info" })
-        </div>
-    </div>
+
+    
+        @*@Html.ActionLink("Rechercher", "Search", "FrontVoyages", null, new { @class = "btn btn-info" })*@
+  
+
 
 
 </div>
