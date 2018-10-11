@@ -37,6 +37,26 @@ namespace BoVoyageMVC.Controllers
             return View(dossierReservation);
         }
 
+
+
+        // GET: Reservations/Book
+        [Authorize(Roles = "Client")]
+        public ActionResult Book()
+        {
+            
+            return View();
+        }
+
+
+        // POST: Reservations/Book
+        [Authorize(Roles ="Client")]
+        [HttpPost]
+        public ActionResult Book(int? id)
+        {
+            
+            return View();
+        }
+
         // GET: Reservations/Create
         public ActionResult Create()
         {

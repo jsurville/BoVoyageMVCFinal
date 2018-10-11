@@ -16,17 +16,27 @@
 
 <div id="bestPrice" class="tabcontent">
     <div class="row">
-        @for (int i = 0; i < 5; i++)
-        {
+        @{IEnumerable<BoVoyageMVC.Models.Voyage> topBestPrice = Model.OrderBy(x => x.UnitPublicPrice);
+
+
+            for (int i = 0; i < 5; i++)
+            {
             <div class="col-md-2">
                 <div class="card">
-                    <img src="https://picsum.photos/200/150" alt="sejour de rêve" style="width:100%">
-                    <h1>Travel</h1>
-                    <p class="price">199€</p>
-                    <p>un sejour de rêve!</p>
-                    <p><button>Reserver</button></p>
+                    @{ if (topBestPrice.ElementAt(i).Destination.Images?.Count > 0)
+                        {
+
+                            <img src="data:@topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
+                         @Convert.ToBase64String(topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
+                        }
+                        }
+                    <h4>@topBestPrice.ElementAt(i).Destination.Country</h4>
+                    <h5>@topBestPrice.ElementAt(i).Destination.Region</h5>
+                    <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
+                    <p><button>En savoir plus</button></p>
                 </div>
             </div>
+        } 
         }
     </div>
 </div>
