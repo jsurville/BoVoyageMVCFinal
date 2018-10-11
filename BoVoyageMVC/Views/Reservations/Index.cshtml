@@ -1,24 +1,25 @@
 ﻿@model IEnumerable<BoVoyageMVC.Models.DossierReservation>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Historique réservation";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Client.UserId)
+            @Html.DisplayNameFor(model => model.Voyage.Destination.Country)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Voyage.Id)
+            @Html.DisplayNameFor(model => model.Voyage.DepartureDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreditCardNumber)
+            @Html.DisplayNameFor(model => model.Voyage.ReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UnitPrice)
@@ -32,13 +33,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Client.UserId)
+            @Html.DisplayFor(modelItem => item.Voyage.Destination.Country)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Voyage.Id)
+            @Html.DisplayFor(modelItem => item.Voyage.DepartureDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreditCardNumber)
+            @Html.DisplayFor(modelItem => item.Voyage.ReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -47,9 +51,9 @@
             @Html.DisplayFor(modelItem => item.EtatDossier)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Ajout participants", "AddParticipant", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Annuler", "Annuler", new { id = item.Id })
         </td>
     </tr>
 }

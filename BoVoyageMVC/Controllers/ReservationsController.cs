@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BoVoyageMVC.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Controllers
 {
     //[Route("MonCompte")]
+    [Authorize(Roles = "Client")]
     public class ReservationsController : BaseController
-    {       
+    {
 
         // GET: Reservations
         public ActionResult Index()
         {
-            var dossiersReservations = db.DossiersReservations.Include(d => d.Client).Include(d => d.Voyage);
+            var dossiersReservations = db.DossiersReservations.Include(d => d.Client)
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination);
             return View(dossiersReservations.ToList());
         }
 
@@ -28,7 +27,9 @@ namespace BoVoyageMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+            DossierReservation dossierReservation = db.DossiersReservations.Include(d => d.Client)
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
+                .SingleOrDefault(d => d.Id == id);
             if (dossierReservation == null)
             {
                 return HttpNotFound();
@@ -39,29 +40,43 @@ namespace BoVoyageMVC.Controllers
 
 
         // GET: Reservations/Book
-        [Authorize(Roles = "Client")]
+
         public ActionResult Book(int id)
         {
             var clientId = GetCurrentClientId();
-            var voyage = db.Voyages.Find(id);
+            var voyage = db.Voyages.Include(v => v.Destination).SingleOrDefault(x => x.Id == id);
             if (voyage == null)
                 return HttpNotFound();
-           
+
             var dossierReservation = new DossierReservation();
             dossierReservation.VoyageId = id;
             dossierReservation.Voyage = voyage;
             dossierReservation.ClientId = clientId;
             dossierReservation.Client = db.Clients.Find(clientId);
+
+            MultiSelectList assuranceValues = new MultiSelectList(db.Assurances, "ID", "TypeAssurance", db.Assurances.Select(x => x.ID));
+            ViewBag.Assurances = assuranceValues;
             return View(dossierReservation);
         }
 
 
         // POST: Reservations/Book
-        [Authorize(Roles ="Client")]
+        [Authorize(Roles = "Client")]
         [HttpPost]
-        public ActionResult Book(int? id)
+        public ActionResult Book([Bind(Exclude = "Id")] DossierReservation dossierReservation, int[] AssuranceIds)
         {
-            
+            if (ModelState.IsValid)
+            {
+                if (AssuranceIds != null && AssuranceIds.Count() > 0)
+                    dossierReservation.Assurances = db.Assurances.Where(x => AssuranceIds.Contains(x.ID)).ToList();
+                dossierReservation.UnitPrice = db.Voyages.Find(dossierReservation.VoyageId).UnitPublicPrice;
+                db.DossiersReservations.Add(dossierReservation);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            MultiSelectList assuranceValues = new MultiSelectList(db.Assurances, "ID", "TypeAssurance", db.Assurances.Select(x => x.ID));
+            ViewBag.Assurances = assuranceValues;
+
             return View();
         }
 
