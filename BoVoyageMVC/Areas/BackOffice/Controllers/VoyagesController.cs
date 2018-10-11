@@ -123,7 +123,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             || x.Destination.Country.Contains(search)
             || x.Destination.Region.Contains(search)
              || (x.DepartureDate > departureDate
-            && x.ReturnDate < returnDate)).ToList();
+            || x.ReturnDate < returnDate)).ToList();
             
             if (voyages?.Count() == 0)
             {
