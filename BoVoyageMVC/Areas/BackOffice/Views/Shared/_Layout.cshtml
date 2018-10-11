@@ -50,16 +50,38 @@
                             <li><a href="@Url.Action("Index", "Assurances")">Lister</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <form class="navbar-form navbar-left">
+                            
+                            <button type="submit" class="btn btn-default">Rechercher</button>
+                        </form>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recherche <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Destination</a></li>
+                            <li><a href="#">Date Aller</a></li>
+                            <li><a href="#">Prix</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Top Voyage</a></li>
+                        </ul>
+                    </li>
+                   
                 </ul>
             </div>
         </div>
     </div>
 
-    <div class="container body-content">
+    <div class="container-fluid body-content">
+        <div id="PartialDisplay" class="container">
+            @Html.Partial("_PartialDisplay")
+
+        </div>
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - BoVoyage MVC Groupe 2</p>
         </footer>
     </div>
 
