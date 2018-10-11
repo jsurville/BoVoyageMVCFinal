@@ -10,7 +10,7 @@ using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Controllers
 {
-    public class FrontContactMessagesController : Controller
+    public class FrontContactMessagesController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -46,8 +46,10 @@ namespace BoVoyageMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,LastName,FisrtName,Email,PhoneNumber,SendDate,Message")] ContactMessage contactMessage)
+        public ActionResult Create([Bind(Include = "Id,Title,LastName,FisrtName,Email,PhoneNumber,Message")] ContactMessage contactMessage)
         {
+            contactMessage.SendDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.ContactMessages.Add(contactMessage);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BoVoyageMVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BoVoyageMVC.Controllers
 {
@@ -29,5 +30,64 @@ namespace BoVoyageMVC.Controllers
             if (!disposing)
                 this.db.Dispose();
         }
+
+        protected int GetCurrentClientId()
+        {
+            var userId = User.Identity.GetUserId();
+            var client = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            if (client != null)
+            {
+                return client.Id;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        protected string GetCurrentClientName()
+        {
+            var userId = User.Identity.GetUserId();
+            var client = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            if (client != null)
+            {
+                return client.FisrtName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        protected string GetCurrentCommercialName()
+        {
+            var userId = User.Identity.GetUserId();
+            var commercial = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            if (commercial != null)
+            {
+                return commercial.FisrtName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        protected string GetCurrentUserRoles()
+        {
+            var userId = User.Identity.GetUserId();
+            
+
+            var client = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            if (client != null)
+            {
+                return client.FisrtName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
     }
 }

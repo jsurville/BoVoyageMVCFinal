@@ -10,10 +10,9 @@ using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Controllers
 {
-    public class ParticipantsController : Controller
+    public class ParticipantsController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
+       
         // GET: Participants
         public ActionResult Index()
         {
