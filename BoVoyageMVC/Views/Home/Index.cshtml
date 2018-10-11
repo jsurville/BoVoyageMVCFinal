@@ -33,7 +33,13 @@
                     <h4>@topBestPrice.ElementAt(i).Destination.Country</h4>
                     <h5>@topBestPrice.ElementAt(i).Destination.Region</h5>
                     <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
-                    <p><button>En savoir plus</button></p>
+                    <p>@Html.ActionLink("En Savoir plus", "Details",
+                      new { region = topBestPrice.ElementAt(i).Destination.Region,
+                          country = topBestPrice.ElementAt(i).Destination.Country,
+                          id = topBestPrice.ElementAt(i).Id },
+                      new { @class = "btn btn-primary",
+                          @style = "float:right",
+                          @data = topBestPrice.ElementAt(i).Destination.Country })</p>
                 </div>
             </div>
         } 
@@ -43,37 +49,69 @@
 
 <div id="soon" class="tabcontent">
     <div class="row">
-        @for (int i = 0; i < 5; i++)
-        {
-            <div class="col-md-2">
-                <div class="card">
-                    <p id="countdown"></p>
-                    <img src="https://picsum.photos/200/150" alt="sejour de rêve" style="width:100%">
-                    <h1>Travel</h1>
-                    <p class="price">199€</p>
-                    <p>un sejour de rêve!</p>
-                    <p><button>Reserver</button></p>
+        @{IEnumerable<BoVoyageMVC.Models.Voyage> topSoon = Model.OrderBy(x => x.DepartureDate);
+
+
+            for (int i = 0; i < 5; i++)
+            {
+                <div class="col-md-2">
+                    <div class="card">
+                        @{ if (topSoon.ElementAt(i).Destination.Images?.Count > 0)
+                            {
+
+                                <img src="data:@topSoon.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
+                         @Convert.ToBase64String(topSoon.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
+                            }
+                        }
+                        <p id="countdown"></p>
+                        <h3>@topSoon.ElementAt(i).DepartureDate.ToShortDateString()</h3>
+                        <h4>@topSoon.ElementAt(i).Destination.Country</h4>
+                        <h5>@topSoon.ElementAt(i).Destination.Region</h5>
+                        <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
+                        <p>@Html.ActionLink("En Savoir plus", "Details",
+                          new { region = topSoon.ElementAt(i).Destination.Region,
+                              country = topSoon.ElementAt(i).Destination.Country,
+                              id = topSoon.ElementAt(i).Id },
+                          new { @class = "btn btn-primary",
+                              @style = "float:right",
+                              @data = topSoon.ElementAt(i).Destination.Country })</p>
+                    </div>
                 </div>
-            </div>
+            }
         }
     </div>
 </div>
 
 <div id="popular" class="tabcontent">
     <div class="row">
-        @for (int i = 0; i < 5; i++)
-        {
-            <div class="col-md-2">
-                <div class="card">
-                    <img src="https://picsum.photos/200/150" alt="sejour de rêve" style="width:100%">
-                    <h1>Travel</h1>
-                    <p class="price">199€</p>
-                    <p>un sejour de rêve!</p>
-                    <p><button>Reserver</button></p>
-                </div>
-            </div>
-        }
+        @{IEnumerable<BoVoyageMVC.Models.Voyage> topPopular = Model.OrderBy(x => x.Destination.Country);
 
+
+            for (int i = 0; i < 5; i++)
+            {
+                <div class="col-md-2">
+                    <div class="card">
+                        @{ if (topPopular.ElementAt(i).Destination.Images?.Count > 0)
+                            {
+
+                                <img src="data:@topPopular.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
+                         @Convert.ToBase64String(topPopular.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
+                            }
+                        }
+                        <h4>@topPopular.ElementAt(i).Destination.Country</h4>
+                        <h5>@topPopular.ElementAt(i).Destination.Region</h5>
+                        <p class="price">@topPopular.ElementAt(i).UnitPublicPrice</p>
+                        <p>@Html.ActionLink("En Savoir plus", "Details",
+                          new { region = topPopular.ElementAt(i).Destination.Region,
+                              country = topPopular.ElementAt(i).Destination.Country,
+                              id = topPopular.ElementAt(i).Id },
+                          new { @class = "btn btn-primary",
+                              @style = "float:right",
+                              @data = topPopular.ElementAt(i).Destination.Country })</p>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>
 
