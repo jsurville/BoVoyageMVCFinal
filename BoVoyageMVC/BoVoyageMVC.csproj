@@ -246,6 +246,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\Extension.cs" />
     <Compile Include="Tools\Message.cs" />
+    <Compile Include="Validators\RouteDetailsAttribute.cs" />
     <Compile Include="Validators\DateAttribute.cs" />
     <Compile Include="Validators\AgeAttribute.cs" />
     <Compile Include="Validators\DecimalAttibute.cs" />
@@ -257,6 +258,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\Social.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -400,6 +402,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
     <Content Include="Scripts\tinymce\license.txt" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />

@@ -13,24 +13,25 @@ namespace BoVoyageMVC.Controllers
     
     public class FrontVoyagesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        protected ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: FrontVoyages
         [Route("Voyages")]
         public ActionResult Index()
         {
-            var voyages = db.Voyages.Include(x => x.AgenceVoyage).Include(y => y.Destination).ToList();
+            var voyages = db.Voyages.Include("Destination").ToList();
             return View(voyages);
         }
 
         // GET: FrontVoyages/Details/5
+        [Route("voyage-details")]  
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Find(id);
+            Voyage voyage = db.Voyages.Include("Destination").SingleOrDefault(x => x.Id == id);
             if (voyage == null)
             {
                 return HttpNotFound();

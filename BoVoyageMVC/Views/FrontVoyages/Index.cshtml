@@ -5,53 +5,32 @@
     
 }
 
-<h2>Index</h2>
+<style>
+    .voyages {
+        padding: 5px;
+        margin: 10px;
+        border: solid 1px red;
+    }
+</style>
 
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Destination)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Destination.Continent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartureDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReturnDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxCapacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Margin)
-        </th>
-        <th></th>
-    </tr>*@
-
-@foreach (var item in Model)
-{
-
-<div class="row">
+<div class="voyages row">
+    @foreach (var item in Model)
+    {
+       
     <div id="voyages" class="col-md-3 alert alert-success" style="margin-bottom:15px">
-        <h2> @Html.DisplayFor(modelItem => item.Destination.Continent) </h2>
+        <h2> @Html.DisplayFor(modelItem => item.Destination.Country) </h2>
         Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
         <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice) </h3>
-
-    </div>
-</div>
-  
         <div>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Plus d'Infos", "Details", new { id = item.Id }, new { @class = "btn btn-primary", @style = "float:right" , @data = item.Destination.Country })
+            @*@Html.ActionLink("Réserver", "Create", "Reservations", new { id = item.Id }, new { @class = "btn btn-primary", @style = "float:right" })*@
         </div>
-    
-    }
+    </div>
 
+
+        
+
+    }
+</div>
  

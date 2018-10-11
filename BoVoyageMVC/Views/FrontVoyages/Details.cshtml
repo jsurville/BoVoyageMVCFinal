@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Details";
+
+    ViewBag.IdVoyage = Model.Id;
 }
 
 <h2>Details</h2>
@@ -10,20 +12,13 @@
     <h4>Voyage</h4>
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
-            @Html.DisplayNameFor(model => model.AgenceVoyage.Name)
+            @Html.DisplayNameFor(model => model.Destination.Country)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AgenceVoyage.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Destination.Continent)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Destination.Continent)
+            @Html.DisplayFor(model => model.Destination.Country)
         </dd>
 
         <dt>
@@ -43,32 +38,38 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MaxCapacity)
+            @Html.DisplayNameFor(model => model.UnitPublicPrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaxCapacity)
+            @Html.DisplayFor(model => model.UnitPublicPrice)
         </dd>
 
+
         <dt>
-            @Html.DisplayNameFor(model => model.UnitPrice)
+            @Html.DisplayNameFor(model => model.Destination.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Margin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Margin)
+            @Html.DisplayFor(model => model.Destination.Description)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<div class="row">
+    @if (Model.Destination.Images != null)
+    {
+        foreach (var picture in Model.Destination.Images)
+        {
+            <div class="col-md-2">
+                <img src="data:@picture.ContentType;base64,@Convert.ToBase64String(picture.Content)" class="img-thumbnail" />
+            </div>
+        }
+    }
+</div>
+<div>
+
+    @Html.ActionLink("Retour à la Liste", "Index", "FrontVoyages", new { @class = "btn btn-default", @style = "float:right" })
+</div>

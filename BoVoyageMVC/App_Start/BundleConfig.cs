@@ -12,7 +12,8 @@ namespace BoVoyageMVC
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/tinymce/tinymce.min.js",
                         "~/Scripts/jquery.validate.globalize.min.js",
-                        "~/Scripts/jquery.datetimepicker.js"));
+                        "~/Scripts/jquery.datetimepicker.js",
+                        "~/Scripts/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -28,7 +29,8 @@ namespace BoVoyageMVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                       "~/Content/jquery.datetimepicker.css"));
+                       "~/Content/jquery.datetimepicker.css",
+                       "~/Content/Social.css"));
         }
     }
 }
