@@ -19,12 +19,12 @@ namespace BoVoyageMVC.Controllers
         [Route("Voyages")]
         public ActionResult Index()
         {
-            var voyages = db.Voyages.Include("Destination").ToList();
+            var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
             return View(voyages);
         }
 
         // GET: FrontVoyages/Details/5
-        [Route("voyage-details")]  
+        [Route("voyage-{region}-{country}/{id}")]  
         public ActionResult Details(int? id)
         {
             if (id == null)

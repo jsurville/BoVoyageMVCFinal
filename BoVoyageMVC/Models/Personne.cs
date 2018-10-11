@@ -38,7 +38,7 @@ namespace BoVoyageMVC.Models
 
         [Display(Name = "Téléphone")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
-        [RegularExpression(@"^([0-9])*\s*$")]
+        [RegularExpression(@"^([0-9])*\s*$",ErrorMessage = "Le champ {0} doit avoir que des chiffres")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "Le numéro de telephone doit avoir de 3 à 20 caractères")]
 		public string PhoneNumber { get; set; }
 

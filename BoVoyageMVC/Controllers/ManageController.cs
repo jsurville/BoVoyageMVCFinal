@@ -1,12 +1,13 @@
-﻿using System;
+﻿using BoVoyageMVC.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Controllers
 {
@@ -32,9 +33,9 @@ namespace BoVoyageMVC.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -74,27 +75,32 @@ namespace BoVoyageMVC.Controllers
             };
             return View(model);
         }
-
+        [Authorize(Roles ="Client")]
         public ActionResult EditClient()
         {
             var user = UserManager.FindByEmail(User.Identity.GetUserName());
             var client = db.Clients.SingleOrDefault(x => x.UserId == user.Id);
+            client.EmailDisplay = user.Email;
             return View(client);
         }
 
         // POST: FrontClients/Edit/5
         [HttpPost]
-        public ActionResult EditClient(int id, Client client)
+        [Authorize(Roles = "Client")]
+        public ActionResult EditClient(Client client)
         {
-            try
+            if (ModelState.IsValid)
             {
-
+                if(client.BirthDate.AddYears(18) > DateTime.Now)
+                {
+                    ModelState.AddModelError("BirthDate","Client doit avoir plus de 18 ans");
+                    return View();
+                }
+                db.Entry(client).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         //
@@ -355,7 +361,7 @@ namespace BoVoyageMVC.Controllers
             base.Dispose(disposing);
         }
 
-#region Programmes d'assistance
+        #region Programmes d'assistance
         // Utilisé pour la protection XSRF lors de l'ajout de connexions externes
         private const string XsrfKey = "XsrfId";
 
@@ -406,6 +412,6 @@ namespace BoVoyageMVC.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

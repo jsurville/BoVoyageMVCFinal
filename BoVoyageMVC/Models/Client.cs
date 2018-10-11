@@ -14,5 +14,9 @@ namespace BoVoyageMVC.Models
         public ApplicationUser ApplicationUser { get; set; }
 
         public ICollection<DossierReservation> DossiersReservations { get; set; }
-	}
+
+        [Display(Name="Email/Username")]
+        [NotMapped]
+        public string EmailDisplay { get; set; }
+    }
 }
