@@ -53,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { voyageId = Model.Id, clientId= @Html.Raw(Html.Action("GetCurrentClientId", "Account")) }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

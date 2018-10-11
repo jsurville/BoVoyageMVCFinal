@@ -637,6 +637,7 @@
     <Content Include="Views\ContactMessages\Details.cshtml" />
     <Content Include="Views\ContactMessages\Edit.cshtml" />
     <Content Include="Views\ContactMessages\Index.cshtml" />
+    <Content Include="Views\Reservations\Book.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
