@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using BoVoyageMVC.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Controllers
 {
+    [Authorize(Roles = "Client")]
     public class ParticipantsController : BaseController
     {
-       
+
         // GET: Participants
         public ActionResult Index()
         {
+
             var participants = db.Participants.Include(p => p.DossierReservation);
+            /*
+            var dossierReservation = db.DossiersReservations.Include(d => d.Voyage)
+    .Include(d => d.Voyage.Destination).SingleOrDefault(d => d.Id == participant.DossierReservationId);
+    
+            ViewBag.Destination = dossierReservation.Voyage.Destination.Country; */
+
             return View(participants.ToList());
         }
 
@@ -36,10 +40,13 @@ namespace BoVoyageMVC.Controllers
         }
 
         // GET: Participants/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.DossierReservationId = new SelectList(db.DossiersReservations, "Id", "CreditCardNumber");
-            return View();
+            var participant = new Participant();
+            if (id == null || id == 0)
+                return RedirectToAction("Index", "Reservations");
+            participant.DossierReservationId = (int)id;
+            return View(participant);
         }
 
         // POST: Participants/Create
@@ -47,16 +54,15 @@ namespace BoVoyageMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DossierReservationId,Title,LastName,FisrtName,Address,PhoneNumber,BirthDate")] Participant participant)
+        public ActionResult Create([Bind(Include = "DossierReservationId,Title,LastName,FisrtName,Address,PhoneNumber,BirthDate")] Participant participant)
         {
             if (ModelState.IsValid)
             {
                 db.Participants.Add(participant);
                 db.SaveChanges();
+                TempData["DossierReservationId"] = participant.DossierReservationId;
                 return RedirectToAction("Index");
             }
-
-            ViewBag.DossierReservationId = new SelectList(db.DossiersReservations, "Id", "CreditCardNumber", participant.DossierReservationId);
             return View(participant);
         }
 
