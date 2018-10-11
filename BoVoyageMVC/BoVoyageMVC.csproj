@@ -632,11 +632,11 @@
     <Content Include="Views\Participants\Index.cshtml" />
     <Content Include="Views\FrontClients\Index.cshtml" />
     <Content Include="Views\Manage\EditClient.cshtml" />
-    <Content Include="Views\ContactMessages\Create.cshtml" />
-    <Content Include="Views\ContactMessages\Delete.cshtml" />
-    <Content Include="Views\ContactMessages\Details.cshtml" />
-    <Content Include="Views\ContactMessages\Edit.cshtml" />
-    <Content Include="Views\ContactMessages\Index.cshtml" />
+    <Content Include="Views\FrontContactMessages\Create.cshtml" />
+    <Content Include="Views\FrontContactMessages\Delete.cshtml" />
+    <Content Include="Views\FrontContactMessages\Details.cshtml" />
+    <Content Include="Views\FrontContactMessages\Edit.cshtml" />
+    <Content Include="Views\FrontContactMessages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
