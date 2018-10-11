@@ -8,137 +8,151 @@
     <h1>BoVoyage</h1>
 </div>
 
-
-
-<div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'bestPrice')">Les moins chers</button>
-    <button class="tablinks" onclick="openCity(event, 'soon')">Depart imminent</button>
-    <button class="tablinks" onclick="openCity(event, 'popular')">Top5 des destinations</button>
-</div>
-
-
-<div id="bestPrice" class="tabcontent">
-    <div class="row">
-
-        @{IEnumerable<BoVoyageMVC.Models.Voyage> topBestPrice = Model.OrderBy(x => x.UnitPublicPrice);
-
-
-            for (int i = 0; i < 5; i++)
-            {
-            <div class="col-md-2">
-                <div class="card">
-                    @{ if (topBestPrice.ElementAt(i).Destination.Images?.Count > 0)
-                        {
-
-                            <img src="data:@topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
-                         @Convert.ToBase64String(topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
-                        }
-                        }
-                    <h4>@topBestPrice.ElementAt(i).Destination.Country</h4>
-                    <h5>@topBestPrice.ElementAt(i).Destination.Region</h5>
-                    <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
-                    <p>@Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
-    new
+@{ if (Model.Count() != 0)
     {
-        region = topBestPrice.ElementAt(i).Destination.Region,
-        country = topBestPrice.ElementAt(i).Destination.Country,
-        id = topBestPrice.ElementAt(i).Id
-    },
-    new
-    {
-        @class = "btn btn-primary",
-        @style = "float:right",
-        @data = topBestPrice.ElementAt(i).Destination.Country
-    })</p>
-                </div>
-            </div>
-                        }
+        int top = 5; // top5 pour la premiere release
+        if (Model.Count() <= top)
+        {
+            top = Model.Count - 1;
         }
-    </div>
-</div>
-
-<div id="soon" class="tabcontent">
-    <div class="row">
-        @{IEnumerable<BoVoyageMVC.Models.Voyage> topSoon = Model.OrderBy(x => x.DepartureDate);
 
 
-            for (int i = 0; i < 5; i++)
-            {
-                <div class="col-md-2">
-                    <div class="card">
-                        @{ if (topSoon.ElementAt(i).Destination.Images?.Count > 0)
-                            {
-
-                                <img src="data:@topSoon.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
-                         @Convert.ToBase64String(topSoon.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
-                            }
-                        }
-                        <p id="countdown"></p>
-                        <h3>@topSoon.ElementAt(i).DepartureDate.ToShortDateString()</h3>
-                        <h4>@topSoon.ElementAt(i).Destination.Country</h4>
-                        <h5>@topSoon.ElementAt(i).Destination.Region</h5>
-                        <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
-                        <p>@Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
-    new
-    {
-        region = topSoon.ElementAt(i).Destination.Region,
-        country = topSoon.ElementAt(i).Destination.Country,
-        id = topSoon.ElementAt(i).Id
-    },
-    new
-    {
-        @class = "btn btn-primary",
-        @style = "float:right",
-        @data = topSoon.ElementAt(i).Destination.Country
-    })</p>
-                    </div>
-                </div>
-                            }
-        }
-    </div>
-</div>
-
-<div id="popular" class="tabcontent">
-    <div class="row">
-        @{IEnumerable<BoVoyageMVC.Models.Voyage> topPopular = Model.OrderBy(x => x.Destination.Country);
-
-
-
-
-            for (int i = 0; i < 5; i++)
-            {
-                    <div class="col-md-2">
-                        <div class="card">
-                            @{ if (topPopular.ElementAt(i).Destination.Images?.Count > 0)
-                                {
-
-                                    <img src="data:@topPopular.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
-                         @Convert.ToBase64String(topPopular.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
-                                }
-            }
-                            <h4>@topPopular.ElementAt(i).Destination.Country</h4>
-                            <h5>@topPopular.ElementAt(i).Destination.Region</h5>
-                            <p class="price">@topPopular.ElementAt(i).UnitPublicPrice</p>
-                            <p>
-                                @Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
-                                        new
-                                        {
-                                            region = topPopular.ElementAt(i).Destination.Region,
-                                            country = topPopular.ElementAt(i).Destination.Country,
-                                            id = topPopular.ElementAt(i).Id
-                                        },
-                                        new
-                                        {
-                                            @class = "btn btn-primary",
-                                            @style = "float:right",
-                                            @data = topPopular.ElementAt(i).Destination.Country
-                                        })
-                        </p>
-                    </div>
-                </div>
-                                }
-            }
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'bestPrice')">Les moins chers</button>
+            <button class="tablinks" onclick="openCity(event, 'soon')">Depart imminent</button>
+            <button class="tablinks" onclick="openCity(event, 'popular')">Top5 des destinations</button>
         </div>
-</div>
-                                
+
+
+        <div id="bestPrice" class="tabcontent">
+            <div class="row">
+
+                @{IEnumerable<BoVoyageMVC.Models.Voyage> topBestPrice = Model.OrderBy(x => x.UnitPublicPrice);
+
+
+                    for (int i = 0; i < top; i++)
+                    {
+                        <div class="col-md-2">
+                            <div class="card">
+                                @{ if (topBestPrice.ElementAt(i).Destination.Images?.Count > 0)
+                                    {
+
+                                        <img src="data:@topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
+                         @Convert.ToBase64String(topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
+                                    }
+                                }
+                                <h4>@topBestPrice.ElementAt(i).Destination.Country</h4>
+                                <h5>@topBestPrice.ElementAt(i).Destination.Region</h5>
+                                <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
+                                <p>
+                                    @Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
+                                            new
+                                            {region = topBestPrice.ElementAt(i).Destination.Region,country = topBestPrice.ElementAt(i).Destination.Country,id = topBestPrice.ElementAt(i).Id},
+                                            new
+                                            {@class = "btn btn-primary",@style = "float:right",@data = topBestPrice.ElementAt(i).Destination.Country})
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <div id="soon" class="tabcontent">
+            <div class="row">
+                @{IEnumerable<BoVoyageMVC.Models.Voyage> topSoon = Model.OrderBy(x => x.DepartureDate);
+
+
+                    for (int i = 0; i < top; i++)
+                    {
+                        <div class="col-md-2">
+                            <div class="card">
+                                @{ if (topSoon.ElementAt(i).Destination.Images?.Count > 0)
+                                    {
+
+                                        <img src="data:@topSoon.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
+                         @Convert.ToBase64String(topSoon.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
+                                    }
+                                }
+                                <p id="countdown"></p>
+                                <h3>@topSoon.ElementAt(i).DepartureDate.ToShortDateString()</h3>
+                                <h4>@topSoon.ElementAt(i).Destination.Country</h4>
+                                <h5>@topSoon.ElementAt(i).Destination.Region</h5>
+                                <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice</p>
+                                <p>
+                                    @Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
+                                            new
+                                            {region = topSoon.ElementAt(i).Destination.Region,country = topSoon.ElementAt(i).Destination.Country,id = topSoon.ElementAt(i).Id},
+                                            new
+                                            {@class = "btn btn-primary",@style = "float:right",@data = topSoon.ElementAt(i).Destination.Country})
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <div id="popular" class="tabcontent">
+            <div class="row">
+                @{IEnumerable<BoVoyageMVC.Models.Voyage> topPopular = Model.OrderBy(x => x.Destination.Country);
+
+
+
+
+                    for (int i = 0; i < top; i++)
+                    {
+                        <div class="col-md-2">
+                            <div class="card">
+                                @{ if (topPopular.ElementAt(i).Destination.Images?.Count > 0)
+                                    {
+
+                                        <img src="data:@topPopular.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
+                         @Convert.ToBase64String(topPopular.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
+                                    }
+                                }
+                                <h4>@topPopular.ElementAt(i).Destination.Country</h4>
+                                <h5>@topPopular.ElementAt(i).Destination.Region</h5>
+                                <p class="price">@topPopular.ElementAt(i).UnitPublicPrice</p>
+                                <p>
+                                    @Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
+                                            new
+                                            {region = topPopular.ElementAt(i).Destination.Region,country = topPopular.ElementAt(i).Destination.Country,id = topPopular.ElementAt(i).Id},
+                                            new
+                                            {@class = "btn btn-primary",@style = "float:right",@data = topPopular.ElementAt(i).Destination.Country})
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+    }
+}
+<script>
+    //script for countdown (index top5)
+  
+    var countDownDate = new Date("Nov 5, 2018 15:37:25").getTime();
+
+
+    var x = setInterval(function () {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>
+
 
