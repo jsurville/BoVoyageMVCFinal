@@ -229,6 +229,14 @@
     <Compile Include="Migrations\201810101436246_ajoutertypeData.Designer.cs">
       <DependentUpon>201810101436246_ajoutertypeData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810110740454_addContactMessage.cs" />
+    <Compile Include="Migrations\201810110740454_addContactMessage.Designer.cs">
+      <DependentUpon>201810110740454_addContactMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810110745363_FIXContactMessage.cs" />
+    <Compile Include="Migrations\201810110745363_FIXContactMessage.Designer.cs">
+      <DependentUpon>201810110745363_FIXContactMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
@@ -643,6 +651,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810101436246_ajoutertypeData.resx">
       <DependentUpon>201810101436246_ajoutertypeData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810110740454_addContactMessage.resx">
+      <DependentUpon>201810110740454_addContactMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810110745363_FIXContactMessage.resx">
+      <DependentUpon>201810110745363_FIXContactMessage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
