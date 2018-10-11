@@ -11,7 +11,7 @@ namespace BoVoyageMVC.Controllers
 {
     [Authorize]
     public class AccountController : BaseController
-    {    
+    {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -152,16 +152,27 @@ namespace BoVoyageMVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var client = new Client
+                    user = UserManager.FindByEmail(model.Email);
+                    if (user.Id != null)
                     {
-                        Title = model.Title, LastName = model.LastName, FisrtName = model.FisrtName,
-                        Address = model.Address, PhoneNumber = model.PhoneNumber, BirthDate = model.BirthDate,
-                        UserId = user.Id
-                    };
-                    db.Clients.Add(client);
-                    db.SaveChanges();
-                    UserManager.AddToRole(user.Id, "Client");
+                        var client = new Client
+                        {
+                            Title = model.Title,
+                            LastName = model.LastName,
+                            FisrtName = model.FisrtName,
+                            Address = model.Address,
+                            PhoneNumber = model.PhoneNumber,
+                            BirthDate = model.BirthDate,
+                            UserId = user.Id
+                        };
+                        db.Clients.Add(client);
+                        db.SaveChanges();
+                        UserManager.AddToRole(user.Id, "Client");
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+
 
                     // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
                     // Envoyer un message électronique avec ce lien
@@ -178,12 +189,12 @@ namespace BoVoyageMVC.Controllers
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
         }
-        [Authorize(Roles ="Client")]
+        [Authorize(Roles = "Client")]
         [ChildActionOnly]
         public string GetCurrentUserName()
         {
             var user = UserManager.FindByEmail(User.Identity.GetUserName());
-            var client = db.Clients.SingleOrDefault(x=>x.UserId == user.Id);
+            var client = db.Clients.SingleOrDefault(x => x.UserId == user.Id);
             if (client != null)
             {
                 return client.FisrtName;
