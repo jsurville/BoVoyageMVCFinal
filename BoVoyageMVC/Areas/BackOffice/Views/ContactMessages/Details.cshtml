@@ -63,12 +63,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Message)
+            @Html.Raw(Model.Message)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+
     @Html.ActionLink("Back to List", "Index")
 </p>
