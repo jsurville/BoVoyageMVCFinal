@@ -23,7 +23,8 @@ namespace BoVoyageMVC.Models
 
 		[Required(ErrorMessage = "Le champ {0} est obligatoire.")]
 		[Column(TypeName = "Money")]
-		[Index("IX_MontantType", 1, IsUnique = true)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        [Index("IX_MontantType", 1, IsUnique = true)]
 		public decimal Montant { get; set; }
 
 		[Required(ErrorMessage = "Le champ {0} est obligatoire.")]
