@@ -241,6 +241,10 @@
     <Compile Include="Migrations\201810110752058_AddDisplayEmailToClient.Designer.cs">
       <DependentUpon>201810110752058_AddDisplayEmailToClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810110813276_changeDestination.cs" />
+    <Compile Include="Migrations\201810110813276_changeDestination.Designer.cs">
+      <DependentUpon>201810110813276_changeDestination.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
@@ -664,6 +668,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810110752058_AddDisplayEmailToClient.resx">
       <DependentUpon>201810110752058_AddDisplayEmailToClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810110813276_changeDestination.resx">
+      <DependentUpon>201810110813276_changeDestination.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
