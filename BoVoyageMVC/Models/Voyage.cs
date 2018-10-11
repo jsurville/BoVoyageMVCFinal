@@ -56,7 +56,7 @@ namespace BoVoyageMVC.Models
         {
             get
             {
-                return UnitPrice * Margin;
+                return UnitPrice * (100+Margin)/100;
             }
         }
 
