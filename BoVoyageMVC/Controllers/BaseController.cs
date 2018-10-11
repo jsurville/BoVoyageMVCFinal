@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BoVoyageMVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BoVoyageMVC.Controllers
 {
@@ -28,6 +29,20 @@ namespace BoVoyageMVC.Controllers
             base.Dispose(disposing);
             if (!disposing)
                 this.db.Dispose();
+        }
+
+        protected int GetCurrentClientId()
+        {
+            var userId = User.Identity.GetUserId();
+            var client = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            if (client != null)
+            {
+                return client.Id;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

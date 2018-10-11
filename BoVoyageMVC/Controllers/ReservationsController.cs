@@ -39,18 +39,19 @@ namespace BoVoyageMVC.Controllers
 
 
         // GET: Reservations/Book
-        [Authorize(Roles = "Client")]
-        public ActionResult Book(int id, int? clientId)
+        //[Authorize(Roles = "Client")]
+        public ActionResult Book(int id)
         {
+            var clientId = GetCurrentClientId();
             var voyage = db.Voyages.Find(id);
             if (voyage == null)
                 return HttpNotFound();
-            if(clientId == null || clientId == 0)
+            if(clientId == 0)
                 return RedirectToAction("Index","Home");
             var dossierReservation = new DossierReservation();
             dossierReservation.VoyageId = id;
             dossierReservation.Voyage = voyage;
-            dossierReservation.ClientId = (int)clientId;
+            dossierReservation.ClientId = clientId;
             return View(dossierReservation);
         }
 
