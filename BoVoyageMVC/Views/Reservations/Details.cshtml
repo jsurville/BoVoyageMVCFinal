@@ -1,37 +1,62 @@
 ﻿@model BoVoyageMVC.Models.DossierReservation
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Détails réservation";
 }
 
-<h2>Details</h2>
+<h4>@ViewBag.Title</h4>
 
 <div>
-    <h4>DossierReservation</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Client.UserId)
+            @Html.DisplayNameFor(model => model.Client.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Client.UserId)
+            @Html.DisplayFor(model => model.Client.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Voyage.Destination.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voyage.Destination.Country)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Voyage.Id)
+            @Html.DisplayNameFor(model => model.Voyage.Destination.Region)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Voyage.Id)
+            @Html.DisplayFor(model => model.Voyage.Destination.Region)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voyage.Destination.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Voyage.Destination.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreditCardNumber)
+            @Html.DisplayNameFor(model => model.Voyage.DepartureDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreditCardNumber)
+            @Html.DisplayFor(model => model.Voyage.DepartureDate)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Voyage.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voyage.ReturnDate)
         </dd>
 
         <dt>
@@ -40,6 +65,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrice)
         </dd>
 
         <dt>
@@ -53,6 +86,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { voyageId = Model.Id, clientId= @Html.Raw(Html.Action("GetCurrentClientId", "Account")) }) |
-    @Html.ActionLink("Back to List", "Index")
+   
+    @Html.ActionLink("Retour", "Index")
 </p>

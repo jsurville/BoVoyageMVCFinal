@@ -16,7 +16,7 @@ namespace BoVoyageMVC.Controllers
         public ActionResult Index()
         {
             var dossiersReservations = db.DossiersReservations.Include(d => d.Client)
-                .Include(d => d.Voyage).Include(d=>d.Voyage.Destination);
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination);
             return View(dossiersReservations.ToList());
         }
 
@@ -27,7 +27,9 @@ namespace BoVoyageMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+            DossierReservation dossierReservation = db.DossiersReservations.Include(d => d.Client)
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
+                .SingleOrDefault(d => d.Id == id);
             if (dossierReservation == null)
             {
                 return HttpNotFound();
