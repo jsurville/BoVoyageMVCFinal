@@ -9,9 +9,9 @@ using System.Net;
 
 namespace BoVoyageMVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        protected ApplicationDbContext db = new ApplicationDbContext();
+       
         public ActionResult Index()
         {
             var voyage= db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
