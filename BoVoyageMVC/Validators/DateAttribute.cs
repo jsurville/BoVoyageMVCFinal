@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BoVoyDateMVC.Validators
+namespace BoVoyageMVC.Validators
 {
     [AttributeUsage(AttributeTargets.Property)] 
     public class DateAttribute : ValidationAttribute

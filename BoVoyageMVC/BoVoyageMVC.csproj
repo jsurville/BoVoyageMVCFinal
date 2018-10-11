@@ -248,6 +248,7 @@
     <Compile Include="Tools\Message.cs" />
     <Compile Include="Validators\DateAttribute.cs" />
     <Compile Include="Validators\AgeAttribute.cs" />
+    <Compile Include="Validators\DecimalAttibute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
