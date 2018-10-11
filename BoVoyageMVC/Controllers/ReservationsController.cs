@@ -8,13 +8,15 @@ using System.Web.Mvc;
 namespace BoVoyageMVC.Controllers
 {
     //[Route("MonCompte")]
+    [Authorize(Roles = "Client")]
     public class ReservationsController : BaseController
     {
 
         // GET: Reservations
         public ActionResult Index()
         {
-            var dossiersReservations = db.DossiersReservations.Include(d => d.Client).Include(d => d.Voyage);
+            var dossiersReservations = db.DossiersReservations.Include(d => d.Client)
+                .Include(d => d.Voyage).Include(d=>d.Voyage.Destination);
             return View(dossiersReservations.ToList());
         }
 
@@ -36,7 +38,7 @@ namespace BoVoyageMVC.Controllers
 
 
         // GET: Reservations/Book
-        [Authorize(Roles = "Client")]
+
         public ActionResult Book(int id)
         {
             var clientId = GetCurrentClientId();
