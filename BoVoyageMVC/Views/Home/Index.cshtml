@@ -4,37 +4,28 @@
     ViewBag.Title = "Accueil";
 }
 
+<style>
+    div {
+        border: solid 1px red;
+    }
+</style>
 <div>
     <h1>BoVoyage</h1>
 </div>
 
-<div class="container-fluid" id="search">
-    <form class="row">
-        <div class="form-group col-3">
+<div id="search">
+    <form class="form-group row" action="@Url.Action("Search", "FrontVoyages")" method="post" enctype="multipart/form-data">
+        <div class="form-group col-md-6">
             <label for="DateAller">Période</label>
-            <a> De <input type="date" class="form-control" id="DateDebut" /> </a> <br />
-            <a> A <input type="date" class="form-control" id="DateEnd" /> </a>
+            <a> De <input type="date" class="form-control" id="DepartureDate" name="DepartureDate"/> </a> <br />
+            <a> A <input type="date" class="form-control" id="ReturnDate" name="DepartureDate"/> </a>
         </div>
-    </form>
-
-
-    <form action="@Url.Action("Search", "FrontVoyages")" method="post" enctype="multipart/form-data">
-        @* enctype form-data pour envoyer un fichier  *@
-        @*@Html.HiddenFor(x => x.ID)*@
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="if">Destination</label>
-            <input type="text" id="destination" name="search" /> @*dans l'input, la valeur envoyée dans la requête post est donnée par le name*@
+            <input class="form-control" type="text" id="destination" name="search" />
         </div>
         <button type="submit" class="btn btn-info"> Rechercher</button>
     </form>
-
-
-    
-        @*@Html.ActionLink("Rechercher", "Search", "FrontVoyages", null, new { @class = "btn btn-info" })*@
-  
-
-
-
 </div>
 
 @{ if (Model.Count() != 0)
@@ -66,7 +57,7 @@
                                 @{ if (topBestPrice.ElementAt(i).Destination.Images?.Count > 0)
                                     {
 
-                            <img src="data:@topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
+                                        <img src="data:@topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).ContentType;base64,
                          @Convert.ToBase64String(topBestPrice.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
                                     }
                                 }
@@ -159,9 +150,25 @@
 
     }
 }
+<script src="~/Scripts/jquery.datetimepicker.js">
+    
+    //$(function () {
+    //    $('#DepartureDate').datetimepicker({
+    //        lang: 'fr',
+    //        format: 'd/M/20y H:i'
+    //    });
+    //    $('#ReturnDate').datetimepicker({
+    //        lang: 'fr',
+    //        format: 'd/M/20y H:i'
+    //    });
+    //    $('#DepartureDate').attr('autocomplete', 'off');
+    //    $('#ReturnDate').attr('autocomplete', 'off');
+
+    //});
+</script>
 <script>
     //script for countdown (index top5)
-  
+
     var countDownDate = new Date("Nov 5, 2018 15:37:25").getTime();
 
 
@@ -182,6 +189,8 @@
             document.getElementById("countdown").innerHTML = "EXPIRED";
         }
     }, 1000);
-</script>
 
+    // Script pour DateTimepicker
+
+</script>
 
