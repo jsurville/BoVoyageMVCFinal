@@ -37,7 +37,7 @@ namespace BoVoyageMVC.Models
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         public double UnitPrice { get; set; }
 
-        [Range(1, 3)]
+        [Range(1, 100)]
         //[Range(1, 3)]
         //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Target Price; Max 18 digits")]
 

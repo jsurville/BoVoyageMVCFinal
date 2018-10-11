@@ -50,6 +50,11 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Montant,TypeAssurance")] Assurance assurance)
         {
+            if (assurance.Montant < 0)
+            { 
+                Display("Assurance doit etre possitive");
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 db.Assurances.Add(assurance);
