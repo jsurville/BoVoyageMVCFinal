@@ -37,8 +37,10 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 return HttpNotFound();
             }
             return View(voyage);
+
         }
 
+        
         // GET: BackOffice/Voyages/Create
         public ActionResult Create()
         {
@@ -131,6 +133,21 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        // GET: BackOffice/Voyages/Details/5
+        public ActionResult RechercherDestination(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Voyage voyage = db.Voyages.Include("Destination").Include(x => x.Destination.Images).SingleOrDefault(x => x.Id == id);
+            if (voyage == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Index");
 
+
+        }
     }
 }
