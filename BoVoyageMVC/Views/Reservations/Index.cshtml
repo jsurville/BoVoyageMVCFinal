@@ -27,6 +27,9 @@
         <th>
             @Html.DisplayNameFor(model => model.EtatDossier)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
         <th></th>
     </tr>
 
@@ -51,7 +54,10 @@
             @Html.DisplayFor(modelItem => item.EtatDossier)
         </td>
         <td>
-            @Html.ActionLink("Ajout participants", "AddParticipant", new { id = item.Id }) |
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.ActionLink("Ajout participants", "Create", "Participants", new { id = item.Id }, null) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Annuler", "Annuler", new { id = item.Id })
         </td>
