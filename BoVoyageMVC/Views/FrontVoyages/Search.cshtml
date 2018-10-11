@@ -1,66 +1,34 @@
-﻿@model IEnumerable<BoVoyageMVC.Models.Voyage>
+﻿@model ICollection<BoVoyageMVC.Models.Voyage>
 
 @{
     ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutSearch.cshtml";
 }
 
-<h2>Search</h2>
+<h2>Résultats</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AgenceVoyage.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Destination.Continent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartureDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReturnDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxCapacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Margin)
-        </th>
-        <th></th>
-    </tr>
+<div class="voyages row">
+    @foreach (var item in Model)
+    {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AgenceVoyage.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Destination.Continent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartureDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReturnDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxCapacity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Margin)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        <div id="voyages" class="card col-md-3 alert alert-success" style="margin-bottom:15px">
+            <h2> @Html.DisplayFor(modelItem => item.Destination.Country) </h2>
+            Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
+            <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice)  </h3>
 
-</table>
+
+            @if (item.Destination.Images?.Count > 0)
+            {
+                <img src="data:@item.Destination.Images.First().ContentType;base64,@Convert.ToBase64String(item.Destination.Images.First().Content)" class="img-thumbnail" />
+            }
+            <div>
+                @Html.ActionLink("Plus d'Infos", "Details", new { region = item.Destination.Region, country = item.Destination.Country, id = item.Id }, new { @class = "btn btn-primary", @style = "float:right", @data = item.Destination.Country })
+                @Html.ActionLink("Réserver", "Create", "Reservations", new { id = item.Id }, new { @class = "btn btn-primary", @style = "float:right" })
+            </div>
+        </div>
+
+
+
+
+    }
+</div>
