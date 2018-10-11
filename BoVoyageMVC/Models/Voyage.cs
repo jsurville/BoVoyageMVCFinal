@@ -45,9 +45,9 @@ namespace BoVoyageMVC.Models
         //[Range(1, (double)decimal.MaxValue, ErrorMessage = "value should be between{1} and {2}."]
         //[DecimalAtribute(ErrorMessage = "Le champ {0} doit etre positif.")]
         [Display(Name = "Marge")]
-        [DisplayFormat(DataFormatString = "{0:C0}")]
+        [DisplayFormat(DataFormatString = "{0:0}")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
-        public double Margin { get; set; }
+        public int Margin { get; set; }
 
         [Display(Name ="Prix/client")]
         [NotMapped]
