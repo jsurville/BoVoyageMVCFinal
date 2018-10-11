@@ -80,41 +80,29 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(client);
             
         }
-
-        // POST: BackOffice/Clients/Edit/5
-        [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Title,LastName,FirstName,Address,PhoneNumber,BirthDate")] Client client)
+        public ActionResult Search(string search)
         {
-            if (ModelState.IsValid)
+            if (search == null)
             {
-                db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToRoute("Index");
             }
-  
-            return View(client);
+            ICollection<Client> clients = db.Clients.Where(x => x.LastName.Contains(search) || x.Address.Contains(search)).ToList();
+            //var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
+            if (clients?.Count() == 0)
+            {
+                Display("Aucun Résultat ");
+            }
+            else
+            {
+                return View(clients);
+            }
+            return RedirectToRoute("Index");
+
+            //return RedirectToAction("Index", "Home");
+
         }
 
-        // GET: BackOffice/Clients/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: BackOffice/Clients/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
