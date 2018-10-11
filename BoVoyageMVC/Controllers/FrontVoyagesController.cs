@@ -39,6 +39,13 @@ namespace BoVoyageMVC.Controllers
             return View(voyage);
         }
 
+        // GET: FrontVoyages/Search/
+       // [Route("voyage-{region}-{country}/{id}")]
+        public ActionResult Search()
+        {
+            
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {
