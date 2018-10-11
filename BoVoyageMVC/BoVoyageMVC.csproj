@@ -200,12 +200,14 @@
     <Compile Include="Areas\BackOffice\Controllers\AssurancesController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\ClientsController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\CommercialsController.cs" />
+    <Compile Include="Areas\BackOffice\Controllers\ContactMessagesController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\DestinationsController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\DossierReservationsController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\DashboardController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\VoyagesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\FrontContactMessagesController.cs" />
     <Compile Include="Controllers\FrontClientsController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -240,6 +242,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Participant.cs" />
+    <Compile Include="Models\ContactMessage.cs" />
     <Compile Include="Models\Personne.cs" />
     <Compile Include="Models\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -372,6 +375,11 @@
     <Content Include="Areas\BackOffice\Views\Voyages\Index.cshtml" />
     <Content Include="Areas\BackOffice\Views\Dashboard\Index.cshtml" />
     <Content Include="ConnectionStrings.config" />
+    <Content Include="Areas\BackOffice\Views\ContactMessages\Create.cshtml" />
+    <Content Include="Areas\BackOffice\Views\ContactMessages\Delete.cshtml" />
+    <Content Include="Areas\BackOffice\Views\ContactMessages\Details.cshtml" />
+    <Content Include="Areas\BackOffice\Views\ContactMessages\Edit.cshtml" />
+    <Content Include="Areas\BackOffice\Views\ContactMessages\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
@@ -599,6 +607,11 @@
     <Content Include="Views\Participants\Index.cshtml" />
     <Content Include="Views\FrontClients\Index.cshtml" />
     <Content Include="Views\Manage\EditClient.cshtml" />
+    <Content Include="Views\ContactMessages\Create.cshtml" />
+    <Content Include="Views\ContactMessages\Delete.cshtml" />
+    <Content Include="Views\ContactMessages\Details.cshtml" />
+    <Content Include="Views\ContactMessages\Edit.cshtml" />
+    <Content Include="Views\ContactMessages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
