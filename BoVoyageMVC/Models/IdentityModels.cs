@@ -48,7 +48,6 @@ namespace BoVoyageMVC.Models
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Commercial> Commercials { get; set; }
         public DbSet<Image> Images { get; set; }
-
-        public System.Data.Entity.DbSet<BoVoyageMVC.Models.ContactMessage> ContactMessages { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
     }
 }
