@@ -639,6 +639,7 @@
     <Content Include="Views\FrontContactMessages\Edit.cshtml" />
     <Content Include="Views\FrontContactMessages\Index.cshtml" />
     <Content Include="Views\FrontVoyages\Search.cshtml" />
+    <Content Include="Views\Reservations\Book.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

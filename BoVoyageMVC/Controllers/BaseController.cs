@@ -44,5 +44,50 @@ namespace BoVoyageMVC.Controllers
                 return 0;
             }
         }
+
+        protected string GetCurrentClientName()
+        {
+            var userId = User.Identity.GetUserId();
+            var client = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            if (client != null)
+            {
+                return client.FisrtName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        protected string GetCurrentCommercialName()
+        {
+            var userId = User.Identity.GetUserId();
+            var commercial = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            if (commercial != null)
+            {
+                return commercial.FisrtName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        protected string GetCurrentUserRoles()
+        {
+            var userId = User.Identity.GetUserId();
+            
+
+            var client = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            if (client != null)
+            {
+                return client.FisrtName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
     }
 }
