@@ -41,21 +41,20 @@ namespace BoVoyageMVC.Controllers
 
         // GET: FrontVoyages/Search/
          [Route("Search")]
-        
         public ActionResult Search(string search, DateTime? departureDate, DateTime? returnDate)
         {
             if (search == null)
             {
                 return RedirectToRoute("Index");
             }
-            ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination)
+            ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
             .Where(x => x.Destination.Description.Contains(search)
             || x.Destination.Continent.Contains(search)
             || x.Destination.Country.Contains(search)
             || x.Destination.Region.Contains(search)
              || (x.DepartureDate > departureDate
             && x.ReturnDate < returnDate)).ToList();
-                //var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
+               
                 if (voyages?.Count() == 0)
                 {
                     Display("Aucun Résultat ");
@@ -65,8 +64,6 @@ namespace BoVoyageMVC.Controllers
                     return View(voyages);
                 }
                 return RedirectToRoute("Index", "Home");
-            
-            //return RedirectToAction("Index", "Home");
 
         }
 
