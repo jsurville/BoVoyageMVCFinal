@@ -37,8 +37,10 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 return HttpNotFound();
             }
             return View(voyage);
+
         }
 
+        
         // GET: BackOffice/Voyages/Create
         public ActionResult Create()
         {
@@ -106,6 +108,33 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(voyage);
         }
 
+        // GET: BackOffice/Voyages/Search
+        public ActionResult Search(string search, DateTime? departureDate, DateTime? returnDate)
+        {
+            if (search == null)
+            {
+                return RedirectToRoute("Index");
+            }
+            ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
+            .Where(x => x.Destination.Description.Contains(search)
+            || x.Destination.Continent.Contains(search)
+            || x.Destination.Country.Contains(search)
+            || x.Destination.Region.Contains(search)
+             || (x.DepartureDate > departureDate
+            && x.ReturnDate < returnDate)).ToList();
+            
+            if (voyages?.Count() == 0)
+            {
+                Display("Aucun Résultat ");
+            }
+            else
+            {
+                return View(voyages);
+            }
+            return RedirectToRoute("Index");
+
+        }
+
         // GET: BackOffice/Voyages/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -131,6 +160,21 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        // GET: BackOffice/Voyages/Details/5
+        public ActionResult RechercherDestination(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Voyage voyage = db.Voyages.Include("Destination").Include(x => x.Destination.Images).SingleOrDefault(x => x.Id == id);
+            if (voyage == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Index");
 
+
+        }
     }
 }

@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BoVoyageMVC.Models;
+using BoVoyageMVC.Tools;
+using BoVoyageMVC.Controllers;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Commercial")]
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
         public ActionResult Index()
         {
@@ -16,16 +22,18 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "PAGE ADMIN";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Numéro Contact Agence";
 
             return View();
         }
+       
+
     }
 }

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BoVoyageMVC.Models.Voyage>
+@{
+    ViewBag.Title = "Rechercher Destination";
+}
+
+<h2>Rechercher Destination</h2>
+<div class="form-horizontal">
+    <h4>Rechercher Destination</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @foreach (var item in Model)
+    {
+
+        <div class="form-group">
+           
+        </div>
+    <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <p><a class="btn btn-primary btn-lg" href="#">Recherche</a></p>
+            </div>
+    </div>
+   
+

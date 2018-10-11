@@ -1,4 +1,4 @@
-﻿@model BoVoyageMVC.Models.ContactMessage
+﻿@model BoVoyageMVC.Models.Client
 
 @{
     ViewBag.Title = "Details";
@@ -51,24 +51,24 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SendDate)
+            @Html.DisplayNameFor(model => model.BirthDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SendDate)
+            @Html.DisplayFor(model => model.BirthDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Message)
+            @Html.DisplayNameFor(model => model.Address)
         </dt>
 
         <dd>
-            @Html.Raw(Model.Message)
+            @Html.DisplayFor(model => model.Address)
         </dd>
 
     </dl>
 </div>
 <p>
-
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
