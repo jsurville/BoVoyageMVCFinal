@@ -10,7 +10,7 @@ using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Controllers
 {
-    public class FrontContactMessagesController : Controller
+    public class FrontContactMessagesController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
