@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace BoVoyageMVC.Controllers
 {
@@ -12,7 +13,8 @@ namespace BoVoyageMVC.Controllers
         protected ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View(db.Voyages.Include("Destination").ToList());
+            var voyage= db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
+            return View(voyage);
         }
         [Route("A-propos")]
         public ActionResult About()
