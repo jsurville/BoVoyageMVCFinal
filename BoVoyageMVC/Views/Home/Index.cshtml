@@ -95,13 +95,13 @@
                                 <h4>@topSoon.ElementAt(i).Destination.Country</h4>
                                 <h5>@topSoon.ElementAt(i).Destination.Region</h5>
                                 <p class="price">@topBestPrice.ElementAt(i).UnitPublicPrice €</p>
-                                <p>
+                                <button>
                                     @Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
                                             new
                                             {region = topSoon.ElementAt(i).Destination.Region,country = topSoon.ElementAt(i).Destination.Country,id = topSoon.ElementAt(i).Id},
                                             new
-                                            {@class = "btn btn-primary",@style = "float:right",@data = topSoon.ElementAt(i).Destination.Country})
-                                </p>
+                                            {/*@class = "btn btn-primary",@style = "float:right",*/@data = topSoon.ElementAt(i).Destination.Country})
+                                </button>
                             </div>
                         </div>
                     }
@@ -130,13 +130,13 @@
                                 <h4>@topPopular.ElementAt(i).Destination.Country</h4>
                                 <h5>@topPopular.ElementAt(i).Destination.Region</h5>
                                 <p class="price">@topPopular.ElementAt(i).UnitPublicPrice €</p>
-                                <p>
+                                <button>
                                     @Html.ActionLink("En Savoir plus", "Details", "FrontVoyages",
                                             new
                                             {region = topPopular.ElementAt(i).Destination.Region,country = topPopular.ElementAt(i).Destination.Country,id = topPopular.ElementAt(i).Id},
                                             new
-                                            {@class = "btn btn-primary",@style = "float:right",@data = topPopular.ElementAt(i).Destination.Country})
-                                </p>
+                                            {/*@class = "btn btn-primary",@style = "float:right",*/@data = topPopular.ElementAt(i).Destination.Country})
+                                </button>
                             </div>
                         </div>
                     }
