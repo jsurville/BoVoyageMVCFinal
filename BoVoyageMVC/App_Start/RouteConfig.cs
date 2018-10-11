@@ -13,6 +13,12 @@ namespace BoVoyageMVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "Details",
+            //    url: "{controller}/{action}/{destination}/{id}",
+            //    defaults: new { controller = "FrontVoyages", action = "Details", destination= , id = UrlParameter.Optional }
+            //);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
