@@ -33,9 +33,9 @@ textarea {
 
     .tab button {
         /* background-color: inherit; */
-    background-image: linear-gradient(to bottom right, rgb(0, 110, 255), rgba(153, 189, 218, 0.719));
+    background-image: linear-gradient(to bottom right, cyan, white);
     float: left;
-    border: none;
+    border: 2px solid black ;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
@@ -99,4 +99,10 @@ textarea {
     background-attachment: fixed; 
     background-repeat: no-repeat;
   
+}
+
+.background{
+    background-color:azure;
+    opacity:0.3;
+    border-radius:15px;
 }
