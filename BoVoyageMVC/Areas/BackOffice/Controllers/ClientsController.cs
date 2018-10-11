@@ -49,19 +49,18 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         public ActionResult Create(UserRegistration registration)
         {
             TextWriter text = null;
-                       
-            
+                                   
             if (ModelState.IsValid)
             {
                 db.UserRegistrations.Add(registration);
                 db.SaveChanges();
-                string Jsonvalue = JsonConvert.SerializeObject(registration);
+                string JsonValue = JsonConvert.SerializeObject(registration);
                 return RedirectToAction("Index");
                 string currentFile = "d:\\FileUsers\\text.txt";
-                If (System.IO.File.Exists(currentFile))
-                    {
+                If(System.IO.File.Exists(currentFile))
+                 {
                     text = new StreamWriter(currentFile);
-                    }
+                }  
                 else
                 {
                     text = new StreamWriter(currentFile, append: true);
@@ -71,9 +70,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 return RedirectToAction("Index");
 
             }
-   
-                return View(registration);
-            
+  
+                return View(registration);            
         }
 
         // GET: BackOffice/Clients/Edit/5
