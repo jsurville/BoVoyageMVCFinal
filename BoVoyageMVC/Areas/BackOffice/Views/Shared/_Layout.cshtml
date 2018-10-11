@@ -67,6 +67,31 @@
 
         </div>
         @RenderBody()
+        <div class="container-fluid" id="search">
+            <form class="row">
+                <div class="form-group col-3">
+                    <label for="Nom">Nom</label>
+                    <a> <input type="date" class="form-control" id="Nom" /> </a> <br />                    
+                </div>
+            </form>
+            <form action="@Url.Action("Search", "Clients")" method="post" enctype="multipart/form-data">
+                @* enctype form-data pour envoyer un fichier  *@
+                @*@Html.HiddenFor(x => x.ID)*@
+            <div class="form-group">
+                    <label for="if">Address</label>
+                    <input type="text" id="Address" name="search" /> @*dans l'input, la valeur envoyée dans la requête post est donnée par le name*@
+                </div>
+                <button type="submit" class="btn btn-info"> Rechercher</button>
+            </form>
+            fghdfjd
+
+
+            @*@Html.ActionLink("Rechercher", "Search", "FrontVoyages", null, new { @class = "btn btn-info" })*@
+
+
+
+
+        </div>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - BoVoyage MVC Groupe 2</p>
