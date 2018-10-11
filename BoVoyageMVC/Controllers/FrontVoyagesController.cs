@@ -31,7 +31,7 @@ namespace BoVoyageMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Include("Destination").SingleOrDefault(x => x.Id == id);
+            Voyage voyage = db.Voyages.Include("Destination").Include(y => y.Destination.Images).SingleOrDefault(x => x.Id == id);
             if (voyage == null)
             {
                 return HttpNotFound();

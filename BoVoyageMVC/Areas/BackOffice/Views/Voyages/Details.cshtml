@@ -68,6 +68,20 @@
 
     </dl>
 </div>
+
+
+<div class="row">
+    @if (Model.Destination.Images != null)
+    {
+        foreach (var picture in Model.Destination.Images)
+        {
+            <div class="col-md-2">
+                <img src="data:@picture.ContentType;base64,@Convert.ToBase64String(picture.Content)" class="img-thumbnail" />
+            </div>
+        }
+    }
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
