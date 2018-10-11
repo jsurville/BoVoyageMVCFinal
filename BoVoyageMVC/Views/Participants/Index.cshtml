@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<BoVoyageMVC.Models.Participant>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List participants pour " + ViewBag.Destination as string;
+
 }
 
-<h2>Index</h2>
+<h3>@ViewBag.Title </h3>
 
 <p>
     @Html.ActionLink("Create New", "Create")

@@ -56,12 +56,12 @@
             @Html.DisplayFor(modelItem => item.SendDate)
         </td>
         <td>
-            @Html.Raw(item.Message.ToString())
+            @Html.DisplayFor(modelItem => item.Message)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
-            @Html.ActionLink("Lire le message", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

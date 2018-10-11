@@ -408,6 +408,8 @@
     <Content Include="Areas\BackOffice\Views\Shared\_PartialDisplay.cshtml" />
     <Content Include="Areas\BackOffice\Views\Voyages\Search.cshtml" />
     <Content Include="Areas\BackOffice\Views\Shared\_LayoutSearch.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Commercials\Index.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Commercials\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
@@ -649,7 +651,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\BackOffice\Views\Clients\" />
-    <Folder Include="Areas\BackOffice\Views\Commercials\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

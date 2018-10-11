@@ -15,11 +15,6 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View();
         }
 
-        // GET: BackOffice/Commercials/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: BackOffice/Commercials/Create
         public ActionResult Create()
