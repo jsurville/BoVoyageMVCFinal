@@ -109,11 +109,13 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         }
 
         // GET: BackOffice/Voyages/Search
+        //[Route("BackOffice/Search")]
+      //  [ValidateAntiForgeryToken]
         public ActionResult Search(string search, DateTime? departureDate, DateTime? returnDate)
         {
             if (search == null)
             {
-                return RedirectToRoute("Index");
+                return RedirectToRoute("Index", "Dashboard");
             }
             ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
             .Where(x => x.Destination.Description.Contains(search)
