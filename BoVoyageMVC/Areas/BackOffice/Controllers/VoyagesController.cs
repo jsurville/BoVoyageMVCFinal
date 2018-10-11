@@ -20,7 +20,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         // GET: BackOffice/Voyages
         public ActionResult Index()
         {
-            var voyages = db.Voyages.Include(v => v.AgenceVoyage).Include(v => v.Destination);
+            var voyages = db.Voyages.Include(v => v.AgenceVoyage).Include("Destination");
             return View(voyages.ToList());
         }
         
