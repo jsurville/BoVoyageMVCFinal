@@ -27,15 +27,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DepartureDate)
+            @Model.DepartureDate.ToShortDateString()
+           
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReturnDate)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.ReturnDate)
+            @Model.ReturnDate.ToShortDateString()
         </dd>
 
         <dt>

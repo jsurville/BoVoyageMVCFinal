@@ -9,7 +9,7 @@
     .voyages {
         padding: 5px;
         margin: 10px;
-        border: solid 1px red;
+        
     }
 </style>
 
@@ -18,10 +18,13 @@
     @foreach (var item in Model)
     {
        
-    <div id="voyages" class="col-md-3 alert alert-success" style="margin-bottom:15px">
+    <div id="voyages" class="card col-md-3 alert alert-success" style="margin-bottom:15px">
         <h2> @Html.DisplayFor(modelItem => item.Destination.Country) </h2>
         Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
         <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice)  </h3>
+
+
+
 
         @if (item.Destination.Images?.Count > 0)
         {
