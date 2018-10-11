@@ -55,11 +55,15 @@
         </div>
     </div>
 
-    <div class="container body-content">
+    <div class="container-fluid body-content">
+        <div id="PartialDisplay" class="container">
+            @Html.Partial("_PartialDisplay")
+
+        </div>
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - BoVoyage MVC Groupe 2</p>
         </footer>
     </div>
 

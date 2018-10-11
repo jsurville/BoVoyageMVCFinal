@@ -7,15 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BoVoyageMVC.Controllers;
 using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Commercial")]
-    public class DestinationsController : Controller
+    public class DestinationsController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: BackOffice/Destinations
         public ActionResult Index()
         {
@@ -114,6 +113,19 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
+
+        // GET
+        public ActionResult DeletePicture(int id, int iddestination)
+        {
+            Image image = db.Images.Find(id);
+            db.Images.Remove(image);
+            db.Entry(image).State = EntityState.Deleted;
+            db.SaveChanges();
+            // return Json(image);
+            return RedirectToAction("Edit", "Destinations", new { id = iddestination });
+        }
+
+
         // GET: BackOffice/Destinations/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -122,6 +134,11 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Destination destination = db.Destinations.Find(id);
+            var voyages = db.Voyages.Where(x => x.DestinationId == destination.Id);
+            if (voyages != null)
+            {
+                Display("Impossible de supprimer une Destination pour un Voyage en Cours ", type: MessageType.ERROR);
+            }
             if (destination == null)
             {
                 return HttpNotFound();
@@ -134,9 +151,24 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Destination destination = db.Destinations.Find(id);
-            db.Destinations.Remove(destination);
-            db.SaveChanges();
+            Destination destination = db.Destinations.Include("Images").SingleOrDefault(x => x.Id == id);
+            var voyages = db.Voyages.Where(x => x.DestinationId == id);
+            if(voyages != null)
+            {
+                Display("Impossible de supprimer une Destination pour un Voyage en Cours ", type: MessageType.ERROR );
+            }
+            else
+            {
+                foreach (var item in voyages)
+                {
+                    db.Entry(item).State = EntityState.Deleted;  // équivalent à db.Shooters.Remove(item);
+                }
+
+                db.Destinations.Remove(destination);
+
+                db.SaveChanges();
+            }
+            
             return RedirectToAction("Index");
         }
 

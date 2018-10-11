@@ -1,15 +1,10 @@
 ﻿@model BoVoyageMVC.Models.Destination
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Destination - Modificattion";
 }
-<style>
-    div{
-        border:solid 1px red;
-    }
-</style>
-<h2>Edit</h2>
-<div class="row">
+<h2>Modification de la Destination @Model.Country</h2>
+<div class="row container-fluid">
     <div class="col-md-6">
 
         @using (Html.BeginForm())
@@ -17,7 +12,7 @@
             @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Destination</h4>
+            
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
@@ -58,7 +53,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Enregistrer les Modifications" class="btn btn-primary" />
                 </div>
             </div>
         </div>
@@ -74,7 +69,7 @@
                 <label for="if">Fichier</label>
                 <input type="file" id="if" name="picture" />
             </div>
-            <button type="submit" class="btn btn-info"> Enregistrer</button>
+            <button type="submit" class="btn btn-info"> Ajouter</button>
         </form>
         <div class="row">
             @if (Model.Images != null)
@@ -83,7 +78,7 @@
                 {
                     <div class="col-md-2" id="@picture.Id">
                         <img src="data:@picture.ContentType;base64,@Convert.ToBase64String(picture.Content)" class="img-thumbnail" />
-                        @*<p><a id="delete" class="delete" href="@Url.Action("DeletePicture", "Destinations", new {id=picture.Id, iddestination=picture.DestinationId })"> <i class="glyphicon glyphicon-trash"></i> </a></p>*@
+                        <p><a id="delete" class="delete" href="@Url.Action("DeletePicture", "Destinations", new {id=picture.Id, iddestination=picture.DestinationId })"> <i class="glyphicon glyphicon-trash"></i> </a></p>
                     </div>
                 }
             }
@@ -92,7 +87,7 @@
 </div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la Liste", "Index")
 </div>
 
 
@@ -105,11 +100,11 @@
             tinymce.init({ selector: '#Description', lang: 'fr' });
         })
             
-        //const btn = document.querySelector('#delete');
-        //btn.addEventListener('click', ev => {
-        //    if (confirm("Voulez-vous supprimer cette photo ?") == false) {
-        //        ev.preventDefault();
-        //    }
-        //});
+        const btn = document.querySelector('#delete');
+        btn.addEventListener('click', ev => {
+            if (confirm("Voulez-vous supprimer cette photo ?") == false) {
+                ev.preventDefault();
+            }
+        });
     </script>
 }

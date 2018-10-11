@@ -401,6 +401,7 @@
     <Content Include="Areas\BackOffice\Views\ContactMessages\Details.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Index.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Shared\_PartialDisplay.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
@@ -633,6 +634,7 @@
     <Content Include="Views\ContactMessages\Details.cshtml" />
     <Content Include="Views\ContactMessages\Edit.cshtml" />
     <Content Include="Views\ContactMessages\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
