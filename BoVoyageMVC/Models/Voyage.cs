@@ -1,4 +1,4 @@
-﻿using BoVoyDateMVC.Validators;
+﻿using BoVoyageMVC.Validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
