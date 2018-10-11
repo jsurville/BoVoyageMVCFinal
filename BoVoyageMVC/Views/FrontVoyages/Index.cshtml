@@ -5,40 +5,32 @@
     
 }
 
-<style>
-    .voyages {
-        padding: 5px;
-        margin: 10px;
-        
-    }
-</style>
 
 
-<div class="voyages row">
+
+<div class="row">
     @foreach (var item in Model)
     {
-       
-    <div id="voyages" class="card col-md-3 alert alert-success" style="margin-bottom:15px">
-        <h2> @Html.DisplayFor(modelItem => item.Destination.Country) </h2>
-        Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
-        <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice)  </h3>
+    
+                <div class="col-md-2" style="margin-top:20px">
+                    <div class="card">
 
+                        @if (item.Destination.Images?.Count > 0)
+                        {
+                            <img src="data:@item.Destination.Images.First().ContentType;base64,@Convert.ToBase64String(item.Destination.Images.First().Content)" alt="sejour de rêve" style="width:100%" />
+                        }
+                        <h2> @Html.DisplayFor(modelItem => item.Destination.Country) </h2>
+                        <h3>  @Html.DisplayFor(modelItem => item.Destination.Region)  </h3>
+                        Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
+                        <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice)  </h3>
 
+                        <button>
 
-
-        @if (item.Destination.Images?.Count > 0)
-        {
-            <img src="data:@item.Destination.Images.First().ContentType;base64,@Convert.ToBase64String(item.Destination.Images.First().Content)" class="img-thumbnail" />
+                            @Html.ActionLink("En Savoir plus", "Details", new { region = item.Destination.Region, country = item.Destination.Country, id = item.Id }, new { @class="neutral", @data = item.Destination.Country })
+                        </button>
+                    </div>
+                </div>
+            
         }
-        <div>
-            @Html.ActionLink("Plus d'Infos", "Details", new { region = item.Destination.Region, country = item.Destination.Country, id = item.Id }, new { @class = "btn btn-primary", @style = "float:right", @data = item.Destination.Country })
-            @*@Html.ActionLink("Réserver", "Create", "Reservations", new { id = item.Id }, new { @class = "btn btn-primary", @style = "float:right" })*@
-        </div>
     </div>
 
-
-        
-
-    }
-</div>
- 
