@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            
+
             @Html.DisplayNameFor(model => model.Client.LastName)
         </dt>
 
@@ -43,6 +43,7 @@
         <dd>
             @Html.Raw(Model.Voyage.Destination.Description)
         </dd>
+
 
         <dt>
             @Html.DisplayNameFor(model => model.Voyage.DepartureDate)
@@ -84,6 +85,26 @@
             @Html.DisplayFor(model => model.EtatDossier)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Participants)
+        </dt>
+
+        @{ if (Model.Participants == null)
+            {
+                <dt>
+                    dfsg dfgsdfgsdf gsdf gsdf
+                </dt>
+            }
+            else
+            {
+                foreach (BoVoyageMVC.Models.Participant participant in Model.Participants)
+                {
+                    <dd>
+                        @Html.DisplayFor(model => participant.FisrtName)
+                    </dd>
+                }
+            }
+        }
     </dl>
 </div>
 <p>

@@ -7,16 +7,16 @@
 <h3>@ViewBag.Title</h3>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-     
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @Html.HiddenFor(model => model.DossierReservationId)        
+        @Html.HiddenFor(model => model.DossierReservationId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -75,9 +75,21 @@
 }
 
 <div>
-    @Html.ActionLink("Retour", "Index","Reservations")
+    @Html.ActionLink("Retour", "Index", "Reservations")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        $(function () {
+            $('#BirthDate').datetimepicker({
+                lang: 'fr',
+                format: 'd/M/20y H:i'
+            });
+           
+            $('#BirthDate').attr('autocomplete', 'off');
+           
+        });
+    </script>
 }
