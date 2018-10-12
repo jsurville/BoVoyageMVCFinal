@@ -17,7 +17,14 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var voyages = db.Voyages.Include("Destination").ToList();
+            var dossiers = db.DossiersReservations.Include("Client").ToList();
+            Dashboard dashboard = new Dashboard()
+            {
+                Voyages = voyages,
+                DossiersReservations = dossiers
+            };
+            return View(dashboard);
         }
 
         public ActionResult About()
