@@ -15,8 +15,10 @@ namespace BoVoyageMVC.Controllers
         // GET: Reservations
         public ActionResult Index()
         {
+            var clientId = GetCurrentClientId();
             var dossiersReservations = db.DossiersReservations.Include(d => d.Client)
-                .Include(d => d.Voyage).Include(d => d.Voyage.Destination);
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
+                .Where(d=>d.ClientId == clientId);
             return View(dossiersReservations.ToList());
         }
 
