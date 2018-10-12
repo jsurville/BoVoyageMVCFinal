@@ -50,7 +50,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Voyage.DepartureDate)
+            @Model.Voyage.DepartureDate.ToShortDateString()
         </dd>
 
         <dt>
@@ -58,7 +58,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Voyage.ReturnDate)
+            @Model.Voyage.ReturnDate.ToShortDateString()
         </dd>
 
         <dt>
@@ -76,7 +76,13 @@
         <dd>
             @Html.DisplayFor(model => model.TotalPrice)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assurances)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Assurances.First().TypeAssurance)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.EtatDossier)
         </dt>

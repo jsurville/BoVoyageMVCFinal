@@ -82,4 +82,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+     $(function () {
+         $('#BirthDate').datetimepicker({
+                lang: 'fr',
+                format: 'd/M/Y H:i'
+            });
+           
+         $('#BirthDate').attr('autocomplete', 'off');
+           
+            tinymce.init({ selector: '#Description', lang: 'fr' });
+        });
+    </script>
 }
