@@ -28,9 +28,10 @@ namespace BoVoyageMVC.Models
 
         [Display(Name = "Places Disponibles")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
+        [Range(0,1000, ErrorMessage ="Le Nombre de places doit être positif")]
         public int MaxCapacity { get; set; }
 
-        [Range(0, 50000)]
+        [Range(0, 50000, ErrorMessage ="Le Prix doit être positif")]
        // [DecimalAtribute(ErrorMessage = "Le champ {0} doit etre positif.")]
         [Display(Name = "Prix agence")]
         [DisplayFormat(DataFormatString = "{0:C0}")]

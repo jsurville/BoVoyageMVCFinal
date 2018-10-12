@@ -63,9 +63,9 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 }
                 return View(clients);
             }
-
+            Display("Aucun résultat");
             return RedirectToAction("Index", "Clients");
-            return RedirectToAction("Index", "Clients");
+           
         }
     }
 }
