@@ -36,5 +36,15 @@ namespace BoVoyageMVC.Models
 
         [Display(Name = "Images")]
         public ICollection<Image> Images { get; set; }
-    }
+
+        [NotMapped]
+        [Display(Name = "nom")]
+        public string Name
+        {
+            get
+            {
+                return this.Country+" "+this.Region;
+            }
+        }
+    }   
 }

@@ -36,7 +36,7 @@ namespace BoVoyageMVC.Controllers
         }
 
         // GET: ContactMessages/Create
-        [Route("Nous-contacter")]
+        //[Route("Nous-contacter")]
         public ActionResult Create()
         {
             return View();
