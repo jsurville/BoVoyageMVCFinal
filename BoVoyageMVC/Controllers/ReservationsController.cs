@@ -28,8 +28,8 @@ namespace BoVoyageMVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DossierReservation dossierReservation = db.DossiersReservations.Include(d => d.Client)
-                .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
-                .SingleOrDefault(d => d.Id == id);
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination).Include(d=>d.Participants)
+                .Include(d=>d.Assurances).SingleOrDefault(d => d.Id == id);
             if (dossierReservation == null)
             {
                 return HttpNotFound();
