@@ -41,9 +41,9 @@ namespace BoVoyageMVC.Controllers
 
         // GET: FrontVoyages/Search/
          [Route("Search")]
-        public ActionResult Search(string search, DateTime? departureDate)
+        public ActionResult Search(string search, DateTime? departureDate, int? maxprice)
         {
-            if (search != "" && departureDate == null)
+            if (search != "" && departureDate == null && maxprice == null )
             {
                 ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
             .Where(x => x.Destination.Description.Contains(search)
@@ -55,9 +55,8 @@ namespace BoVoyageMVC.Controllers
                 {
                     return View(voyages);
                 }
-               
             }
-            if (search == "" && departureDate != null)
+            if (search == "" && departureDate != null && maxprice == null)
             {
                 
                 ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
@@ -67,8 +66,20 @@ namespace BoVoyageMVC.Controllers
                 {
                     return View(voyages);
                 }
-
             }
+            if (search == "" && departureDate == null && maxprice != null)
+            {
+
+                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
+            .ToList().Where(x => x.UnitPublicPrice <= maxprice).ToList();
+
+                if (voyages != null)
+                {
+                    return View(voyages);
+                }
+            }
+
+
             Display("Aucun résultat");
             Display("Le Nouveau Tireur a bien été enregistré");
             return RedirectToAction("Index", "Home");
