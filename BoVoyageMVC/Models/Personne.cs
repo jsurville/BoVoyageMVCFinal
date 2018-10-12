@@ -12,7 +12,7 @@ namespace BoVoyageMVC.Models
 	{
 		public int Id { get; set; }
 
-        [Display(Name = "M/Mme")]
+        [Display(Name = "Civilité")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
 		[StringLength(20, MinimumLength = 1, ErrorMessage = "La civilite doit avoir de 1 à 20 caractères")]
 		[Index("IX_PersonneUnique", 1, IsUnique = true)]
@@ -38,7 +38,7 @@ namespace BoVoyageMVC.Models
 
         [Display(Name = "Téléphone")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
-        [RegularExpression(@"^([0-9])*\s*$",ErrorMessage = "Le champ {0} doit avoir que des chiffres")]
+        [RegularExpression(@"^([0-9])*\s*$",ErrorMessage = "Le champ {0} ne doit contenir que des chiffres")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "Le numéro de telephone doit avoir de 3 à 20 caractères")]
 		public string PhoneNumber { get; set; }
 

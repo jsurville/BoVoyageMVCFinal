@@ -4,92 +4,91 @@
     ViewBag.Title = "Destination - Modification";
 }
 <div class="detail">
-<h2>Modification de la Destination @Model.Country</h2>
-<div class="row container-fluid">
-    <div class="col-md-6">
+    <h2>Modification de la Destination @Model.Country</h2>
+    <div class="row container-fluid">
+        <div class="col-md-6">
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Id)
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Continent, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Continent, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Continent, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Enregistrer les Modifications" class="btn btn-primary" />
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-
-    <div class="col-md-6">
-        <h3>Images</h3>
-        Les images doivent etre de resolution 600x400
-        <form action="@Url.Action("AddPicture", "Destinations")" method="post" enctype="multipart/form-data">
-            @* enctype form-data pour envoyer un fichier  *@
-            @Html.HiddenFor(x => x.Id)
-            <div class="form-group">
-                <label for="if">Fichier</label>
-                <input type="file" id="if" name="picture" />
-            </div>
-            <button type="submit" class="btn btn-info"> Ajouter</button>
-        </form>
-        <div class="row">
-            @if (Model.Images != null)
+            @using (Html.BeginForm())
             {
-                foreach (var picture in Model.Images)
-                {
-                    <div class="col-md-2" id="@picture.Id">
-                        <img src="data:@picture.ContentType;base64,@Convert.ToBase64String(picture.Content)" class="img-thumbnail" />
-                        <p><a id="delete" class="delete" href="@Url.Action("DeletePicture", "Destinations", new {id=picture.Id, iddestination=picture.DestinationId })"> <i class="glyphicon glyphicon-trash"></i> </a></p>
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Continent, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Continent, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Continent, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                }
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Enregistrer les Modifications" class="btn btn-info" />  @Html.ActionLink("Annuler", "Index", null, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                </div>
             }
         </div>
+
+        <div class="col-md-6">
+            <h3>Images</h3>
+            Les images doivent etre de resolution 600x400
+            <form action="@Url.Action("AddPicture", "Destinations")" method="post" enctype="multipart/form-data">
+                @* enctype form-data pour envoyer un fichier  *@
+                @Html.HiddenFor(x => x.Id)
+                <div class="form-group">
+                    <label for="if">Fichier</label>
+                    <input type="file" id="if" name="picture" />
+                </div>
+                <button type="submit" class="btn btn-info"> Ajouter</button>
+            </form>
+            <div class="row">
+                @if (Model.Images != null)
+                {
+                    foreach (var picture in Model.Images)
+                    {
+                        <div class="col-md-2" id="@picture.Id">
+                            <img src="data:@picture.ContentType;base64,@Convert.ToBase64String(picture.Content)" class="img-thumbnail" />
+                            <p><a id="delete" class="delete" href="@Url.Action("DeletePicture", "Destinations", new {id=picture.Id, iddestination=picture.DestinationId })"> <i class="glyphicon glyphicon-trash"></i> </a></p>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
     </div>
-    <div>
-        @Html.ActionLink("Retour à la Liste", "Index")
-    </div>
-</div>
+   
 </div>
 
 

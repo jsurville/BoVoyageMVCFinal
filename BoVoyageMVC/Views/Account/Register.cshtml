@@ -10,13 +10,14 @@
         @Html.AntiForgeryToken()
 
         <hr />
-        @Html.ValidationSummary("", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
         <div class="form-group">
             @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -24,6 +25,7 @@
             @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -31,6 +33,7 @@
             @Html.LabelFor(m => m.FisrtName, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.FisrtName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FisrtName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -38,6 +41,7 @@
             @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -45,6 +49,7 @@
             @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -52,6 +57,7 @@
             @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.BirthDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -59,24 +65,29 @@
             @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="S’inscrire" />
+                <input type="submit" class="btn btn-info" value="S’inscrire" />
+                @Html.ActionLink("Retour", "Index", "Home")
             </div>
+
         </div>
     }
 </div>
@@ -88,10 +99,7 @@
                 lang: 'fr',
                 format: 'd/M/Y H:i'
             });
-           
          $('#BirthDate').attr('autocomplete', 'off');
-           
-            tinymce.init({ selector: '#Description', lang: 'fr' });
         });
     </script>
 }

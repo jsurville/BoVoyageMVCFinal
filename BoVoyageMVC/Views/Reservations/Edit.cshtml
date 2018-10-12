@@ -4,15 +4,16 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
+<div class="detail">
     <div class="form-horizontal">
-        <h4>DossierReservation</h4>
+        <h2>Edition du dossier</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -63,11 +64,15 @@
             </div>
         </div>
     </div>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
