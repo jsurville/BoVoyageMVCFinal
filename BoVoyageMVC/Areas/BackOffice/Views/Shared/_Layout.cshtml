@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body background="~/Content/img/BoBackground2.jpg" class="parallax">
+<body background="~/Content/img/Background2.jpg" class="parallax">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -53,7 +53,7 @@
 
                     <li>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="@Url.Action("Index", "Commercials")">Nouveau Commercial</a></li>
+                            <li><a href="@Url.Action("RegisterCommercial", "Account")">Nouveau Commercial</a></li>
                         </ul>
                     </li>
                     <li>
@@ -77,12 +77,10 @@
     </div>
 
     <div class="container-fluid body-content">
-        <div id="PartialDisplay" class="container">
-            @Html.Partial("_PartialDisplay")
 
-        </div>
+        @Html.Partial("_PartialDisplay")
         @RenderBody()
-        
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - BoVoyage MVC Groupe 2</p>

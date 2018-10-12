@@ -140,6 +140,12 @@ namespace BoVoyageMVC.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult RegisterCommercial()
+        {
+            return View();
+        }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -190,7 +196,56 @@ namespace BoVoyageMVC.Controllers
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
         }
-      
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterCommercial(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    user = UserManager.FindByEmail(model.Email);
+                    if (user.Id != null)
+                    {
+                        var client = new Client
+                        {
+                            Title = model.Title,
+                            LastName = model.LastName,
+                            FisrtName = model.FisrtName,
+                            Address = model.Address,
+                            PhoneNumber = model.PhoneNumber,
+                            BirthDate = model.BirthDate,
+                            UserId = user.Id
+                        };
+                        db.Clients.Add(client);
+                        db.SaveChanges();
+                        UserManager.AddToRole(user.Id, "Client");
+                    }
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+
+
+                    // Pour plus d'informations sur l'activation de la confirmation de compte et de la réinitialisation de mot de passe, visitez https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Envoyer un message électronique avec ce lien
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+                    Display("Client enregistré");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
+            return View(model);
+        }
         [ChildActionOnly]
         public string GetCurrentUserName()
         {

@@ -41,14 +41,15 @@
         }
 
 
-        <div class="tab">
+        @*<div class="tab">
             <button class="tablinks" onclick="openCity(event, 'bestPrice')">Les moins chers</button>
             <button class="tablinks" onclick="openCity(event, 'soon')">Depart imminent</button>
             <button class="tablinks" onclick="openCity(event, 'popular')">Top5 des destinations</button>
-        </div>
+        </div>*@
 
 
         <div id="bestPrice" class="tabcontent">
+            <h2>Nos meilleurs offres</h2>
             <div class="row">
 
                 @{IEnumerable<BoVoyageMVC.Models.Voyage> topBestPrice = Model.OrderBy(x => x.UnitPublicPrice);
@@ -84,9 +85,12 @@
         </div>
 
         <div id="soon" class="tabcontent">
+            <h2>Departs imminents</h2>
+            @*<h3>Prochain depart dans <span id="countdown"></span>!</h3>*@
             <div class="row">
                 @{IEnumerable<BoVoyageMVC.Models.Voyage> topSoon = Model.OrderBy(x => x.DepartureDate);
 
+                    //ViewBag.NextDeparture = topSoon.ElementAt(0).DepartureDate;
 
                     for (int i = 0; i < top; i++)
                     {
@@ -99,7 +103,6 @@
                          @Convert.ToBase64String(topSoon.ElementAt(i).Destination.Images.ElementAt(0).Content)" alt="sejour de rêve" style="width:100%">
                                     }
                                 }
-                                <p id="countdown"></p>
                                 <h3>@topSoon.ElementAt(i).DepartureDate.ToShortDateString()</h3>
                                 <h4>@topSoon.ElementAt(i).Destination.Country</h4>
                                 <h5>@topSoon.ElementAt(i).Destination.Region</h5>
@@ -119,6 +122,7 @@
         </div>
 
         <div id="popular" class="tabcontent">
+            <h2>Destinations les plus populaires</h2>
             <div class="row">
                 @{IEnumerable<BoVoyageMVC.Models.Voyage> topPopular = Model.OrderBy(x => x.Destination.Country);
 
@@ -176,29 +180,29 @@
 
 <script>
     
-
+    
     //script for countdown (index top5)
 
-    var countDownDate = new Date("Nov 5, 2018 15:37:25").getTime();
+    //var countDownDate = new Date(ViewBag.NextDeparture).getTime();
 
 
-    var x = setInterval(function () {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //var x = setInterval(function () {
+    //    var now = new Date().getTime();
+    //    var distance = countDownDate - now;
+    //    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    //    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-            + minutes + "m " + seconds + "s ";
+    //    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+    //        + minutes + "m " + seconds + "s ";
 
 
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("countdown").innerHTML = "EXPIRED";
-        }
-    }, 1000);
+    //    if (distance < 0) {
+    //        clearInterval(x);
+    //        document.getElementById("countdown").innerHTML = "EXPIRED";
+    //    }
+    //}, 1000);
 
     // Script pour DateTimepicker
 

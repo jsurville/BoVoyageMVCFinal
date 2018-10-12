@@ -132,7 +132,10 @@ namespace BoVoyageMVC.Controllers
             }
             if (dossierReservation.EtatDossier == EtatDossierReservation.Refusee
                 || dossierReservation.EtatDossier == EtatDossierReservation.Annule)
+            {
+                Display("Votre réservation a été réfusé ou annulé",MessageType.ERROR);
                 return RedirectToAction("Index");
+            }
             return View(dossierReservation);
         }
 

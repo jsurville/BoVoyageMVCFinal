@@ -257,6 +257,10 @@
     <Compile Include="Migrations\201810120910394_AddRaisonAnnulerToDossierReservationNullable.Designer.cs">
       <DependentUpon>201810120910394_AddRaisonAnnulerToDossierReservationNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810121022069_AddRequiredUserIdFroCommercial.cs" />
+    <Compile Include="Migrations\201810121022069_AddRequiredUserIdFroCommercial.Designer.cs">
+      <DependentUpon>201810121022069_AddRequiredUserIdFroCommercial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
@@ -278,7 +282,6 @@
     <Compile Include="Services\CarteBancaireService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\Extension.cs" />
-    <Compile Include="Tools\Message.cs" />
     <Compile Include="Validators\RouteDetailsAttribute.cs" />
     <Compile Include="Validators\DateAttribute.cs" />
     <Compile Include="Validators\AgeAttribute.cs" />
@@ -417,7 +420,6 @@
     <Content Include="Areas\BackOffice\Views\ContactMessages\Details.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Index.cshtml" />
-    <Content Include="Areas\BackOffice\Views\Shared\_PartialDisplay.cshtml" />
     <Content Include="Areas\BackOffice\Views\Voyages\Search.cshtml" />
     <Content Include="Areas\BackOffice\Views\Shared\_LayoutSearch.cshtml" />
     <Content Include="Areas\BackOffice\Views\Commercials\Create.cshtml" />
@@ -427,6 +429,7 @@
     <Content Include="Areas\BackOffice\Views\Clients\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Index.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Search.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Shared\_PartialDisplay.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
@@ -621,7 +624,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RegisterCommercial.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -665,6 +668,7 @@
     <Content Include="Views\Reservations\Book.cshtml" />
     <Content Include="Views\Shared\_LayoutSearch.cshtml" />
     <Content Include="Views\Shared\_PartialDisplay.cshtml" />
+    <Content Include="Views\Account\Register - Copier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -714,6 +718,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810120910394_AddRaisonAnnulerToDossierReservationNullable.resx">
       <DependentUpon>201810120910394_AddRaisonAnnulerToDossierReservationNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810121022069_AddRequiredUserIdFroCommercial.resx">
+      <DependentUpon>201810121022069_AddRequiredUserIdFroCommercial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

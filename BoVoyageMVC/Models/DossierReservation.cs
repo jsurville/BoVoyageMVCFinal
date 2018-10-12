@@ -89,7 +89,7 @@ namespace BoVoyageMVC.Models
         public EtatDossierReservation EtatDossier { get; set; }
 
         [Display(Name = "Raison Annulation")]
-        [EnumDataType(typeof(EtatDossierReservation))]
+        [EnumDataType(typeof(RaisonAnnulationDossier))]
         [JsonConverter(typeof(StringEnumConverter))]
         public RaisonAnnulationDossier? RaisonAnnulationDossier { get; set; }
 
