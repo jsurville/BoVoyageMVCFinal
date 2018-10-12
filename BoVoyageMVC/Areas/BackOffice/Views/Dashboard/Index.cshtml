@@ -1,26 +1,120 @@
-﻿@model BoVoyageMVC.Areas.BackOffice.Models.HomeIndexViewModel
+﻿
+@using BoVoyageMVC.Models;
+
+@model Tuple<Voyage, DossierReservation>
 
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "tableau de bord";
 }
 
-<div class="jumbotron">
-    <h1>BoVoyage</h1>
-</div>
+
 
 
 <div class="row">
     <div class="col-md-6">
-        <h2>Les meilleurs prix!</h2>
-        <p>  </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <h3>Prochains départs</h3>
+        <table class="table">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.Destination.Country)
+                    @Html.DisplayNameFor(model => model.Item1.Destination.Region)
+                </th>               
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.DepartureDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.ReturnDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.MaxCapacity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item1.UnitPrice)
+                </th>
+
+            </tr>
+
+            @*@foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgenceVoyage.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Destination.Continent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartureDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReturnDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaxCapacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Margin)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("edit", new { id=item.Id })"><i class="glyphicon glyphicon-edit text-warning"></i></a> |
+                        <a href="@Url.Action("Details", new { id=item.Id })"><i class="glyphicon glyphicon-search"></i></a> |
+                        <a href="@Url.Action("delete", new { id=item.Id })"><i class="glyphicon glyphicon-trash"></i></a>
+                    </td>
+                </tr>
+            }*@
+
+        </table>
     </div>
 
     <div class="col-md-6">
-        <h2>Le plus presents</h2>
-        <p>You can easily find </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h3>Reservations en attente</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item2.Client.FisrtName)
+                    @Html.DisplayNameFor(model => model.Item2.Client.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Item2.Id)
+                </th>                            
+                <th>
+                    @Html.DisplayNameFor(model => model.Item2.EtatDossier)
+                </th>
+                <th></th>
+            </tr>
+
+            @*@foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Client.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Voyage.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreditCardNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EtatDossier)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }*@
+
+        </table>
     </div>
 </div>
 
