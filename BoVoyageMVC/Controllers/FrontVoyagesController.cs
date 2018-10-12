@@ -13,8 +13,6 @@ namespace BoVoyageMVC.Controllers
     
     public class FrontVoyagesController : BaseController
     {
-       
-
         // GET: FrontVoyages
         [Route("Voyages")]
         public ActionResult Index()
