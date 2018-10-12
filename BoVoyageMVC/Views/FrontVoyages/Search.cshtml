@@ -5,30 +5,34 @@
     Layout = "~/Views/Shared/_LayoutSearch.cshtml";
 }
 
-<h2>Résultats</h2>
+
+<h2>Résultats de votre recherche</h2>
 
 
-<div class="col-md-4">
-    <form class="form-group row" action="@Url.Action("Search", "FrontVoyages")" method="post" enctype="multipart/form-data">
-        <div class="form-group ">
-            <label for="DateAller">Départ avant le:</label>
-            <a> <input type="date" class="form-control" id="DepartureDate" name="departureDate" /> </a> <br />
-        </div>
+    <div class="col-md-4">
 
-        <div class="form-group ">
-            <label for="MaxPrice">Prix Max</label>
-            <input class="form-control" type="number" id="maxprice" name="maxprice" />
-        </div>
+       
+            <form class="form-group row" action="@Url.Action("Search", "FrontVoyages")" method="post" enctype="multipart/form-data">
+                <div class="form-group ">
+                    <label for="DateAller">Départ avant le:</label>
+                    <a> <input type="date" class="form-control" id="DepartureDate" name="departureDate" /> </a> <br />
+                </div>
 
-        <div class="form-group ">
-            <label for="Destination">Destination</label>
-            <input class="form-control" type="text" id="destination" name="search" />
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-info"> Rechercher</button>
-        </div>
+                <div class="form-group ">
+                    <label for="MaxPrice">Prix Max</label>
+                    <input class="form-control" type="number" id="maxprice" name="maxprice" />
+                </div>
 
-    </form>
+                <div class="form-group ">
+                    <label for="Destination">Destination</label>
+                    <input class="form-control" type="text" id="destination" name="search" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info"> Rechercher</button>
+                </div>
+
+            </form>
+        
 </div>
 
 <div class="col-md-8">
@@ -36,22 +40,34 @@
     <div class="voyages row">
         @foreach (var item in Model)
         {
+        <div class="col-md-4">
+            <div class="card">
 
-            <div id="voyages" class="card col-md-3 alert alert-success" style="margin-bottom:15px">
-                <h2> @Html.DisplayFor(modelItem => item.Destination.Country) </h2>
-                Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
-                <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice)  </h3>
-
-
-                @if (item.Destination.Images?.Count > 0)
-                {
-                    <img src="data:@item.Destination.Images.First().ContentType;base64,@Convert.ToBase64String(item.Destination.Images.First().Content)" class="img-thumbnail" />
-                }
+                @*<div id="voyages" class="card col-md-3 alert alert-success" style="margin-bottom:15px">*@
                 <div>
-                    @Html.ActionLink("Plus d'Infos", "Details", new { region = item.Destination.Region, country = item.Destination.Country, id = item.Id }, new { @class = "btn btn-primary", @style = "float:right", @data = item.Destination.Country })
-                    @Html.ActionLink("Réserver", "Create", "Reservations", new { id = item.Id }, new { @class = "btn btn-primary", @style = "float:right" })
+                    <h2> @Html.DisplayFor(modelItem => item.Destination.Country) </h2>
+                    <h3>  @Html.DisplayFor(modelItem => item.Destination.Region)  </h3>
+                    Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
+                    <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice)  </h3>
+
+
+                    @if (item.Destination.Images?.Count > 0)
+                    {
+                        <img src="data:@item.Destination.Images.First().ContentType;base64,@Convert.ToBase64String(item.Destination.Images.First().Content)" alt="sejour de rêve" style="width:100%" />
+                    }
+                    <br />
+                    <br />
+                    <div>
+                        @Html.ActionLink("En Savoir plus", "Details", new { region = item.Destination.Region, country = item.Destination.Country, id = item.Id }, new { @class = "btn btn-primary", @data = item.Destination.Country })
+                        @Html.ActionLink("Réserver", "Create", "Reservations", new { id = item.Id }, new { @class = "btn btn-primary", })
+                    </div>
+                    <br />
                 </div>
+
             </div>
-        }
-    </div>
-</div>
+        </div>
+                
+
+                }
+            </div>
+        </div>
