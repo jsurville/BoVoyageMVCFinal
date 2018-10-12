@@ -17,7 +17,7 @@ namespace BoVoyageMVC.Controllers
         {
             var clientId = GetCurrentClientId();
             var dossiersReservations = db.DossiersReservations.Include(d => d.Client)
-                .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination).Include(d=>d.Participants)
                 .Where(d => d.ClientId == clientId);
             return View(dossiersReservations.ToList());
         }

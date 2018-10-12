@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace BoVoyageMVC.Controllers
 {
@@ -238,7 +237,7 @@ namespace BoVoyageMVC.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
                     Display("Commercial ajouté");
 
-                    return RedirectToAction("Index", "Dashboard",new { area="BackOffice"});
+                    return RedirectToAction("Index", "Dashboard", new { area = "BackOffice" });
                 }
                 AddErrors(result);
             }
@@ -251,12 +250,12 @@ namespace BoVoyageMVC.Controllers
         {
             string userId = User.Identity.GetUserId();
             var roles = UserManager.GetRoles(userId);
-           // string[] roles = Roles.GetRolesForUser();
-            if (roles ==null )
+            // string[] roles = Roles.GetRolesForUser();
+            if (roles == null)
                 return "";
             if (roles.Contains("Commercial"))
-                return User.Identity.Name;
-            // return GetCurrentCommercialName();
+                //return User.Identity.Name;
+                return GetCurrentCommercialName();
             if (roles.Contains("Client"))
                 return GetCurrentClientName();
             return User.Identity.Name;

@@ -104,8 +104,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         }
 
         // POST: BackOffice/DossierReservations/
-        [HttpPost]
-        public ActionResult Validate(int id)
+        
+        public ActionResult Validate(int? id)
         {
             DossierReservation dossierReservation = db.DossiersReservations.Find(id);
             if (dossierReservation == null)

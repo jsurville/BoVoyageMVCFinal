@@ -62,7 +62,7 @@ namespace BoVoyageMVC.Controllers
         protected string GetCurrentCommercialName()
         {
             var userId = User.Identity.GetUserId();
-            var commercial = db.Clients.SingleOrDefault(x => x.UserId == userId);
+            var commercial = db.Commercials.SingleOrDefault(x => x.UserId == userId);
             if (commercial != null)
             {
                 return commercial.FisrtName;
