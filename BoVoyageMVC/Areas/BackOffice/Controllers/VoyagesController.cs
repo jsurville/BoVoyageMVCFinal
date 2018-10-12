@@ -108,32 +108,52 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(voyage);
         }
 
-        // GET: BackOffice/Voyages/Search
-        //[Route("BackOffice/Search")]
-      //  [ValidateAntiForgeryToken]
-        public ActionResult Search(string search, DateTime? departureDate, DateTime? returnDate)
+
+        // GET: BackOffice/Search/
+        [Route("Search")]
+        public ActionResult Search(string search, DateTime? departureDate, int? maxprice)
         {
-            if (search == null)
+            if (search != "" && departureDate == null && maxprice == null)
             {
-                return RedirectToRoute("Index", "Dashboard");
-            }
-            ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
+                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
             .Where(x => x.Destination.Description.Contains(search)
             || x.Destination.Continent.Contains(search)
             || x.Destination.Country.Contains(search)
-            || x.Destination.Region.Contains(search)
-             || (x.DepartureDate > departureDate
-            || x.ReturnDate < returnDate)).ToList();
-            
-            if (voyages?.Count() == 0)
-            {
-                Display("Aucun Résultat ");
+            || x.Destination.Region.Contains(search)).ToList();
+
+                if (voyages != null)
+                {
+                    return View(voyages);
+                }
             }
-            else
+            if (search == "" && departureDate != null && maxprice == null)
             {
-                return View(voyages);
+
+                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
+            .Where(x => x.DepartureDate <= departureDate).ToList();
+
+                if (voyages != null)
+                {
+                    return View(voyages);
+                }
             }
-            return RedirectToRoute("Index");
+            if (search == "" && departureDate == null && maxprice != null)
+            {
+
+                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
+            .ToList().Where(x => x.UnitPrice <= maxprice).ToList();
+
+                if (voyages != null)
+                {
+                    return View(voyages);
+                }
+            }
+
+
+            Display("Aucun résultat");
+            Display("Le Nouveau Tireur a bien été enregistré");
+            return RedirectToAction("Index", "Voyages");
+
 
         }
 
@@ -161,22 +181,6 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             db.Voyages.Remove(voyage);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-        // GET: BackOffice/Voyages/Details/5
-        public ActionResult RechercherDestination(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Voyage voyage = db.Voyages.Include("Destination").Include(x => x.Destination.Images).SingleOrDefault(x => x.Id == id);
-            if (voyage == null)
-            {
-                return HttpNotFound();
-            }
-            return RedirectToAction("Index");
-
-
         }
     }
 }
