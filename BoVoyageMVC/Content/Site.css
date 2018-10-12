@@ -114,3 +114,9 @@ textarea {
     .neutral:hover {
         color: white;
     }
+
+.logo {
+    max-width: 40%;
+    height: auto;
+    width: auto
+}

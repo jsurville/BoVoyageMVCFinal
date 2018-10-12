@@ -5,7 +5,11 @@
 }
 
 <div>
-    <h1>BoVoyage</h1>
+    <div >
+        <br />
+        <img src="~/Content/img/Logo.svg" class="logo" />
+    </div>
+    
 </div>
 
 <div id="search">
@@ -42,10 +46,10 @@
 
 
         @*<div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'bestPrice')">Les moins chers</button>
-            <button class="tablinks" onclick="openCity(event, 'soon')">Depart imminent</button>
-            <button class="tablinks" onclick="openCity(event, 'popular')">Top5 des destinations</button>
-        </div>*@
+                <button class="tablinks" onclick="openCity(event, 'bestPrice')">Les moins chers</button>
+                <button class="tablinks" onclick="openCity(event, 'soon')">Depart imminent</button>
+                <button class="tablinks" onclick="openCity(event, 'popular')">Top5 des destinations</button>
+            </div>*@
 
 
         <div id="bestPrice" class="tabcontent">
@@ -75,7 +79,7 @@
                                             {region = topBestPrice.ElementAt(i).Destination.Region,country = topBestPrice.ElementAt(i).Destination.Country,id = topBestPrice.ElementAt(i).Id},
                                             new
                                             {@class = "neutral",/*@style = "float:right",*/@data = topBestPrice.ElementAt(i).Destination.Country})
-                                           
+
                                 </button>
                             </div>
                         </div>
@@ -161,50 +165,50 @@
 }
 <script src="~/Scripts/jquery.datetimepicker.js">
 
-    //$(function () {
-    //    $('#DepartureDate').datetimepicker({
-    //        lang: 'fr',
-    //        format: 'd/M/20y H:i'
-    //    });
-    //    $('#ReturnDate').datetimepicker({
-    //        lang: 'fr',
-    //        format: 'd/M/20y H:i'
-    //    });
-    //    $('#DepartureDate').attr('autocomplete', 'off');
-    //    $('#ReturnDate').attr('autocomplete', 'off');
+        //$(function () {
+        //    $('#DepartureDate').datetimepicker({
+        //        lang: 'fr',
+        //        format: 'd/M/20y H:i'
+        //    });
+        //    $('#ReturnDate').datetimepicker({
+        //        lang: 'fr',
+        //        format: 'd/M/20y H:i'
+        //    });
+        //    $('#DepartureDate').attr('autocomplete', 'off');
+        //    $('#ReturnDate').attr('autocomplete', 'off');
 
-    //});
+        //});
 </script>
 
 
 
 <script>
-    
-    
-    //script for countdown (index top5)
-
-    //var countDownDate = new Date(ViewBag.NextDeparture).getTime();
 
 
-    //var x = setInterval(function () {
-    //    var now = new Date().getTime();
-    //    var distance = countDownDate - now;
-    //    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    //    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    //    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        //script for countdown (index top5)
 
-    //    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-    //        + minutes + "m " + seconds + "s ";
+        //var countDownDate = new Date(ViewBag.NextDeparture).getTime();
 
 
-    //    if (distance < 0) {
-    //        clearInterval(x);
-    //        document.getElementById("countdown").innerHTML = "EXPIRED";
-    //    }
-    //}, 1000);
+        //var x = setInterval(function () {
+        //    var now = new Date().getTime();
+        //    var distance = countDownDate - now;
+        //    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Script pour DateTimepicker
+        //    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+        //        + minutes + "m " + seconds + "s ";
+
+
+        //    if (distance < 0) {
+        //        clearInterval(x);
+        //        document.getElementById("countdown").innerHTML = "EXPIRED";
+        //    }
+        //}, 1000);
+
+        // Script pour DateTimepicker
 
 </script>
 
