@@ -32,7 +32,7 @@ namespace BoVoyageMVC.Models
 
         [Range(0, 50000)]
        // [DecimalAtribute(ErrorMessage = "Le champ {0} doit etre positif.")]
-        [Display(Name = "Prix/pers")]
+        [Display(Name = "Prix agence")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         public double UnitPrice { get; set; }
