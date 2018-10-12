@@ -6,15 +6,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BoVoyageMVC.Controllers;
 using BoVoyageMVC.Models;
+using BoVoyageMVC.Services;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [Authorize(Roles="Commercial")]
     [RouteArea("BackOffice")]
-    public class DossierReservationsController : Controller
+    public class DossierReservationsController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: BackOffice/DossierReservations
         [Route("Bookings")]
@@ -101,31 +103,72 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(dossierReservation);
         }
 
-        // GET: BackOffice/DossierReservations/Delete/5
-        public ActionResult Delete(int? id)
+        // POST: BackOffice/DossierReservations/
+        [HttpPost]
+        public ActionResult Validate(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             DossierReservation dossierReservation = db.DossiersReservations.Find(id);
             if (dossierReservation == null)
             {
                 return HttpNotFound();
             }
-            return View(dossierReservation);
-        }
 
-        // POST: BackOffice/DossierReservations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
-            db.DossiersReservations.Remove(dossierReservation);
+            if (dossierReservation.EtatDossier != EtatDossierReservation.EnAttente)
+            {
+                Display("L'état du Dossier ne permet pas de valider");
+                return RedirectToAction("Index");
+            }
+            var carteBancaireServie = new CarteBancaireService();
+            if (carteBancaireServie.ValiderSolvabilite(dossierReservation.CreditCardNumber,
+                dossierReservation.TotalPrice))
+            {
+                dossierReservation.EtatDossier = EtatDossierReservation.EnCours;
+                Display("La réservation a été validée");
+            }
+            else
+            {
+                dossierReservation.EtatDossier = EtatDossierReservation.Refusee;
+                dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Insolvable;
+                Display("Opération Refusée pour insolvabilité");
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+
+
+
+
+
+
+
+        //// GET: BackOffice/DossierReservations/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+        //    if (dossierReservation == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(dossierReservation);
+        //}
+
+        //// POST: BackOffice/DossierReservations/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+        //    db.DossiersReservations.Remove(dossierReservation);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
