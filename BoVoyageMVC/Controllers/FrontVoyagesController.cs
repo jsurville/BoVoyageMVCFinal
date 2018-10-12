@@ -41,7 +41,7 @@ namespace BoVoyageMVC.Controllers
 
         // GET: FrontVoyages/Search/
          [Route("Search")]
-        public ActionResult Search(string search, DateTime? departureDate, int maxprice)
+        public ActionResult Search(string search, DateTime? departureDate, int? maxprice)
         {
             if (search != "" && departureDate == null && maxprice == null )
             {
