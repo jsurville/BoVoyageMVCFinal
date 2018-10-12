@@ -1,12 +1,9 @@
-﻿using System;
+﻿using BoVoyageMVC.Controllers;
+using BoVoyageMVC.Models;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BoVoyageMVC.Controllers;
-using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
@@ -17,7 +14,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         // GET: BackOffice/Clients
         public ActionResult Index()
         {
-            
+
             List<Client> clients = db.Clients.ToList();
             return View(clients);
         }
@@ -37,7 +34,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(client);
         }
 
-        
+
         public ActionResult Edit(int id)
         {
             if (id == 0)
@@ -49,14 +46,14 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
-         
+
             return View(client);
-            
+
         }
 
         public ActionResult Search(string search)
         {
-            if (search != "" )
+            if (search != "")
             {
                 ICollection<Client> clients = db.Clients.Where(x => x.LastName.Contains(search) || x.FisrtName.Contains(search) || x.Address.Contains(search) || x.Address.Contains(search)).ToList();
                 //var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
@@ -68,13 +65,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             }
 
             return RedirectToAction("Index", "Clients");
-
-            //return RedirectToAction("Index", "Home");
-
+            return RedirectToAction("Index", "Clients");
         }
-
-
-
-
     }
 }

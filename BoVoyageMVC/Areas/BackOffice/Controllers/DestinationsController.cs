@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BoVoyageMVC.Controllers;
+using BoVoyageMVC.Models;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -7,8 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using BoVoyageMVC.Controllers;
-using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
@@ -153,9 +151,9 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         {
             Destination destination = db.Destinations.Include("Images").SingleOrDefault(x => x.Id == id);
             var voyages = db.Voyages.Where(x => x.DestinationId == id);
-            if(voyages != null)
+            if (voyages != null)
             {
-                Display("Impossible de supprimer une Destination pour un Voyage en Cours ", type: MessageType.ERROR );
+                Display("Impossible de supprimer une Destination pour un Voyage en Cours ", type: MessageType.ERROR);
             }
             else
             {
@@ -168,17 +166,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
                 db.SaveChanges();
             }
-            
-            return RedirectToAction("Index");
-        }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return RedirectToAction("Index");
         }
     }
 }

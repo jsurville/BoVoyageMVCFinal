@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace BoVoyageMVC.Controllers
 {
-    [Authorize(Roles ="Client")]
+    [Authorize]
     public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;

@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using BoVoyageMVC.Controllers;
+using BoVoyageMVC.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Commercial,Admin")]
-    public class ContactMessagesController : Controller
+    public class ContactMessagesController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: BackOffice/ContactMessages
         public ActionResult Index()
         {
@@ -114,15 +109,6 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             db.ContactMessages.Remove(contactMessage);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
