@@ -22,7 +22,7 @@ namespace BoVoyageMVC.Models
 				if (Age < 12)
 					return 0.6f;
 				else
-					return 1.0f;
+					return 0.0f;
 			}
 		}
 
