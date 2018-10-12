@@ -79,10 +79,10 @@ namespace BoVoyageMVC.Controllers
             MultiSelectList assuranceValues = new MultiSelectList(db.Assurances, "ID", "TypeAssurance", db.Assurances.Select(x => x.ID));
             ViewBag.Assurances = assuranceValues;
 
-            return View();
+            return View(dossierReservation);
         }
 
-       
+
         // GET: Reservations/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -142,10 +142,13 @@ namespace BoVoyageMVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             DossierReservation dossierReservation = db.DossiersReservations.Find(id);
-            dossierReservation.EtatDossier = EtatDossierReservation.Annule;
-            dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
-            db.Entry(dossierReservation).State = EntityState.Modified;
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                dossierReservation.EtatDossier = EtatDossierReservation.Annule;
+                dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
+                db.Entry(dossierReservation).State = EntityState.Modified;
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

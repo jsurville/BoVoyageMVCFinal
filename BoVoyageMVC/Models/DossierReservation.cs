@@ -28,7 +28,7 @@ namespace BoVoyageMVC.Models
     public enum RaisonAnnulationDossier : byte
     {
         [EnumMember(Value = "Client")]
-        Client = 1,
+        Client =1,
 
         [EnumMember(Value = "Places Insuffisantes")]
         PlacesInsuffisantes,
@@ -91,7 +91,7 @@ namespace BoVoyageMVC.Models
         [Display(Name = "Raison Annulation")]
         [EnumDataType(typeof(EtatDossierReservation))]
         [JsonConverter(typeof(StringEnumConverter))]
-        public RaisonAnnulationDossier RaisonAnnulationDossier { get; set; }
+        public RaisonAnnulationDossier? RaisonAnnulationDossier { get; set; }
 
         [Display(Name = "Client")]
         public int ClientId { get; set; }
