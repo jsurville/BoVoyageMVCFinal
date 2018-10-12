@@ -168,26 +168,30 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
-
-            if (dossierReservation.EtatDossier != EtatDossierReservation.EnAttente)
+            if (dossierReservation.EtatDossier == EtatDossierReservation.Clos
+               || dossierReservation.EtatDossier == EtatDossierReservation.Annule)                
             {
-                Display("L'état du Dossier ne permet pas de valider");
+                Display("L'état du Dossier ne permet pas de l'Annuler", MessageType.ERROR);
                 return RedirectToAction("Index");
             }
-            var carteBancaireServie = new CarteBancaireService();
-            if (carteBancaireServie.ValiderSolvabilite(dossierReservation.CreditCardNumber,
-                dossierReservation.TotalPrice))
+            if (dossierReservation.EtatDossier != EtatDossierReservation.Refusee)
             {
-                dossierReservation.EtatDossier = EtatDossierReservation.EnCours;
-                Display("La réservation a été validée");
+                if (dossierReservation.EtatDossier == EtatDossierReservation.Accepte)
+                {
+                    if (dossierReservation.Assurances.Where(x => x.TypeAssurance == TypeAssurance.Annulation).Count() > 0)
+                    {
+                        var rembourser = new CarteBancaireService().Rembourser(dossierReservation.CreditCardNumber,
+                            dossierReservation.TotalPrice);
+                        Display("Vous serez remboursé grâce à votre Assurance Annulation", MessageType.SUCCES);
+                    }
+                }
+                dossierReservation.RaisonAnnulationDossier= RaisonAnnulationDossier.Client;
+                dossierReservation.EtatDossier = EtatDossierReservation.Annule;
+                db.Entry(dossierReservation).State = EntityState.Modified;
+                db.SaveChanges();
+                Display("La réservation a été annulée", MessageType.SUCCES);
             }
-            else
-            {
-                dossierReservation.EtatDossier = EtatDossierReservation.Refusee;
-                dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Insolvable;
-                Display("Opération Refusée pour insolvabilité");
-            }
-            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -195,30 +199,15 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         public ActionResult Close(int? id)
         {
             DossierReservation dossierReservation = db.DossiersReservations.Find(id);
-            if (dossierReservation == null)
+            if (dossierReservation.EtatDossier != EtatDossierReservation.Accepte)
             {
-                return HttpNotFound();
-            }
-
-            if (dossierReservation.EtatDossier != EtatDossierReservation.EnAttente)
-            {
-                Display("L'état du Dossier ne permet pas de valider");
+                Display("L'état du Dossier ne permet pas de le Clotûrer", MessageType.ERROR);
                 return RedirectToAction("Index");
             }
-            var carteBancaireServie = new CarteBancaireService();
-            if (carteBancaireServie.ValiderSolvabilite(dossierReservation.CreditCardNumber,
-                dossierReservation.TotalPrice))
-            {
-                dossierReservation.EtatDossier = EtatDossierReservation.EnCours;
-                Display("La réservation a été validée");
-            }
-            else
-            {
-                dossierReservation.EtatDossier = EtatDossierReservation.Refusee;
-                dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Insolvable;
-                Display("Opération Refusée pour insolvabilité");
-            }
+            dossierReservation.EtatDossier = EtatDossierReservation.Clos;
+            db.Entry(dossierReservation).State = EntityState.Modified;
             db.SaveChanges();
+            Display("Le Dossier de Réservation a été clôturé", MessageType.SUCCES);
             return RedirectToAction("Index");
         }
 

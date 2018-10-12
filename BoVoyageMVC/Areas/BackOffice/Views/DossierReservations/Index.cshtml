@@ -48,10 +48,10 @@
                 @Html.DisplayFor(modelItem => item.Voyage.Destination.Country)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Voyage.DepartureDate)
+                @item.Voyage.DepartureDate.ToShortDateString()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Voyage.ReturnDate)
+                @item.Voyage.ReturnDate.ToShortDateString()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)

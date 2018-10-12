@@ -75,6 +75,30 @@ namespace BoVoyageMVC.Controllers
             };
             return View(model);
         }
+
+        public async Task<ActionResult> IndexBo(ManageMessageId? message)
+        {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Votre mot de passe a été changé."
+                : message == ManageMessageId.SetPasswordSuccess ? "Votre mot de passe a été défini."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Votre fournisseur d'authentification à 2 facteurs a été défini."
+                : message == ManageMessageId.Error ? "Une erreur s'est produite."
+                : message == ManageMessageId.AddPhoneSuccess ? "Votre numéro de téléphone a été ajouté."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Votre numéro de téléphone a été supprimé."
+                : "";
+
+            var userId = User.Identity.GetUserId();
+            var model = new IndexViewModel
+            {
+                HasPassword = HasPassword(),
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await UserManager.GetLoginsAsync(userId),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            };
+            return View(model);
+        }
+
         [Authorize(Roles ="Client")]
         public ActionResult EditClient()
         {

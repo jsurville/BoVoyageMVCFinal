@@ -76,7 +76,9 @@ namespace BoVoyageMVC.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {                        
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -139,7 +141,7 @@ namespace BoVoyageMVC.Controllers
             return View();
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult RegisterCommercial()
         {
             return View();
@@ -245,6 +247,25 @@ namespace BoVoyageMVC.Controllers
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
         }
+
+        public void GetCurrentUserRole()
+        {
+            string userId = User.Identity.GetUserId();
+            var roles = UserManager.GetRoles(userId);
+
+            if (roles != null)
+            {
+                if (roles.Contains("Admin"))
+                    Session["ROLE"] = "Admin";
+
+                if (roles.Contains("Commercial"))
+                    Session["ROLE"] = "Commercial";
+
+                if (roles.Contains("Client"))
+                    Session["ROLE"] = "Client";
+            }
+        }
+
         [ChildActionOnly]
         public string GetCurrentUserName()
         {
@@ -253,12 +274,16 @@ namespace BoVoyageMVC.Controllers
             // string[] roles = Roles.GetRolesForUser();
             if (roles == null)
                 return "";
+            if (roles.Contains("Admin"))
+                return "Admin";
+
             if (roles.Contains("Commercial"))
-                //return User.Identity.Name;
                 return GetCurrentCommercialName();
+
             if (roles.Contains("Client"))
                 return GetCurrentClientName();
-            return User.Identity.Name;
+
+            return "";
         }
 
 
@@ -482,6 +507,7 @@ namespace BoVoyageMVC.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.Remove("ROLE");
             return RedirectToAction("Index", "Home");
         }
 
