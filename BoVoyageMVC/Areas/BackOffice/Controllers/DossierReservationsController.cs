@@ -115,7 +115,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
             if (dossierReservation.EtatDossier != EtatDossierReservation.EnAttente)
             {
-                Display("L'état du Dossier ne permet pas de valider");
+                Display("L'état du Dossier ne permet pas de valider ou a déjà été validé", MessageType.ERROR);
                 return RedirectToAction("Index");
             }
             var carteBancaireServie = new CarteBancaireService();
@@ -123,20 +123,45 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 dossierReservation.TotalPrice))
             {
                 dossierReservation.EtatDossier = EtatDossierReservation.EnCours;
-                Display("La réservation a été validée");
+                db.Entry(dossierReservation).State = EntityState.Modified;
+                db.SaveChanges();
+                Display("La réservation a été validée", MessageType.SUCCES);
             }
             else
             {
                 dossierReservation.EtatDossier = EtatDossierReservation.Refusee;
                 dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Insolvable;
-                Display("Opération Refusée pour insolvabilité");
+                Display("Opération Refusée pour insolvabilité", MessageType.ERROR);
             }
-            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         // POST: BackOffice/DossierReservations/
         public ActionResult Accept(int? id)
+        {
+            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+            if (dossierReservation == null)
+            {
+                return HttpNotFound();
+            }
+            if (dossierReservation.EtatDossier != EtatDossierReservation.EnCours)
+            {
+                Display("L'état du Dossier ne permet pas de valider");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                dossierReservation.EtatDossier = EtatDossierReservation.Accepte;
+                db.Entry(dossierReservation).State = EntityState.Modified;
+                db.SaveChanges();
+                Display("La réservation a été acceptée");
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        // POST: BackOffice/DossierReservations/
+        public ActionResult Cancel(int? id)
         {
             DossierReservation dossierReservation = db.DossiersReservations.Find(id);
             if (dossierReservation == null)
@@ -166,10 +191,36 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: BackOffice/DossierReservations/
+        public ActionResult Close(int? id)
+        {
+            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+            if (dossierReservation == null)
+            {
+                return HttpNotFound();
+            }
 
-
-
-
+            if (dossierReservation.EtatDossier != EtatDossierReservation.EnAttente)
+            {
+                Display("L'état du Dossier ne permet pas de valider");
+                return RedirectToAction("Index");
+            }
+            var carteBancaireServie = new CarteBancaireService();
+            if (carteBancaireServie.ValiderSolvabilite(dossierReservation.CreditCardNumber,
+                dossierReservation.TotalPrice))
+            {
+                dossierReservation.EtatDossier = EtatDossierReservation.EnCours;
+                Display("La réservation a été validée");
+            }
+            else
+            {
+                dossierReservation.EtatDossier = EtatDossierReservation.Refusee;
+                dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Insolvable;
+                Display("Opération Refusée pour insolvabilité");
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
 
 
