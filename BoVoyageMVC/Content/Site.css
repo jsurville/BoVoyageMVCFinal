@@ -139,3 +139,7 @@ textarea {
     max-width: 100%;
   
 }
+.bigBtn{
+    padding-bottom:20px;
+    padding-top:20px;
+}

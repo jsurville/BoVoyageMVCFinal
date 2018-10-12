@@ -38,8 +38,6 @@ namespace BoVoyageMVC.Controllers
             return View(dossierReservation);
         }
 
-
-
         // GET: Reservations/Book
 
         public ActionResult Book(int id)
@@ -70,10 +68,18 @@ namespace BoVoyageMVC.Controllers
             {
                 if (AssuranceIds != null && AssuranceIds.Count() > 0)
                     dossierReservation.Assurances = db.Assurances.Where(x => AssuranceIds.Contains(x.ID)).ToList();
-                dossierReservation.UnitPrice = db.Voyages.Find(dossierReservation.VoyageId).UnitPublicPrice;
-                db.DossiersReservations.Add(dossierReservation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                int cardNumber = 0;
+                if (int.TryParse(dossierReservation.CreditCardNumber, out cardNumber) && cardNumber > 0)
+                {
+                    dossierReservation.UnitPrice = db.Voyages.Find(dossierReservation.VoyageId).UnitPublicPrice;
+                    db.DossiersReservations.Add(dossierReservation);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                } else
+                {                   
+                    ModelState.AddModelError("CreditCardNumber", "Carte Bancaire Invalide");                   
+                }
+
             }
             MultiSelectList assuranceValues = new MultiSelectList(db.Assurances, "ID", "TypeAssurance", db.Assurances.Select(x => x.ID));
             ViewBag.Assurances = assuranceValues;

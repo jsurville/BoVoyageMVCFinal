@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 
-<table class="table">
+<table class="table container-fluid">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Client.FisrtName)
@@ -48,10 +48,10 @@
                 @Html.DisplayFor(modelItem => item.Voyage.Destination.Country)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Voyage.DepartureDate)
+                @item.Voyage.DepartureDate.ToShortDateString()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Voyage.ReturnDate)
+                @item.Voyage.ReturnDate.ToShortDateString()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
@@ -69,11 +69,10 @@
 
                 @Html.ActionLink("Details", "Details", new { id = item.Id }, null)
                 <a href="@Url.Action("Validate", "DossierReservations", new { id = item.Id })" class="btn btn-default">VALIDER</a>
-                @*<a href=@Url.Action("Validate", "DossierReservation") action="@Url.Action("Validate", "DossierReservation")" id=item.Id method="post" >VALIDER</a> |*@
-
-                @Html.ActionLink("ACCEPTER", "Accpet", new { id = item.Id }) |
-                @Html.ActionLink("ANNULER", "Cancel", new { id = item.Id }) |
-                @Html.ActionLink("CLOTURER", "Close", new { id = item.Id })
+                <a href="@Url.Action("Accept", "DossierReservations", new { id = item.Id })" class="btn btn-success">ACCEPTER</a>
+                <a href="@Url.Action("Cancel", "DossierReservations", new { id = item.Id })" class="btn btn-warning">ANNULER</a>
+                <a href="@Url.Action("Close", "DossierReservations", new { id = item.Id })" class="btn btn-danger">CLOTURER</a>
+              
             </td>
         </tr>
     }

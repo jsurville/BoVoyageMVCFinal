@@ -22,7 +22,10 @@ namespace BoVoyageMVC.Models
         Accepte,
 
         [EnumMember(Value = "Annule")]
-        Annule
+        Annule,
+
+            [EnumMember(Value = "Clos")]
+        Clos
     }
 
     public enum RaisonAnnulationDossier : byte
