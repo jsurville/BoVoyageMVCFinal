@@ -3,72 +3,73 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="detail">
+    
 
-<h2>Details</h2>
+    <div>
+        <h2>Details</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-<div>
-    <h4>ContactMessage</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FisrtName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FisrtName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FisrtName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FisrtName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SendDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SendDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SendDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SendDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Message)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
+            <dd>
+                @Html.Raw(Model.Message)
+            </dd>
 
-        <dd>
-            @Html.Raw(Model.Message)
-        </dd>
+        </dl>
+    </div>
+    <p>
 
-    </dl>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-
-    @Html.ActionLink("Back to List", "Index")
-</p>
