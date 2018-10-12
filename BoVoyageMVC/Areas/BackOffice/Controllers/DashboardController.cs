@@ -12,7 +12,7 @@ using BoVoyageMVC.Controllers;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
-    [Authorize(Roles = "Commercial")]
+    [Authorize(Roles="Commercial,Admin")]
     public class DashboardController : BaseController
     {
         public ActionResult Index()

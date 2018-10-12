@@ -12,7 +12,7 @@ using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
-    [Authorize(Roles = "Commercial")]
+    [Authorize(Roles = "Commercial,Admin")]
     public class DestinationsController : BaseController
     {
         // GET: BackOffice/Destinations
