@@ -1,4 +1,5 @@
 ﻿using BoVoyageMVC.Models;
+using BoVoyageMVC.Services;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -15,8 +16,10 @@ namespace BoVoyageMVC.Controllers
         public ActionResult Index()
         {
             var clientId = GetCurrentClientId();
-            var dossiersReservations = db.DossiersReservations.Include(d => d.Client).Include(d => d.Participants)
+            var dossiersReservations = db.DossiersReservations.Include(d => d.Client)               
                 .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
+                 .Include(d => d.Participants)
+                 .Include(d => d.Assurances)
                 .Where(d => d.ClientId == clientId).ToList();
             return View(dossiersReservations);
         }
@@ -29,7 +32,8 @@ namespace BoVoyageMVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DossierReservation dossierReservation = db.DossiersReservations.Include(d => d.Client)
-                .Include(d => d.Voyage).Include(d => d.Voyage.Destination).Include(d => d.Participants)
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
+                .Include(d => d.Participants)
                 .Include(d => d.Assurances).SingleOrDefault(d => d.Id == id);
             if (dossierReservation == null)
             {
@@ -125,8 +129,19 @@ namespace BoVoyageMVC.Controllers
             DossierReservation dossierReservation = db.DossiersReservations.Find(id);
             if (ModelState.IsValid)
             {
+                if (dossierReservation.EtatDossier == EtatDossierReservation.Accepte)
+                {
+                    if (dossierReservation.Assurances.Where(x => x.TypeAssurance == TypeAssurance.Annulation).Count() > 0)
+                    {
+                        var rembourser = new CarteBancaireService().Rembourser(dossierReservation.CreditCardNumber,
+                            dossierReservation.TotalPrice);
+                        Display("Vous serez remboursé grâce à votre Assurance Annulation", MessageType.SUCCES);
+                    }
+                }
                 dossierReservation.EtatDossier = EtatDossierReservation.Annule;
                 dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
+
+
                 db.Entry(dossierReservation).State = EntityState.Modified;
                 db.SaveChanges();
             }

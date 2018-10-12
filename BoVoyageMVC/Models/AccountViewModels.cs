@@ -67,16 +67,20 @@ namespace BoVoyageMVC.Models
 
     public class RegisterViewModel
     {
+        
+        [RegularExpression(@"([a-zA-Z])*\s*$", ErrorMessage = "Le champ {0} ne doit contenir que des lettres")]
         [Display(Name = "M/Mme")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         [StringLength(20, MinimumLength = 1, ErrorMessage = "La civilite doit avoir de 1 à 20 caractères")]
         public string Title { get; set; }
 
+        [RegularExpression(@"([a-zA-Zéàèïëüêâîôöç\-])*\s*$", ErrorMessage = "Le champ {0} ne doit contenir que des lettres")]
         [Display(Name = "Nom")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         [StringLength(30, MinimumLength = 2, ErrorMessage = "Le nom doit avoir de 2 à 30 caractères")]
         public string LastName { get; set; }
 
+        [RegularExpression(@"([a-zA-Zéàèïëüêâîôöç\-])*\s*$", ErrorMessage = "Le champ {0} ne doit contenir que des lettres")]
         [Display(Name = "Prénom")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         [StringLength(30, MinimumLength = 2, ErrorMessage = "La prénom doit avoir de 2 à 30 caractères")]
@@ -89,7 +93,7 @@ namespace BoVoyageMVC.Models
 
         [Display(Name = "Téléphone")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
-        [RegularExpression(@"^([0-9])*\s*$")]
+        [RegularExpression(@"^([0-9])*\s*$", ErrorMessage = "Le champ {0} ne doit contenir que des chiffres")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "Le numéro de telephone doit avoir de 3 à 20 caractères")]
         public string PhoneNumber { get; set; }
 
