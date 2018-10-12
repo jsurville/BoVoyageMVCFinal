@@ -13,7 +13,7 @@ namespace BoVoyageMVC.Controllers
     
     public class FrontVoyagesController : BaseController
     {
-        protected ApplicationDbContext db = new ApplicationDbContext();
+       
 
         // GET: FrontVoyages
         [Route("Voyages")]
@@ -41,23 +41,33 @@ namespace BoVoyageMVC.Controllers
 
         // GET: FrontVoyages/Search/
          [Route("Search")]
-        public ActionResult Search(string search, DateTime? departureDate)
+        public ActionResult Search(string search, DateTime departureDate)
         {
-            if (search != "" || departureDate != null)
+            if (search != "" && departureDate == null)
             {
-
                 ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
             .Where(x => x.Destination.Description.Contains(search)
             || x.Destination.Continent.Contains(search)
             || x.Destination.Country.Contains(search)
-            || x.Destination.Region.Contains(search)
-            || (x.DepartureDate <= departureDate && departureDate <= x.ReturnDate)).ToList();
+            || x.Destination.Region.Contains(search)).ToList();
 
                 if (voyages != null)
                 {
                     return View(voyages);
                 }
                
+            }
+            if (search == "" && departureDate != null)
+            {
+                
+                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
+            .Where(x => x.DepartureDate == departureDate).ToList();
+
+                if (voyages != null)
+                {
+                    return View(voyages);
+                }
+
             }
             Display("Aucun résultat");
             Display("Le Nouveau Tireur a bien été enregistré");

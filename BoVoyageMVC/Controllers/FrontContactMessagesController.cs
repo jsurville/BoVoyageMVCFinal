@@ -12,7 +12,7 @@ namespace BoVoyageMVC.Controllers
 {
     public class FrontContactMessagesController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: ContactMessages
         public ActionResult Index()
