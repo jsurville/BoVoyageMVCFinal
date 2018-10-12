@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201810120845184_AddRaisonAnnulerToDossierReservation.Designer.cs">
       <DependentUpon>201810120845184_AddRaisonAnnulerToDossierReservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810120910394_AddRaisonAnnulerToDossierReservationNullable.cs" />
+    <Compile Include="Migrations\201810120910394_AddRaisonAnnulerToDossierReservationNullable.Designer.cs">
+      <DependentUpon>201810120910394_AddRaisonAnnulerToDossierReservationNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgenceVoyage.cs" />
@@ -705,6 +709,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810120845184_AddRaisonAnnulerToDossierReservation.resx">
       <DependentUpon>201810120845184_AddRaisonAnnulerToDossierReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810120910394_AddRaisonAnnulerToDossierReservationNullable.resx">
+      <DependentUpon>201810120910394_AddRaisonAnnulerToDossierReservationNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
