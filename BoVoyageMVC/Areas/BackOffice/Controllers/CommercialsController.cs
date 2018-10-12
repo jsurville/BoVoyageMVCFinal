@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BoVoyageMVC.Controller;
+using BoVoyageMVC.Controllers;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
@@ -18,30 +18,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             
         }
 
-
-        // GET: BackOffice/Commercials/Create
-        public ActionResult Create()
-        {            
-            return View(); 
-        }
-
-        // POST: BackOffice/Commercials/Create
-        [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Title,LastName,FirstName,Address,PhoneNumber,Birthday")] Commercial commercial)
-        {
-        if (commercial.BirthDate > DateTime.Now) 
-
-            {
-                Display("Date de naissance est invalide");
-            }
-            if (ModelState.IsValid)
-            {
-                db.Commercials.Add(commercial);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-             return View(commercial);
-        }
+        
 
         // GET: BackOffice/Commercials/Edit/5
         public ActionResult Edit(int id)

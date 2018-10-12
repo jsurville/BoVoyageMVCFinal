@@ -37,47 +37,10 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(client);
         }
 
-        // GET: BackOffice/Clients/Create
-        public ActionResult Create()
-        {
-            UserRegistration registration = new UserRegistration();
-            return View(registration);
-        }
-
-        // POST: BackOffice/Clients/Create
-        [HttpPost]
-        public ActionResult Create(UserRegistration registration)
-        {
-            TextWriter text = null;
-                                   
-            if (ModelState.IsValid)
-            {
-                db.UserRegistrations.Add(registration);
-                db.SaveChanges();
-                string JsonValue = JsonConvert.SerializeObject(registration);
-                return RedirectToAction("Index");
-                string currentFile = "d:\\FileUsers\\text.txt";
-                If(System.IO.File.Exists(currentFile))
-                 {
-                    text = new StreamWriter(currentFile);
-                }  
-                else
-                {
-                    text = new StreamWriter(currentFile, append: true);
-                }
-                text.WriteLine(JsonValue);
-                text.Close();
-                return RedirectToAction("Index");
-
-            }
-  
-                return View(registration);            
-        }
-
-        // GET: BackOffice/Clients/Edit/5
+        
         public ActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -90,6 +53,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(client);
             
         }
+
         public ActionResult Search(string search)
         {
             if (search == null)
