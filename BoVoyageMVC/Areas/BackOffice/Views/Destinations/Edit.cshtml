@@ -1,8 +1,9 @@
 ﻿@model BoVoyageMVC.Models.Destination
 
 @{
-    ViewBag.Title = "Destination - Modificattion";
+    ViewBag.Title = "Destination - Modification";
 }
+<div class="detail">
 <h2>Modification de la Destination @Model.Country</h2>
 <div class="row container-fluid">
     <div class="col-md-6">
@@ -11,57 +12,58 @@
         {
             @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
+            <div class="form-horizontal">
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Continent, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Continent, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Continent, "", new { @class = "text-danger" })
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Continent, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Continent, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Continent, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Enregistrer les Modifications" class="btn btn-primary" />
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Enregistrer les Modifications" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
         }
     </div>
 
     <div class="col-md-6">
         <h3>Images</h3>
+        Les images doivent etre de resolution 600x400
         <form action="@Url.Action("AddPicture", "Destinations")" method="post" enctype="multipart/form-data">
             @* enctype form-data pour envoyer un fichier  *@
             @Html.HiddenFor(x => x.Id)
@@ -84,22 +86,23 @@
             }
         </div>
     </div>
+    <div>
+        @Html.ActionLink("Retour à la Liste", "Index")
+    </div>
+</div>
 </div>
 
-<div>
-    @Html.ActionLink("Retour à la Liste", "Index")
-</div>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $(function () {
+    <script>
+        $(function () {
             //$.setLocale('fr');
-            
+
             tinymce.init({ selector: '#Description', lang: 'fr' });
         })
-            
+
         const btn = document.querySelector('#delete');
         btn.addEventListener('click', ev => {
             if (confirm("Voulez-vous supprimer cette photo ?") == false) {

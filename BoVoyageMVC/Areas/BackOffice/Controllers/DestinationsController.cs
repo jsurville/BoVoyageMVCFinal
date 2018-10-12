@@ -108,7 +108,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("edit", "destinations", new { id = id });
             }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Display("une image doit être séléctionnée");
+            return RedirectToAction("edit", "destinations", new { id = id });
         }
 
 
