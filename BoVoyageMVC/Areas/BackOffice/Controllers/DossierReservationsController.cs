@@ -16,9 +16,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
     [RouteArea("BackOffice")]
     [Authorize(Roles = "Commercial,Admin")]
     public class DossierReservationsController : BaseController
-    {
-        
-
+    {       
         // GET: BackOffice/DossierReservations
         [Route("Bookings")]
         public ActionResult Index()
@@ -173,13 +171,5 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

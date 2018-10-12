@@ -1,6 +1,5 @@
 ﻿using BoVoyageMVC.Models;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -9,9 +8,6 @@ namespace BoVoyageMVC.Controllers
     [Authorize(Roles = "Client")]
     public class ParticipantsController : BaseController
     {
-
-
-        // GET: Participants/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -29,10 +25,27 @@ namespace BoVoyageMVC.Controllers
         // GET: Participants/Create
         public ActionResult Create(int? id)
         {
-            var participant = new Participant();
             if (id == null || id == 0)
+            {
+                Display("Réservation inexistante", MessageType.ERROR);
                 return RedirectToAction("Index", "Reservations");
+            }
+            var dossierReservation = db.DossiersReservations.Find(id);
+            var clientId = GetCurrentClientId();
+            if (dossierReservation.ClientId != clientId)
+            {
+                Display("Vous n'avez pas accès à cette réservation", MessageType.ERROR);
+                return RedirectToAction("Index", "Reservations");
+            }
+            if (dossierReservation.EtatDossier != EtatDossierReservation.EnAttente)
+            {
+                Display("Votre réservation doit etre en attente pour pouvoir ajouter des participants", MessageType.ERROR);
+                return RedirectToAction("Index", "Reservations");
+            }
+
+            var participant = new Participant();
             participant.DossierReservationId = (int)id;
+
             return View(participant);
         }
 
@@ -110,7 +123,5 @@ namespace BoVoyageMVC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
     }
 }

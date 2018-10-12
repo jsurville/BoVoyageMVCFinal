@@ -11,7 +11,6 @@ namespace BoVoyageMVC.Controllers
 {
     public class HomeController : BaseController
     {
-       
         public ActionResult Index()
         {
             var voyage= db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();

@@ -40,7 +40,5 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
             return View();
         }
-       
-
     }
 }
