@@ -1,60 +1,55 @@
 ﻿@model BoVoyageMVC.Models.DossierReservation
 
 
+<div class="detail">
+    <h3>Etes vous sûr d'annuler ce voyage ?</h3>
+    <div>
 
-<h3>Vous êtes sur d'annuler ce voyage ?</h3>
-<div>
+        <hr />
+        <dl class="dl-horizontal">
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Client.LastName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Voyage.Destination.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Client.LastName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Voyage.Destination.Name)
+            </dd>           
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Voyage.Destination.Country)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Voyage.Destination.Country)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TotalPrice)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.EtatDossier)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.EtatDossier)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </dt>
+            <dt>
+            @Html.DisplayNameFor(model => model.Id)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TotalPrice)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EtatDossier)
-        </dt>
+        </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.EtatDossier)
-        </dd>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Confirmer" class="btn btn-danger" /> 
-            @Html.ActionLink("Retour", "Index",null, new {@class="btn btn-info" })
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Confirmer" class="btn btn-danger" />
+                @Html.ActionLink("Retour", "Index", null, new { @class = "btn btn-info" })
+            </div>
+        }
+    </div>
 </div>

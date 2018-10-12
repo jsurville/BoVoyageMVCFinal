@@ -38,7 +38,7 @@ namespace BoVoyageMVC.Models
         public ICollection<Image> Images { get; set; }
 
         [NotMapped]
-        [Display(Name = "nom")]
+        [Display(Name = "Nom")]
         public string Name
         {
             get
