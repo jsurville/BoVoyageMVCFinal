@@ -108,6 +108,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
+           // if(db.DossiersReservations.Any(d=>d.Assurances. ))
             return View(assurance);
         }
 
