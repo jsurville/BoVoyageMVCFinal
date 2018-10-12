@@ -69,9 +69,9 @@
 
                 @Html.ActionLink("Details", "Details", new { id = item.Id }, null)
                 <a href="@Url.Action("Validate", "DossierReservations", new { id = item.Id })" class="btn btn-default">VALIDER</a>
-                <a href="@Url.Action("Validate", "DossierReservations", new { id = item.Id })" class="btn btn-success">ACCEPTER</a>
-                <a href="@Url.Action("Validate", "DossierReservations", new { id = item.Id })" class="btn btn-warning">ANNULER</a>
-                <a href="@Url.Action("Validate", "DossierReservations", new { id = item.Id })" class="btn btn-danger">CLOTURER</a>
+                <a href="@Url.Action("Accept", "DossierReservations", new { id = item.Id })" class="btn btn-success">ACCEPTER</a>
+                <a href="@Url.Action("Cancel", "DossierReservations", new { id = item.Id })" class="btn btn-warning">ANNULER</a>
+                <a href="@Url.Action("Close", "DossierReservations", new { id = item.Id })" class="btn btn-danger">CLOTURER</a>
               
             </td>
         </tr>

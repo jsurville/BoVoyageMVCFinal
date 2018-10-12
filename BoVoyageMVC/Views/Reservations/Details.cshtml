@@ -49,17 +49,17 @@
                 @Html.DisplayNameFor(model => model.Voyage.DepartureDate)
             </dt>
 
-        <dd>
-            @Model.Voyage.DepartureDate.ToShortDateString()
-        </dd>
+            <dd>
+                @Model.Voyage.DepartureDate.ToShortDateString()
+            </dd>
 
             <dt>
                 @Html.DisplayNameFor(model => model.Voyage.ReturnDate)
             </dt>
 
-        <dd>
-            @Model.Voyage.ReturnDate.ToShortDateString()
-        </dd>
+            <dd>
+                @Model.Voyage.ReturnDate.ToShortDateString()
+            </dd>
 
             <dt>
                 @Html.DisplayNameFor(model => model.Voyage.UnitPublicPrice)
@@ -73,22 +73,31 @@
                 @Html.DisplayNameFor(model => model.TotalPrice)
             </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TotalPrice)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Assurances)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TotalPrice) €
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Assurances)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Assurances.First().TypeAssurance)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EtatDossier)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Assurances.First().TypeAssurance)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EtatDossier)
+            </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.EtatDossier)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreditCardNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreditCardNumber)
             </dd>
 
             <dt>
