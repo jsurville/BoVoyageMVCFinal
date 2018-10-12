@@ -11,7 +11,6 @@ namespace BoVoyageMVC.Controllers
     [Authorize(Roles = "Client")]
     public class ReservationsController : BaseController
     {
-
         // GET: Reservations
         public ActionResult Index()
         {

@@ -123,7 +123,5 @@ namespace BoVoyageMVC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
     }
 }

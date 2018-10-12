@@ -9,8 +9,7 @@ using System.Web.Mvc;
 using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Controllers
-{
-    
+{    
     public class FrontVoyagesController : BaseController
     {
         // GET: FrontVoyages
@@ -83,16 +82,6 @@ namespace BoVoyageMVC.Controllers
             return RedirectToAction("Index", "Home");
            
             
-        }
-
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
