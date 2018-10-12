@@ -139,7 +139,7 @@ namespace BoVoyageMVC.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles ="Admin")]
         public ActionResult RegisterCommercial()
         {
             return View();
@@ -196,7 +196,7 @@ namespace BoVoyageMVC.Controllers
             return View(model);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
