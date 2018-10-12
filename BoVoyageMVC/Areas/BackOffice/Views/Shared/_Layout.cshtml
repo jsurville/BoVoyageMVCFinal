@@ -21,31 +21,18 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agence Voyage <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion des voyages <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><h4 class="dropdownTitle">Agences de voyage</h4></li>
                             <li><a href="@Url.Action("Create", "AgenceVoyages")">Ajouter</a></li>
                             <li><a href="@Url.Action("index", "AgenceVoyages")">Lister</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Destination <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                            <li><h4 class="dropdownTitle">Destinations</h4class="dropdownTitle"></li>
                             <li><a href="@Url.Action("Create", "Destinations")">Ajouter</a></li>
                             <li><a href="@Url.Action("Index", "Destinations")">Lister</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Voyage <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                            <li><h4 class="dropdownTitle">Voyages</h4class="dropdownTitle"></li>
                             <li><a href="@Url.Action("Create", "Voyages")">Ajouter</a></li>
                             <li><a href="@Url.Action("Index", "Voyages")">Lister</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Assurance <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                            <li><h4 class="dropdownTitle">Assurances</h4class="dropdownTitle"></li>
                             <li><a href="@Url.Action("Create", "Assurances")">Ajouter</a></li>
                             <li><a href="@Url.Action("Index", "Assurances")">Lister</a></li>
                         </ul>
