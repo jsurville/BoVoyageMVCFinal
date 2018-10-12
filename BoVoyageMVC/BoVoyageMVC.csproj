@@ -292,10 +292,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\img\Background.jpg" />
     <Content Include="Content\img\Background2.jpg" />
-    <Content Include="Content\img\BoBackground.jpg" />
-    <Content Include="Content\img\BoBackground2.jpg" />
     <Content Include="Content\img\Logo.svg" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\Social.css" />

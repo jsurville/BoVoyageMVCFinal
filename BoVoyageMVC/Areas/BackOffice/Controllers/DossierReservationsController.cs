@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BoVoyageMVC.Controllers;
+using BoVoyageMVC.Models;
+using BoVoyageMVC.Services;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BoVoyageMVC.Controllers;
-using BoVoyageMVC.Models;
-using BoVoyageMVC.Services;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
-   
+
     [RouteArea("BackOffice")]
     [Authorize(Roles = "Commercial,Admin")]
     public class DossierReservationsController : BaseController
-    {       
+    {
         // GET: BackOffice/DossierReservations
         [Route("Bookings")]
         public ActionResult Index()
@@ -32,9 +29,9 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DossierReservation dossierReservation = db.DossiersReservations.Include(y => y.Voyage).Include(z =>z.Client)
+            DossierReservation dossierReservation = db.DossiersReservations.Include(y => y.Voyage).Include(z => z.Client)
                                                     .Include(t => t.Participants).Include(k => k.Assurances)
-                                                    .Include(t => t.Voyage.Destination).SingleOrDefault(x => x.Id ==id);
+                                                    .Include(t => t.Voyage.Destination).SingleOrDefault(x => x.Id == id);
             if (dossierReservation == null)
             {
                 return HttpNotFound();
@@ -146,16 +143,27 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             }
             if (dossierReservation.EtatDossier != EtatDossierReservation.EnCours)
             {
-                Display("L'état du Dossier ne permet pas de valider");
+                Display("L'état du Dossier ne permet pas d'accepter");
                 return RedirectToAction("Index");
+            }
+
+            var voyage = db.Voyages.Find(dossierReservation.VoyageId);
+            if (dossierReservation.Participants.Count < voyage.MaxCapacity)
+            {                
+                dossierReservation.EtatDossier = EtatDossierReservation.Accepte;               
+                voyage.MaxCapacity -= dossierReservation.Participants.Count;
+                db.Entry(voyage).State = EntityState.Modified;
+                Display("La réservation a été acceptée");
             }
             else
             {
-                dossierReservation.EtatDossier = EtatDossierReservation.Accepte;
-                db.Entry(dossierReservation).State = EntityState.Modified;
-                db.SaveChanges();
-                Display("La réservation a été acceptée");
+                dossierReservation.EtatDossier = EtatDossierReservation.Refusee;
+                dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.PlacesInsuffisantes;
+                Display("La réservation a été refusée pour cause places non disponibles");
             }
+
+            db.Entry(dossierReservation).State = EntityState.Modified;           
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -169,7 +177,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 return HttpNotFound();
             }
             if (dossierReservation.EtatDossier == EtatDossierReservation.Clos
-               || dossierReservation.EtatDossier == EtatDossierReservation.Annule)                
+               || dossierReservation.EtatDossier == EtatDossierReservation.Annule)
             {
                 Display("L'état du Dossier ne permet pas de l'Annuler", MessageType.ERROR);
                 return RedirectToAction("Index");
@@ -184,8 +192,9 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                             dossierReservation.TotalPrice);
                         Display("Vous serez remboursé grâce à votre Assurance Annulation", MessageType.SUCCES);
                     }
+                    dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
                 }
-                dossierReservation.RaisonAnnulationDossier= RaisonAnnulationDossier.Client;
+                
                 dossierReservation.EtatDossier = EtatDossierReservation.Annule;
                 db.Entry(dossierReservation).State = EntityState.Modified;
                 db.SaveChanges();
