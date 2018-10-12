@@ -18,7 +18,7 @@ namespace BoVoyageMVC.Controllers
             var clientId = GetCurrentClientId();
             var dossiersReservations = db.DossiersReservations.Include(d => d.Client)
                 .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
-                .Where(d=>d.ClientId == clientId);
+                .Where(d => d.ClientId == clientId);
             return View(dossiersReservations.ToList());
         }
 
@@ -30,8 +30,8 @@ namespace BoVoyageMVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DossierReservation dossierReservation = db.DossiersReservations.Include(d => d.Client)
-                .Include(d => d.Voyage).Include(d => d.Voyage.Destination).Include(d=>d.Participants)
-                .Include(d=>d.Assurances).SingleOrDefault(d => d.Id == id);
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination).Include(d => d.Participants)
+                .Include(d => d.Assurances).SingleOrDefault(d => d.Id == id);
             if (dossierReservation == null)
             {
                 return HttpNotFound();
@@ -82,33 +82,7 @@ namespace BoVoyageMVC.Controllers
             return View();
         }
 
-        // GET: Reservations/Create
-        public ActionResult Create()
-        {
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "UserId");
-            ViewBag.VoyageId = new SelectList(db.Voyages, "Id", "Id");
-            return View();
-        }
-
-        // POST: Reservations/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreditCardNumber,UnitPrice,EtatDossier,ClientId,VoyageId")] DossierReservation dossierReservation)
-        {
-            if (ModelState.IsValid)
-            {
-                db.DossiersReservations.Add(dossierReservation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "UserId", dossierReservation.ClientId);
-            ViewBag.VoyageId = new SelectList(db.Voyages, "Id", "Id", dossierReservation.VoyageId);
-            return View(dossierReservation);
-        }
-
+       
         // GET: Reservations/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -156,6 +130,9 @@ namespace BoVoyageMVC.Controllers
             {
                 return HttpNotFound();
             }
+            if (dossierReservation.EtatDossier == EtatDossierReservation.Refusee
+                || dossierReservation.EtatDossier == EtatDossierReservation.Annule)
+                return RedirectToAction("Index");
             return View(dossierReservation);
         }
 
@@ -165,7 +142,9 @@ namespace BoVoyageMVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             DossierReservation dossierReservation = db.DossiersReservations.Find(id);
-            db.DossiersReservations.Remove(dossierReservation);
+            dossierReservation.EtatDossier = EtatDossierReservation.Annule;
+            dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
+            db.Entry(dossierReservation).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

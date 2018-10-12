@@ -10,19 +10,6 @@ namespace BoVoyageMVC.Controllers
     public class ParticipantsController : BaseController
     {
 
-        // GET: Participants
-        public ActionResult Index()
-        {
-
-            var participants = db.Participants.Include(p => p.DossierReservation);
-            /*
-            var dossierReservation = db.DossiersReservations.Include(d => d.Voyage)
-    .Include(d => d.Voyage.Destination).SingleOrDefault(d => d.Id == participant.DossierReservationId);
-    
-            ViewBag.Destination = dossierReservation.Voyage.Destination.Country; */
-
-            return View(participants.ToList());
-        }
 
         // GET: Participants/Details/5
         public ActionResult Details(int? id)
@@ -60,8 +47,7 @@ namespace BoVoyageMVC.Controllers
             {
                 db.Participants.Add(participant);
                 db.SaveChanges();
-                TempData["DossierReservationId"] = participant.DossierReservationId;
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Reservations");
             }
             return View(participant);
         }
@@ -125,13 +111,6 @@ namespace BoVoyageMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
     }
 }
