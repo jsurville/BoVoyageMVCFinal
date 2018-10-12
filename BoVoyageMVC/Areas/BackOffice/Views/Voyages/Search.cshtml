@@ -1,34 +1,96 @@
-﻿@model ICollection<BoVoyageMVC.Models.Voyage>
+﻿@model IEnumerable<BoVoyageMVC.Models.Voyage>
 
 @{
-    ViewBag.Title = "Search";
-    Layout = "~/Areas/BackOffice/Views/Shared/_LayoutSearch.cshtml";
+    ViewBag.Title = "Voyages - BackOffice";
 }
 
 <h2>Résultats</h2>
 
-<div class="voyages row">
-    @foreach (var item in Model)
-    {
+<div id="search">
+    <form class="form-group row" action="@Url.Action("Search")" method="post" enctype="multipart/form-data">
+        <div class="form-group col-md-3">
+            <label for="DateAller">Départ avant le:</label>
+            <a> <input type="date" class="form-control" id="DepartureDate" name="departureDate" /> </a> <br />
 
-        <div id="voyages" class="card col-md-3 alert alert-success" style="margin-bottom:15px">
-            <h2> @Html.DisplayFor(modelItem => item.Destination.Country) </h2>
-            Du  @item.DepartureDate.ToShortDateString() au  @item.ReturnDate.ToShortDateString()
-            <h3>  @Html.DisplayFor(modelItem => item.UnitPublicPrice)  </h3>
-
-
-            @if (item.Destination.Images?.Count > 0)
-            {
-                <img src="data:@item.Destination.Images.First().ContentType;base64,@Convert.ToBase64String(item.Destination.Images.First().Content)" class="img-thumbnail" />
-            }
-            <div>
-                @Html.ActionLink("Plus d'Infos", "Details", new { region = item.Destination.Region, country = item.Destination.Country, id = item.Id }, new { @class = "btn btn-primary", @style = "float:right", @data = item.Destination.Country })
-                @Html.ActionLink("Réserver", "Create", "Reservations", new { id = item.Id }, new { @class = "btn btn-primary", @style = "float:right" })
-            </div>
         </div>
 
+        <div class="form-group col-md-3">
+            <label for="MaxPrice">Prix Max</label>
+            <input class="form-control" type="number" id="maxprice" name="maxprice" />
+        </div>
 
+        <div class="form-group col-md-3">
+            <label for="Destination">Destination</label>
+            <input class="form-control" type="text" id="destination" name="search" />
+        </div>
+        <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-primary"> Rechercher</button>
+        </div>
 
-
-    }
+    </form>
 </div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AgenceVoyage.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destination.Continent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Margin)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgenceVoyage.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination.Continent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxCapacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Margin)
+            </td>
+            <td>
+                <a href="@Url.Action("edit", new { id=item.Id })"><i class="glyphicon glyphicon-edit text-warning"></i></a> |
+                <a href="@Url.Action("Details", new { id=item.Id })"><i class="glyphicon glyphicon-search"></i></a> |
+                <a href="@Url.Action("delete", new { id=item.Id })"><i class="glyphicon glyphicon-trash"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+    <div>
+        @Html.ActionLink("Retour à la Liste", "Index", "Voyages" ,null, htmlAttributes: new {@class= "btn bt-primary" })
+    </div>
+

@@ -6,23 +6,32 @@
 
 <h2>Liste des Voyages</h2>
 
-<div  class="container " id="search">
-    <form class="form-group row" action="@Url.Action("Search", "Voyages" )" method="post" enctype="multipart/form-data">
-        <div class="form-group col-md-6">
-            <label for="DateAller">Période</label>
-            <a> De <input type="date" class="form-control" id="DepartureDate" name="DepartureDate" /> </a> <br />
-            <a> A <input type="date" class="form-control" id="ReturnDate" name="DepartureDate" /> </a>
+<div id="search">
+    <form class="form-group row" action="@Url.Action("Search")" method="post" enctype="multipart/form-data">
+        <div class="form-group col-md-3">
+            <label for="DateAller">Départ avant le:</label>
+            <a> <input type="date" class="form-control" id="DepartureDate" name="departureDate" /> </a> <br />
+
         </div>
-        <div class="form-group col-md-6">
-            <label for="if">Destination</label>
+
+        <div class="form-group col-md-3">
+            <label for="MaxPrice">Prix Max</label>
+            <input class="form-control" type="number" id="maxprice" name="maxprice" />
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="Destination">Destination</label>
             <input class="form-control" type="text" id="destination" name="search" />
         </div>
-        <button type="submit" class="btn btn-info"> Rechercher</button>
+        <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-primary"> Rechercher</button>
+        </div>
+
     </form>
 </div>
 
 <p>
-    @Html.ActionLink("Nouveau Voyage", "Create", null, new { @class = "btn btn-info" })
+    @Html.ActionLink("Nouveau Voyage", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
