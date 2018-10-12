@@ -8,14 +8,16 @@ namespace BoVoyageMVC.Services
 {
     class CarteBancaireService
     {
-        public bool ValiderSolvabilite(string numeroCarteBancaire, double prixTotal)
+        public bool ValiderSolvabilite(string numeroCarteBancaire, string prixTotal)
         {
             double solde = 0;
             double.TryParse(numeroCarteBancaire, out solde);
-            return (solde > prixTotal);  
+            double prix = 0;
+            double.TryParse(prixTotal, out prix);
+            return (solde > prix);  
         }
 
-        public bool Rembourser(string numeroCarteBancaire, decimal prixTotal)
+        public bool Rembourser(string numeroCarteBancaire, string prixTotal)
         {
             return true ;
         }

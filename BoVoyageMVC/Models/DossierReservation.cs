@@ -24,14 +24,14 @@ namespace BoVoyageMVC.Models
         [EnumMember(Value = "Annule")]
         Annule,
 
-            [EnumMember(Value = "Clos")]
+        [EnumMember(Value = "Clos")]
         Clos
     }
 
     public enum RaisonAnnulationDossier : byte
     {
         [EnumMember(Value = "Client")]
-        Client =1,
+        Client = 1,
 
         [EnumMember(Value = "Places Insuffisantes")]
         PlacesInsuffisantes,
@@ -65,7 +65,7 @@ namespace BoVoyageMVC.Models
 
         [Display(Name = "Prix Total")]
         [NotMapped]
-        public int TotalPrice
+        public string TotalPrice
         {
             get
             {
@@ -82,9 +82,12 @@ namespace BoVoyageMVC.Models
                         totalPrice += (double)assurance.Montant;
                     }
                 }
-                return (int)totalPrice;
+
+                return totalPrice.ToString("0.##");
             }
+
         }
+
 
         [Display(Name = "Etat Dossier")]
         [EnumDataType(typeof(EtatDossierReservation))]

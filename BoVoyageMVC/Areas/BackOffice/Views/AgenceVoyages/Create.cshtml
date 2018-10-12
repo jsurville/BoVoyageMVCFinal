@@ -1,7 +1,7 @@
 ﻿@model BoVoyageMVC.Models.AgenceVoyage
 
 @{
-    ViewBag.Title = "Création d'agences de voyage";
+    ViewBag.Title = "Création Agence";
 }
 
     
@@ -27,13 +27,13 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Enregistrer" class="btn btn-info" />
+                @Html.ActionLink("Annuler", "Index", null, new { @class = "btn btn-default" })
+                
             </div>
+
         </div>
     </div>
 
-    <div >
-        @Html.ActionLink("Retour", "Index", null, new { @class = "btn btn-default" })
-    </div>
 </div>
     }
 
