@@ -66,9 +66,13 @@
             @Html.DisplayFor(modelItem => item.Id)
         </td>
         <td>
-            @Html.ActionLink("Ajout participants", "Create", "Participants", new { id = item.Id }, null) |
+
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Annuler", "Delete", new { id = item.Id })
+            <a href=@Url.Action("Validate", "DossierReservation") action="@Url.Action("Validate", "DossierReservation")" id=item.Id method="post" >VALIDER</a> |
+            
+            @Html.ActionLink("ACCEPTER", "Accpet", new { id = item.Id }) |
+            @Html.ActionLink("ANNULER", "Cancel", new { id = item.Id }) |
+            @Html.ActionLink("CLOTURER", "Close", new { id = item.Id })
         </td>
     </tr>
     }
