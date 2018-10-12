@@ -18,8 +18,11 @@ namespace BoVoyageMVC.Models
         [EnumMember(Value = "Refusee")]
         Refusee,
 
-        [EnumMember(Value = "Acceptee")]
-        Acceptee
+        [EnumMember(Value = "Accepte")]
+        Accepte,
+
+        [EnumMember(Value = "Annule")]
+        Annule
     }
 
     public enum RaisonAnnulationDossier : byte
@@ -28,7 +31,10 @@ namespace BoVoyageMVC.Models
         Client = 1,
 
         [EnumMember(Value = "Places Insuffisantes")]
-        PlacesInsuffisantes
+        PlacesInsuffisantes,
+
+        [EnumMember(Value = "Insolvable")]
+        Insolvable
     }
 
     [Table("DossiersReservations")]
@@ -47,7 +53,7 @@ namespace BoVoyageMVC.Models
 
         [Display(Name = "Prix/client")]
         public double UnitPrice { get; set; }
-        
+
         public DossierReservation()
         {
             this.Participants = new HashSet<Participant>();
@@ -78,10 +84,14 @@ namespace BoVoyageMVC.Models
         }
 
         [Display(Name = "Etat Dossier")]
-        [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         [EnumDataType(typeof(EtatDossierReservation))]
         [JsonConverter(typeof(StringEnumConverter))]
         public EtatDossierReservation EtatDossier { get; set; }
+
+        [Display(Name = "Raison Annulation")]
+        [EnumDataType(typeof(EtatDossierReservation))]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public RaisonAnnulationDossier RaisonAnnulationDossier { get; set; }
 
         [Display(Name = "Client")]
         public int ClientId { get; set; }
