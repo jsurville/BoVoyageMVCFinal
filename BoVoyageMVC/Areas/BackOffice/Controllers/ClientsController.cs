@@ -56,21 +56,18 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
         public ActionResult Search(string search)
         {
-            if (search == null)
+            if (search != "" )
             {
-                return RedirectToRoute("Index");
-            }
-            ICollection<Client> clients = db.Clients.Where(x => x.LastName.Contains(search) || x.Address.Contains(search)).ToList();
-            //var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
-            if (clients?.Count() == 0)
-            {
-                Display("Aucun Résultat ");
-            }
-            else
-            {
+                ICollection<Client> clients = db.Clients.Where(x => x.LastName.Contains(search) || x.FisrtName.Contains(search) || x.Address.Contains(search) || x.Address.Contains(search)).ToList();
+                //var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
+                if (clients?.Count() == 0)
+                {
+                    Display("Aucun Résultat ");
+                }
                 return View(clients);
             }
-            return RedirectToRoute("Index");
+
+            return RedirectToAction("Index", "Clients");
 
             //return RedirectToAction("Index", "Home");
 

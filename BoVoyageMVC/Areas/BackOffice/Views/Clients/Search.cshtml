@@ -8,7 +8,7 @@
 
 <div id="search">
     <form class="form-group row" action="@Url.Action("Search")" method="post" enctype="multipart/form-data">
-        
+
         <div class="form-group col-md-3">
             <label for="Destination">Recherche</label>
             <input class="form-control" type="text" id="client" name="search" />
@@ -72,3 +72,9 @@
     }
 
 </table>
+
+
+<div>
+    @Html.ActionLink("Retour à la Liste", "Index", "Voyages", null, htmlAttributes: new { @class = "btn bt-primary" })
+</div>
+
