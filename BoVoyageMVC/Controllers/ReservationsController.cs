@@ -83,40 +83,7 @@ namespace BoVoyageMVC.Controllers
         }
 
 
-        // GET: Reservations/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
-            if (dossierReservation == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "UserId", dossierReservation.ClientId);
-            ViewBag.VoyageId = new SelectList(db.Voyages, "Id", "Id", dossierReservation.VoyageId);
-            return View(dossierReservation);
-        }
-
-        // POST: Reservations/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreditCardNumber,UnitPrice,EtatDossier,ClientId,VoyageId")] DossierReservation dossierReservation)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(dossierReservation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "UserId", dossierReservation.ClientId);
-            ViewBag.VoyageId = new SelectList(db.Voyages, "Id", "Id", dossierReservation.VoyageId);
-            return View(dossierReservation);
-        }
+      
 
         // GET: Reservations/Delete/5
         public ActionResult Delete(int? id)
@@ -130,10 +97,16 @@ namespace BoVoyageMVC.Controllers
             {
                 return HttpNotFound();
             }
+            var clientId = GetCurrentClientId();
+            if(dossierReservation.ClientId!=clientId)
+            {
+                Display("Vous n'avez pas accès à cette réservation", MessageType.ERROR);
+                return RedirectToAction("Index");
+            }
             if (dossierReservation.EtatDossier == EtatDossierReservation.Refusee
                 || dossierReservation.EtatDossier == EtatDossierReservation.Annule)
             {
-                Display("Votre réservation a été réfusé ou annulé",MessageType.ERROR);
+                Display("Votre réservation avait déjà été réfusé ou annulé",MessageType.ERROR);
                 return RedirectToAction("Index");
             }
             return View(dossierReservation);
