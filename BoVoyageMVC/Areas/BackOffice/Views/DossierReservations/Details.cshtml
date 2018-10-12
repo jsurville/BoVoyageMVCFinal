@@ -1,12 +1,12 @@
 ﻿@model BoVoyageMVC.Models.DossierReservation
 
 @{
-    ViewBag.Title = "Ma Réservation";
+    ViewBag.Title = "Détail du dossier";
 }
 
 
 
-<div class="container">
+<div class="detail">
     <h2>@ViewBag.Title</h2>
     <hr />
     <dl class="dl-horizontal">
@@ -108,7 +108,7 @@
         @{ if (Model.Participants == null)
             {
                 <dt>
-                    dfsg dfgsdfgsdf gsdf gsdf
+
                 </dt>
             }
             else
@@ -121,12 +121,12 @@
                 }
             }
         }
+        <p>
 
+            @Html.ActionLink("Retour", "Index", null, new { @style = "float:left" })
+        </p>
     </dl>
 
-    <p>
-
-        @Html.ActionLink("Retour", "Index", null, new { @style = "float:left" })
-    </p>
+    
 </div>
 
