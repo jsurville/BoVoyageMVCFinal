@@ -14,8 +14,6 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
     [Authorize(Roles = "Commercial")]
     public class AgenceVoyagesController : BaseController
     {
-       
-
         // GET: BackOffice/AgenceVoyages
         public ActionResult Index()
         {

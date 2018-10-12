@@ -11,14 +11,16 @@ using BoVoyageMVC.Models;
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [Authorize(Roles="Commercial")]
+    [RouteArea("BackOffice")]
     public class DossierReservationsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BackOffice/DossierReservations
+        [Route("Bookings")]
         public ActionResult Index()
         {
-            var dossiersReservations = db.DossiersReservations.Include(d => d.Client).Include(d => d.Voyage);
+            var dossiersReservations = db.DossiersReservations.Include(d => d.Client).Include(d => d.Voyage).Include(u => u.Voyage.Destination);
             return View(dossiersReservations.ToList());
         }
 

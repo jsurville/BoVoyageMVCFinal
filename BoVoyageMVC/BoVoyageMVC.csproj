@@ -199,7 +199,6 @@
     <Compile Include="Areas\BackOffice\Controllers\AgenceVoyagesController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\AssurancesController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\ClientsController.cs" />
-    <Compile Include="Areas\BackOffice\Controllers\CommercialsController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\ContactMessagesController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\DestinationsController.cs" />
     <Compile Include="Areas\BackOffice\Controllers\DossierReservationsController.cs" />
@@ -290,7 +289,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\Background.jpg" />
+    <Content Include="Content\img\Background2.jpg" />
     <Content Include="Content\img\BoBackground.jpg" />
+    <Content Include="Content\img\BoBackground2.jpg" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\Social.css" />
     <Content Include="favicon.ico" />
@@ -417,7 +418,6 @@
     <Content Include="Areas\BackOffice\Views\Shared\_PartialDisplay.cshtml" />
     <Content Include="Areas\BackOffice\Views\Voyages\Search.cshtml" />
     <Content Include="Areas\BackOffice\Views\Shared\_LayoutSearch.cshtml" />
-    <Content Include="Areas\BackOffice\Views\Commercials\Index.cshtml" />
     <Content Include="Areas\BackOffice\Views\Commercials\Create.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Create.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Delete.cshtml" />
