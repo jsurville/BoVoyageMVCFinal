@@ -10,12 +10,13 @@
     <form class="form-group row" action="@Url.Action("Search")" method="post" enctype="multipart/form-data">
 
         <div class="form-group col-md-3">
-            <label for="Destination">Recherche</label>
+            <label for="Destination">Recherche Nom/Prénom/Email/Adresse</label>
             <input class="form-control" type="text" id="client" name="search" />
+            <div class="form-group col-md-3">
+                <button type="submit" class="btn btn-primary"> Recherche</button>
+            </div>
         </div>
-        <div class="form-group col-md-3">
-            <button type="submit" class="btn btn-primary"> Recherche nom/prénom/email/adresse</button>
-        </div>
+        
 
     </form>
 </div>
@@ -75,6 +76,6 @@
 
 
 <div>
-    @Html.ActionLink("Retour à la Liste", "Index", "Voyages", null, htmlAttributes: new { @class = "btn bt-primary" })
+    @Html.ActionLink("Retour à la Liste", "Index", "Clients", null, htmlAttributes: new { @class = "btn bt-primary" })
 </div>
 

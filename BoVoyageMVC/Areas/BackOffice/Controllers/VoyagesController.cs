@@ -60,7 +60,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             if (voyage.ReturnDate <= voyage.DepartureDate)
 
             {
-                Display("Date retour est invalide"); 
+                Display("La Date de retour n'est pas valide"); 
             }
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         {
             if (search != "" && departureDate == null && maxprice == null)
             {
-                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
+                ICollection<Voyage> voyages = db.Voyages.Include(u => u.AgenceVoyage).Include(x => x.Destination).Include(x => x.Destination.Images)
             .Where(x => x.Destination.Description.Contains(search)
             || x.Destination.Continent.Contains(search)
             || x.Destination.Country.Contains(search)
@@ -149,10 +149,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                     return View(voyages);
                 }
             }
-
-
             Display("Aucun résultat");
-            Display("Le Nouveau Tireur a bien été enregistré");
+           
             return RedirectToAction("Index", "Voyages");
 
 
