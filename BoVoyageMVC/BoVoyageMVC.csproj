@@ -415,7 +415,6 @@
     <Content Include="Areas\BackOffice\Views\ContactMessages\Details.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Index.cshtml" />
-    <Content Include="Areas\BackOffice\Views\Shared\_PartialDisplay.cshtml" />
     <Content Include="Areas\BackOffice\Views\Voyages\Search.cshtml" />
     <Content Include="Areas\BackOffice\Views\Shared\_LayoutSearch.cshtml" />
     <Content Include="Areas\BackOffice\Views\Commercials\Create.cshtml" />
@@ -425,6 +424,7 @@
     <Content Include="Areas\BackOffice\Views\Clients\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Index.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Search.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Shared\_PartialDisplay.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
