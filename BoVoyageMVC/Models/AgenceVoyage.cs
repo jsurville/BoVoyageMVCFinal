@@ -12,7 +12,7 @@ namespace BoVoyageMVC.Models
 	{
 		public int Id { get; set; }
 
-        [Display(Name="Nom Agence")]
+        [Display(Name="Nom de l'Agence")]
 		[Required(ErrorMessage = "Le champ {0} est obligatoire.")]
 		[Index(IsUnique = true)]
 		[StringLength(60, MinimumLength = 5, ErrorMessage = "Le nom de l'agence doit avoir de 5 a 60 caracteres")]

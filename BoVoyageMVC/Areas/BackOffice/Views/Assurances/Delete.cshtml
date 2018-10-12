@@ -1,40 +1,43 @@
 ﻿@model BoVoyageMVC.Models.Assurance
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Supprimer agence";
 }
 
-<h2>Delete</h2>
+<div class="detail">
+    <h3>Etes vous sûr de vouloir supprimer</h3>
+    <div>
+       
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Montant)
+            </dt>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Assurance</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Montant)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Montant)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Montant)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TypeAssurance)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TypeAssurance)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TypeAssurance)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TypeAssurance)
-        </dd>
+        </dl>
 
-    </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                <div class="btn btn-info">
+                    @Html.ActionLink("Retour", "Index")
+                </div>
+            </div>
+        }
+    </div>
+    </div>
