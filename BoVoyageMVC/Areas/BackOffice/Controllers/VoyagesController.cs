@@ -13,7 +13,7 @@ using BoVoyageMVC.Controllers;
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [RouteArea("BackOffice")]
-    [Authorize(Roles = "Commercial")]
+    [Authorize(Roles = "Commercial,Admin")]
     public class VoyagesController : BaseController
     {
        
@@ -45,7 +45,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         public ActionResult Create()
         {
             ViewBag.AgenceVoyageId = new SelectList(db.AgencesVoyages, "Id", "Name");
-            ViewBag.DestinationId = new SelectList(db.Destinations, "Id", "Continent");
+            ViewBag.DestinationId = new SelectList(db.Destinations, "Id", "Name");
+           
             return View();
         }
 
