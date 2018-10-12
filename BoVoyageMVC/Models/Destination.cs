@@ -43,7 +43,7 @@ namespace BoVoyageMVC.Models
         {
             get
             {
-                return this.Country+" "+this.Region;
+                return this.Country+" / "+this.Region;
             }
         }
     }   

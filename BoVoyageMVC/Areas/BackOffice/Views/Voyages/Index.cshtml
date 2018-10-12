@@ -24,7 +24,7 @@
             <input class="form-control" type="text" id="destination" name="search" />
         </div>
         <div class="form-group col-md-3">
-            <button type="submit" class="btn btn-primary"> Rechercher</button>
+            <button type="submit" class="btn btn-primary bigBtn"> Rechercher</button>
         </div>
 
     </form>
@@ -39,7 +39,7 @@
             @Html.DisplayNameFor(model => model.AgenceVoyage.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Destination.Continent)
+            @Html.DisplayNameFor(model => model.Destination.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DepartureDate)
@@ -66,7 +66,7 @@
                 @Html.DisplayFor(modelItem => item.AgenceVoyage.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Destination.Continent)
+                @Html.DisplayFor(modelItem => item.Destination.Name)
             </td>
             <td>
                 @item.DepartureDate.ToShortDateString()
