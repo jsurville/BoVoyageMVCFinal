@@ -11,6 +11,7 @@ namespace BoVoyageMVC.Models
 	{
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         public string UserId { get; set; }
+
         [ForeignKey("UserId")]
         public ApplicationUser ApplicationUser { get; set; }
 
