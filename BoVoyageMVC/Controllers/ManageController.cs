@@ -297,6 +297,36 @@ namespace BoVoyageMVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles ="Commercial,Admin")]
+        public ActionResult ChangePasswordBo()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangePassword
+        [Authorize(Roles = "Commercial,Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePasswordBo(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            AddErrors(result);
+            return View(model);
+        }
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()

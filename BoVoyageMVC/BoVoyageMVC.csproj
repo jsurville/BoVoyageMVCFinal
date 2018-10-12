@@ -667,6 +667,7 @@
     <Content Include="Views\Shared\_PartialDisplay.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Manage\IndexBo.cshtml" />
+    <Content Include="Views\Manage\ChangePasswordBo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

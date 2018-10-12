@@ -43,13 +43,7 @@
         {
             top = Model.Count - 1;
         }
-
-
-        @*<div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'bestPrice')">Les moins chers</button>
-                <button class="tablinks" onclick="openCity(event, 'soon')">Depart imminent</button>
-                <button class="tablinks" onclick="openCity(event, 'popular')">Top5 des destinations</button>
-            </div>*@
+     
 
 
         <div id="bestPrice" class="tabcontent">
@@ -90,11 +84,11 @@
 
         <div id="soon" class="tabcontent">
             <h2>Departs imminents</h2>
-            @*<h3>Prochain depart dans <span id="countdown"></span>!</h3>*@
+          
             <div class="row">
                 @{IEnumerable<BoVoyageMVC.Models.Voyage> topSoon = Model.OrderBy(x => x.DepartureDate);
 
-                    //ViewBag.NextDeparture = topSoon.ElementAt(0).DepartureDate;
+                
 
                     for (int i = 0; i < top; i++)
                     {
@@ -165,50 +159,8 @@
 }
 <script src="~/Scripts/jquery.datetimepicker.js">
 
-        //$(function () {
-        //    $('#DepartureDate').datetimepicker({
-        //        lang: 'fr',
-        //        format: 'd/M/20y H:i'
-        //    });
-        //    $('#ReturnDate').datetimepicker({
-        //        lang: 'fr',
-        //        format: 'd/M/20y H:i'
-        //    });
-        //    $('#DepartureDate').attr('autocomplete', 'off');
-        //    $('#ReturnDate').attr('autocomplete', 'off');
-
-        //});
+    
 </script>
 
 
-
-<script>
-
-
-        //script for countdown (index top5)
-
-        //var countDownDate = new Date(ViewBag.NextDeparture).getTime();
-
-
-        //var x = setInterval(function () {
-        //    var now = new Date().getTime();
-        //    var distance = countDownDate - now;
-        //    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        //    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        //    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        //    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        //    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-        //        + minutes + "m " + seconds + "s ";
-
-
-        //    if (distance < 0) {
-        //        clearInterval(x);
-        //        document.getElementById("countdown").innerHTML = "EXPIRED";
-        //    }
-        //}, 1000);
-
-        // Script pour DateTimepicker
-
-</script>
 
