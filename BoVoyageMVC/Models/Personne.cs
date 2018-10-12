@@ -12,7 +12,7 @@ namespace BoVoyageMVC.Models
 	{
 		public int Id { get; set; }
 
-        [Display(Name = "M/Mme")]
+        [Display(Name = "Civilité")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
 		[StringLength(20, MinimumLength = 1, ErrorMessage = "La civilite doit avoir de 1 à 20 caractères")]
 		[Index("IX_PersonneUnique", 1, IsUnique = true)]
