@@ -6,68 +6,82 @@
     ViewBag.IdVoyage = Model.Id;
 }
 
+
+
 <div>
-    <h2>Voyage en @Model.Destination.Country</h2>
-    <hr />
-    <dl class="dl-horizontal">
+    <div class="detail">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Destination.Country)
-        </dt>
+        <h2>Voyage en @Model.Destination.Country</h2>
+        <hr />
+        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Destination.Country)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Destination.Country)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DepartureDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Destination.Country)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Destination.Region)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Destination.Region)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DepartureDate)
+            </dt>
 
-        <dd>
-            @Model.DepartureDate.ToShortDateString()
+            <dd>
+                @Model.DepartureDate.ToShortDateString()
 
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ReturnDate)
-        </dt>
-        <dd>
-            @Model.ReturnDate.ToShortDateString()
-        </dd>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </dt>
+            <dd>
+                @Model.ReturnDate.ToShortDateString()
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitPublicPrice)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitPublicPrice)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitPublicPrice)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UnitPublicPrice)
+            </dd>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Destination.Description)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Destination.Description)
+            </dt>
 
-        <dd>
-            @Html.Raw(Model.Destination.Description)
-        </dd>
+            <dd>
+                @Html.Raw(Model.Destination.Description)
+            </dd>
 
-    </dl>
+        </dl>
 
-    <div class="row">
-        @if (Model.Destination.Images != null)
-        {
-            foreach (var picture in Model.Destination.Images)
+        <div>
+            @Html.ActionLink("Réserver", "Book", "Reservations", new { id = Model.Id }, new { @class = "btn btn-primary"})
+            @Html.ActionLink("Retour à la Liste", "Index", "FrontVoyages", new { @class = "btn btn-default"})
+        </div>
+        <br />
+
+        <div class="row">
+
+            @if (Model.Destination.Images != null)
             {
-                <div class="col-md-2">
-                    <img src="data:@picture.ContentType;base64,@Convert.ToBase64String(picture.Content)" class="img-thumbnail" />
-                </div>
+                foreach (var picture in Model.Destination.Images)
+                {
+                    <div class="col-md-4">             
+                        <img src="data:@picture.ContentType;base64,@Convert.ToBase64String(picture.Content)" class="detailPicture" />
+                    </div>
+                }
             }
-        }
+        </div>
+
     </div>
-</div>
 
 
-<div>
-    @Html.ActionLink("Réserver", "Book", "Reservations", new { id = Model.Id }, new { @class = "btn btn-primary", @style = "float:right" })
-    @Html.ActionLink("Retour à la Liste", "Index", "FrontVoyages", new { @class = "btn btn-default", @style = "float:right" })
 </div>
