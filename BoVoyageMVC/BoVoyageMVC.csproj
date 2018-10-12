@@ -282,6 +282,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\Background.jpg" />
+    <Content Include="Content\img\BoBackground.jpg" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\Social.css" />
     <Content Include="favicon.ico" />
@@ -410,6 +411,11 @@
     <Content Include="Areas\BackOffice\Views\Shared\_LayoutSearch.cshtml" />
     <Content Include="Areas\BackOffice\Views\Commercials\Index.cshtml" />
     <Content Include="Areas\BackOffice\Views\Commercials\Create.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Clients\Create.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Clients\Delete.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Clients\Details.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Clients\Edit.cshtml" />
+    <Content Include="Areas\BackOffice\Views\Clients\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\cldr.js" />
     <Content Include="Scripts\cldr\event.js" />
@@ -651,7 +657,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\BackOffice\Views\Clients\" />
+    <Folder Include="Areas\BackOffice\FileUsers\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

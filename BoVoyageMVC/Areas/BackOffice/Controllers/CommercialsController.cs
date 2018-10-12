@@ -3,40 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BoVoyageMVC.Controllers;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Commercial")]
-    public class CommercialsController : Controller
+    public class CommercialsController : BaseController
     {
         // GET: BackOffice/Commercials
         public ActionResult Index()
         {
-            return View();
+            var commercials = db.Commercials;
+            return View(commercials.ToList());
+            
         }
 
-
-        // GET: BackOffice/Commercials/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: BackOffice/Commercials/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // GET: BackOffice/Commercials/Edit/5
         public ActionResult Edit(int id)

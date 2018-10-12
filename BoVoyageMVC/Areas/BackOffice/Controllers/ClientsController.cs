@@ -37,37 +37,10 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(client);
         }
 
-        // GET: BackOffice/Clients/Create
-        public ActionResult Create()
-        {
-           
-            return View();
-        }
-
-        // POST: BackOffice/Clients/Create
-        [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Title,LastName,FirstName,Address,PhoneNumber,BirthDate")] Client client)
-        {
-            if (client.BirthDate <= DateTime.Now)
-
-            {
-                Display("Date de naissance est invalide");
-            }
-            if (ModelState.IsValid)
-            {
-                db.Clients.Add(client);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-   
-                return View();
-            
-        }
-
-        // GET: BackOffice/Clients/Edit/5
+        
         public ActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -80,6 +53,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(client);
             
         }
+
         public ActionResult Search(string search)
         {
             if (search == null)
@@ -101,6 +75,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             //return RedirectToAction("Index", "Home");
 
         }
+
 
 
 

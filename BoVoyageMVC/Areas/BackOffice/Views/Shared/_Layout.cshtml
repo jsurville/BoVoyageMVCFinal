@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body background="~/Content/img/BoBackground.jpg" class="parallax">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -53,10 +53,14 @@
 
                     <li>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="@Url.Action("index", "Clients")">Détails Client</a></li>
+                            <li><a href="@Url.Action("index", "Commercials")">Create compt commercial</a></li>
                         </ul>
                     </li>
-
+                    <li>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="@Url.Action("Create", "Clients")">Détails Client</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="@Url.Action("index", "ContactMessages")">Liste des messages</a></li>
