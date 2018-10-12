@@ -62,7 +62,7 @@ namespace BoVoyageMVC.Models
 
         [Display(Name = "Prix Total")]
         [NotMapped]
-        public double TotalPrice
+        public int TotalPrice
         {
             get
             {
@@ -79,7 +79,7 @@ namespace BoVoyageMVC.Models
                         totalPrice += (double)assurance.Montant;
                     }
                 }
-                return totalPrice;
+                return (int)totalPrice;
             }
         }
 

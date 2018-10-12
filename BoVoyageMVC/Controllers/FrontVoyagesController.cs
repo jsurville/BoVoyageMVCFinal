@@ -75,10 +75,7 @@ namespace BoVoyageMVC.Controllers
                     return View(voyages);
                 }
             }
-
-
-            Display("Aucun résultat");
-            Display("Le Nouveau Tireur a bien été enregistré");
+            Display("Aucun résultat");           
             return RedirectToAction("Index", "Home");
            
             
