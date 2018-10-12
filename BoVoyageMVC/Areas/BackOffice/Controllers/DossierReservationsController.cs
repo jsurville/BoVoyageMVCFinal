@@ -143,7 +143,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             }
             if (dossierReservation.EtatDossier != EtatDossierReservation.EnCours)
             {
-                Display("L'état du Dossier ne permet pas de valider");
+                Display("L'état du Dossier ne permet pas d'accepter");
                 return RedirectToAction("Index");
             }
 
@@ -192,8 +192,9 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                             dossierReservation.TotalPrice);
                         Display("Vous serez remboursé grâce à votre Assurance Annulation", MessageType.SUCCES);
                     }
+                    dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
                 }
-                dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
+                
                 dossierReservation.EtatDossier = EtatDossierReservation.Annule;
                 db.Entry(dossierReservation).State = EntityState.Modified;
                 db.SaveChanges();
