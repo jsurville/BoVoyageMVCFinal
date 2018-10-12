@@ -41,7 +41,7 @@ namespace BoVoyageMVC.Controllers
 
         // GET: FrontVoyages/Search/
          [Route("Search")]
-        public ActionResult Search(string search, DateTime departureDate)
+        public ActionResult Search(string search, DateTime? departureDate)
         {
             if (search != "" && departureDate == null)
             {
@@ -61,7 +61,7 @@ namespace BoVoyageMVC.Controllers
             {
                 
                 ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
-            .Where(x => x.DepartureDate == departureDate).ToList();
+            .Where(x => x.DepartureDate <= departureDate).ToList();
 
                 if (voyages != null)
                 {
