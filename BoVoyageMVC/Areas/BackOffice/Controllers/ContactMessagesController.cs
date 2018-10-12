@@ -10,6 +10,7 @@ using BoVoyageMVC.Models;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
+    [Authorize(Roles = "Commercial,Admin")]
     public class ContactMessagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

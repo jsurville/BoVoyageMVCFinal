@@ -96,7 +96,6 @@ namespace BoVoyageMVC.Models
         [Display(Name = "Date de Naissance")]
         [DataType(DataType.DateTime)]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
-        [Column(TypeName = "datetime2")]
         [Age(18, MaximumAge = 110, ErrorMessage = "Pour le champ {0}, vous devez avoir plus de {1} ans")]
         public DateTime BirthDate { get; set; }
 

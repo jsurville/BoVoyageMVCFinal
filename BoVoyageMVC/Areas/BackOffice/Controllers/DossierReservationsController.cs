@@ -12,8 +12,9 @@ using BoVoyageMVC.Services;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
-    [Authorize(Roles="Commercial")]
+   
     [RouteArea("BackOffice")]
+    [Authorize(Roles = "Commercial,Admin")]
     public class DossierReservationsController : BaseController
     {
         
