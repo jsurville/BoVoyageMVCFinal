@@ -23,7 +23,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [Route("Bookings")]
         public ActionResult Index()
         {
-            var dossiersReservations = db.DossiersReservations.Include(d => d.Client).Include(d => d.Voyage).Include(u => u.Voyage.Destination);
+            var dossiersReservations = db.DossiersReservations.Include(d => d.Client).Include(z => z.Participants).Include(d => d.Voyage).Include(u => u.Voyage.Destination);
             return View(dossiersReservations.ToList());
         }
 

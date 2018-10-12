@@ -1,20 +1,22 @@
 ﻿@model BoVoyageMVC.Models.DossierReservation
 
 @{
-    ViewBag.Title = "Détails réservation";
+    ViewBag.Title = "Ma Réservation";
 }
 
-<h4>@ViewBag.Title</h4>
+<h2>@ViewBag.Title</h2>
 
 <div>
 
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            
             @Html.DisplayNameFor(model => model.Client.LastName)
         </dt>
 
         <dd>
+            @Html.DisplayNameFor(model => model.Client.FisrtName)
             @Html.DisplayFor(model => model.Client.LastName)
         </dd>
         <dt>
@@ -50,7 +52,6 @@
             @Html.DisplayFor(model => model.Voyage.DepartureDate)
         </dd>
 
-
         <dt>
             @Html.DisplayNameFor(model => model.Voyage.ReturnDate)
         </dt>
@@ -60,11 +61,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UnitPrice)
+            @Html.DisplayNameFor(model => model.Voyage.UnitPublicPrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
+            @Html.DisplayFor(model => model.Voyage.UnitPublicPrice)
         </dd>
 
         <dt>
