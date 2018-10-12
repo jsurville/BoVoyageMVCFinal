@@ -45,7 +45,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         public ActionResult Create()
         {
             ViewBag.AgenceVoyageId = new SelectList(db.AgencesVoyages, "Id", "Name");
-            ViewBag.DestinationId = new SelectList(db.Destinations, "Id", "Continent");
+            ViewBag.DestinationId = new SelectList(db.Destinations, "Id", "Name");
+           
             return View();
         }
 
