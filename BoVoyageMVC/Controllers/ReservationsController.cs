@@ -85,6 +85,8 @@ namespace BoVoyageMVC.Controllers
                 }
 
             }
+            var voyage = db.Voyages.Include(v => v.Destination).SingleOrDefault(x => x.Id == dossierReservation.VoyageId);
+            dossierReservation.Voyage = voyage;
             MultiSelectList assuranceValues = new MultiSelectList(db.Assurances, "ID", "TypeAssurance", db.Assurances.Select(x => x.ID));
             ViewBag.Assurances = assuranceValues;
 

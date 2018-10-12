@@ -1,7 +1,7 @@
 ﻿@model BoVoyageMVC.Models.Assurance
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Ajout Assurance";
 }
 
 
@@ -34,14 +34,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Ajouter" class="btn btn-info" />  @Html.ActionLink("Annuler", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
 
 </div>
 }
