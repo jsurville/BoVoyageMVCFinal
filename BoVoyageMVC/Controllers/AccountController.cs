@@ -212,7 +212,7 @@ namespace BoVoyageMVC.Controllers
                     user = UserManager.FindByEmail(model.Email);
                     if (user.Id != null)
                     {
-                        var client = new Client
+                        var commercial = new Commercial
                         {
                             Title = model.Title,
                             LastName = model.LastName,
@@ -222,9 +222,9 @@ namespace BoVoyageMVC.Controllers
                             BirthDate = model.BirthDate,
                             UserId = user.Id
                         };
-                        db.Clients.Add(client);
+                        db.Commercials.Add(commercial);
                         db.SaveChanges();
-                        UserManager.AddToRole(user.Id, "Client");
+                        UserManager.AddToRole(user.Id, "Commercial");
                     }
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -236,9 +236,9 @@ namespace BoVoyageMVC.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
-                    Display("Client enregistré");
+                    Display("Commercial ajouté");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Dashboard",new { area="BackOffice"});
                 }
                 AddErrors(result);
             }
