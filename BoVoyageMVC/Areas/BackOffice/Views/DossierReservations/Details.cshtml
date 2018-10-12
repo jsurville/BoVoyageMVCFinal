@@ -81,7 +81,24 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Assurances.First().TypeAssurance)
+
+            @if (Model.Assurances == null)
+            {
+                <dt>
+
+                </dt>
+                }
+            else
+            {
+                foreach (BoVoyageMVC.Models.Participant participant in Model.Participants)
+                {
+                <dd>
+                    @Html.DisplayFor(model => model.Assurances.First().TypeAssurance)
+                </dd>
+                }
+            }   
+
+                   
         </dd>
 
         <dt>
