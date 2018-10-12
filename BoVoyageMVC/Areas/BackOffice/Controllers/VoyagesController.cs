@@ -57,16 +57,19 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DepartureDate,ReturnDate,MaxCapacity,UnitPrice,Margin,AgenceVoyageId,DestinationId")] Voyage voyage)
         {
-            if (voyage.ReturnDate <= voyage.DepartureDate)
-
-            {
-                Display("La Date de retour n'est pas valide"); 
-            }
+            
             if (ModelState.IsValid)
             {
-                db.Voyages.Add(voyage);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (voyage.ReturnDate >= voyage.DepartureDate.AddDays(2))
+                {
+                    db.Voyages.Add(voyage);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    Display("La Date de retour n'est pas valide", MessageType.ERROR);
+                }
             }
 
             ViewBag.AgenceVoyageId = new SelectList(db.AgencesVoyages, "Id", "Name", voyage.AgenceVoyageId);
@@ -163,12 +166,18 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Find(id);
+            Voyage voyage = db.Voyages.Include(t => t.DossiersReservations).Include(x => x.AgenceVoyage).SingleOrDefault(y => y.Id==id);
             if (voyage == null)
             {
                 return HttpNotFound();
             }
-            return View(voyage);
+            if (voyage.DossiersReservations?.Count() >0)
+            {
+                Display("Impossible, Dossier en cours", MessageType.ERROR);
+                return RedirectToAction("Index");
+            }
+
+                return View(voyage);
         }
 
         // POST: BackOffice/Voyages/Delete/5
@@ -177,8 +186,13 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Voyage voyage = db.Voyages.Find(id);
-            db.Voyages.Remove(voyage);
-            db.SaveChanges();
+            
+                db.Voyages.Remove(voyage);
+                db.SaveChanges();
+               
+            
+            Display("Le Voyage a été supprimé", MessageType.SUCCES);
+
             return RedirectToAction("Index");
         }
     }
