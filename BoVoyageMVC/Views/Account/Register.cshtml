@@ -93,13 +93,13 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-     $(function () {
-         $('#BirthDate').datetimepicker({
-                lang: 'fr',
-                format: 'd/M/Y H:i'
+    @*<script>
+         $(function () {
+             $('#BirthDate').datetimepicker({
+                    lang: 'fr',
+                    format: 'd/M/Y H:i'
+                });
+             $('#BirthDate').attr('autocomplete', 'off');
             });
-         $('#BirthDate').attr('autocomplete', 'off');
-        });
-    </script>
+        </script>*@
 }
