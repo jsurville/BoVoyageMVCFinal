@@ -122,7 +122,11 @@
         <div id="popular" class="tabcontent">
             <h2>Destinations les plus populaires</h2>
             <div class="row">
-                @{IEnumerable<BoVoyageMVC.Models.Voyage> topPopular = Model.OrderBy(x => x.Destination.Country);
+                @{IEnumerable<BoVoyageMVC.Models.Voyage> topPopular = Model
+                        .GroupBy(v => v.Destination.Country)
+                  .OrderByDescending(x => x.Count())
+                  .SelectMany(voy => voy).Take(5).ToList();
+                    
 
 
 
