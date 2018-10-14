@@ -1,8 +1,10 @@
 ﻿using BoVoyageMVC.Controllers;
 using BoVoyageMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web.Mvc;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
@@ -51,21 +53,57 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
         }
 
-        public ActionResult Search(string search)
+        public ActionResult Search(string search, string dateDebut, string dateFin)
         {
-            if (search != "")
+            ICollection<Client> clients = new List<Client>();
+            DateTime avantNaissance;
+            DateTime apresNaissance;
+            if (!string.IsNullOrWhiteSpace(search))
             {
-                ICollection<Client> clients = db.Clients.Where(x => x.LastName.Contains(search) || x.FisrtName.Contains(search) || x.Address.Contains(search) || x.Address.Contains(search)).ToList();
-                //var voyages = db.Voyages.Include("Destination").Include(x => x.Destination.Images).ToList();
-                if (clients?.Count() == 0)
-                {
-                    Display("Aucun Résultat ");
-                }
-                return View(clients);
+                clients = db.Clients.Where(x => x.LastName.Contains(search)
+                || x.FisrtName.Contains(search) || x.Address.Contains(search)
+                || x.Address.Contains(search)).ToList();
             }
-            Display("Aucun résultat");
-            return RedirectToAction("Index", "Clients");
-           
+
+            if (string.IsNullOrWhiteSpace(search) &&
+                DateTime.TryParse(dateDebut, out avantNaissance)
+                && DateTime.TryParse(dateFin, out apresNaissance))
+                clients = db.Clients.Where(c => c.BirthDate > avantNaissance &&
+                                            c.BirthDate < apresNaissance).ToList();
+
+            if (clients?.Count() == 0)
+            {
+                Display("Aucun Résultat ");
+            }
+            return View("Index", clients);
+
+        }
+
+        public ActionResult Download()
+        {
+            ICollection<Client> clients = db.Clients.ToList();
+
+            string csv = ListToCSV(clients);
+
+            return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", "clients.csv");
+        }
+
+        private string ListToCSV<T>(IEnumerable<T> list)
+        {
+            StringBuilder sList = new StringBuilder();
+
+            Type type = typeof(T);
+            var props = type.GetProperties();
+            sList.Append(string.Join(",", props.Select(p => p.Name)));
+            sList.Append(Environment.NewLine);
+
+            foreach (var element in list)
+            {
+                sList.Append(string.Join(",", props.Select(p => p.GetValue(element, null))));
+                sList.Append(Environment.NewLine);
+            }
+
+            return sList.ToString();
         }
     }
 }
