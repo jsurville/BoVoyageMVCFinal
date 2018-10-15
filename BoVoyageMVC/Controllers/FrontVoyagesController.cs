@@ -40,45 +40,32 @@ namespace BoVoyageMVC.Controllers
          [Route("Search")]
         public ActionResult Search(string search, DateTime? departureDate, int? maxprice)
         {
-            if (search != "" && departureDate == null && maxprice == null )
+
+            IEnumerable<Voyage> voyages = db.Voyages.Include(u => u.AgenceVoyage).
+                Include(x => x.Destination).Include(x => x.Destination.Images);
+
+            if (!string.IsNullOrWhiteSpace(search))
             {
-                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
-            .Where(x => x.Destination.Description.Contains(search)
+                voyages = voyages.Where(x => x.Destination.Description.Contains(search)
             || x.Destination.Continent.Contains(search)
             || x.Destination.Country.Contains(search)
-            || x.Destination.Region.Contains(search)).ToList();
-
-                if (voyages != null)
-                {
-                    return View(voyages);
-                }
+            || x.Destination.Region.Contains(search));
             }
-            if (search == "" && departureDate != null && maxprice == null)
+
+            if (departureDate != null)
+                voyages = voyages.Where(x => x.DepartureDate <= departureDate);
+
+
+            if (maxprice != null)
+                voyages = voyages.Where(x => x.UnitPublicPrice <= maxprice);
+
+            if (voyages.Count() == 0)
             {
-                
-                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
-            .Where(x => x.DepartureDate <= departureDate).ToList();
-
-                if (voyages != null)
-                {
-                    return View(voyages);
-                }
+                Display("Aucun résultat");
             }
-            if (search == "" && departureDate == null && maxprice != null)
-            {
 
-                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
-            .ToList().Where(x => x.UnitPublicPrice <= maxprice).ToList();
+            return View("Index", voyages.ToList());
 
-                if (voyages != null)
-                {
-                    return View(voyages);
-                }
-            }
-            Display("Aucun résultat");           
-            return RedirectToAction("Index", "Home");
-           
-            
         }
     }
 }
