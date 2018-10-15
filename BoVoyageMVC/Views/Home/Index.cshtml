@@ -5,18 +5,18 @@
 }
 
 <div>
-    <div >
+    <div>
         <br />
         <img src="~/Content/img/Logo.svg" class="logo" />
     </div>
-    
+
 </div>
 
 <div id="search">
     <form class="form-group row" action="@Url.Action("Search", "FrontVoyages")" method="post" enctype="multipart/form-data">
         <div class="form-group col-md-3">
             <label for="DateAller">Départ avant le:</label>
-            <a> <input type="date" class="form-control" id="DepartureDate" name="departureDate" /> </a> <br />
+            <a> <input type="text" class="form-control" id="DepartureDate" name="departureDate" /> </a> <br />
 
         </div>
 
@@ -43,7 +43,7 @@
         {
             top = Model.Count - 1;
         }
-     
+
 
 
         <div id="bestPrice" class="tabcontent">
@@ -84,11 +84,11 @@
 
         <div id="soon" class="tabcontent">
             <h2>Départs imminents</h2>
-          
+
             <div class="row">
                 @{IEnumerable<BoVoyageMVC.Models.Voyage> topSoon = Model.OrderBy(x => x.DepartureDate);
 
-                
+
 
                     for (int i = 0; i < top; i++)
                     {
@@ -123,9 +123,9 @@
             <h2>Destinations les plus populaires</h2>
             <div class="row">
                 @{IEnumerable<BoVoyageMVC.Models.Voyage> topPopular = Model
-                        .GroupBy(v => v.Destination.Country)
-                  .OrderByDescending(x => x.Count())
-                  .SelectMany(voy => voy).Take(5).ToList();
+                          .GroupBy(v => v.Destination.Country)
+                    .OrderByDescending(x => x.Count())
+                    .SelectMany(voy => voy).Take(5).ToList();
 
                     for (int i = 0; i < top; i++)
                     {
@@ -157,10 +157,22 @@
 
     }
 }
-<script src="~/Scripts/jquery.datetimepicker.js">
-
-    
-</script>
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.datetimepicker.js"></script>
+    <script>
+
+        $(function () {
+            $('#DepartureDate').datetimepicker({
+                lang: 'fr',
+                format: 'd/M/Y'
+            });
+
+            $('#DepartureDate').attr('autocomplete', 'off');
+
+        });
+    </script>
+}
 

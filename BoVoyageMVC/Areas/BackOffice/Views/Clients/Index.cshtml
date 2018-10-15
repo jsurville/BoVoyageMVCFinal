@@ -15,12 +15,12 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="dateDebut"> Date Naissance après le: </label>
-                <input class="form-control" type="text" id="client" name="dateDebut" />
+                <input class="form-control" type="text" id="dateDebut" name="dateDebut" />
             </div>
 
             <div class="form-group col-md-2">
                 <label for="dateFin"> Date Naissance avant le: </label>
-                <input class="form-control" type="text" id="client" name="dateFin" />
+                <input class="form-control" type="text" id="dateFin" name="dateFin" />
             </div>
             <div class="form-group col-md-3">
                 <button type="submit" class="btn btn-primary bigBtn">Recherche </button>
@@ -74,7 +74,7 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @item.BirthDate.ToShortDateString())
+                @item.BirthDate.ToShortDateString()
             </td>
 
 
@@ -84,4 +84,27 @@
 
 </table>
 
-<a href="@Url.Action("Download","Clients")" class="btn btn-info">Telecharger tous les client </a>
+<a href="@Url.Action("Download","Clients")" class="btn btn-info">Télécharger tous les client </a>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.datetimepicker.js"></script>
+    <script>
+
+        $(function () {
+            $('#dateDebut').datetimepicker({
+                lang: 'fr',
+                format: 'd/M/Y'
+            });
+            $('#dateFin').datetimepicker({
+                lang: 'fr',
+                format: 'd/M/Y'
+            });
+            $('#dateDebut').attr('autocomplete', 'off');
+            $('#dateFin').attr('autocomplete', 'off');
+            tinymce.init({ selector: '#Description', lang: 'fr' });
+        });
+    </script>
+}
