@@ -10,7 +10,7 @@
     <form class="form-group row" action="@Url.Action("Search")" method="post" enctype="multipart/form-data">
         <div class="form-group col-md-3">
             <label for="DateAller">Départ avant le:</label>
-            <a> <input type="date" class="form-control" id="DepartureDate" name="departureDate" /> </a> <br />
+            <a> <input type="text" class="form-control" id="DepartureDate" name="departureDate" /> </a> <br />
 
         </div>
 
@@ -94,3 +94,22 @@
     @Html.ActionLink("Retour à la Liste", "Index", "Voyages", null, htmlAttributes: new { @class = "btn bt-primary" })
 </div>
 
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.datetimepicker.js"></script>
+    <script>
+
+        $(function () {
+            $('#DepartureDate').datetimepicker({
+                lang: 'fr',
+                format: 'd/M/Y H:i'
+            });
+           
+            $('#DepartureDate').attr('autocomplete', 'off');
+            
+        });
+    </script>
+}
