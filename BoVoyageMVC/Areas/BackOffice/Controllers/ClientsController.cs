@@ -55,28 +55,29 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
         public ActionResult Search(string search, string dateDebut, string dateFin)
         {
-            ICollection<Client> clients = new List<Client>();
+            IEnumerable<Client> clients = db.Clients;
             DateTime avantNaissance;
             DateTime apresNaissance;
             if (!string.IsNullOrWhiteSpace(search))
             {
-                clients = db.Clients.Where(x => x.LastName.Contains(search)
+                clients = clients.Where(x => x.LastName.Contains(search)
                 || x.FisrtName.Contains(search) || x.Address.Contains(search)
-                || x.Address.Contains(search)).ToList();
+                || x.Address.Contains(search));
             }
 
-            if (string.IsNullOrWhiteSpace(search) &&
-                DateTime.TryParse(dateDebut, out avantNaissance)
-                && DateTime.TryParse(dateFin, out apresNaissance))
-                clients = db.Clients.Where(c => c.BirthDate > avantNaissance &&
-                                            c.BirthDate < apresNaissance).ToList();
+            if (DateTime.TryParse(dateDebut, out avantNaissance))
+                clients = clients.Where(c => c.BirthDate > avantNaissance);
+
+            if (DateTime.TryParse(dateFin, out apresNaissance))
+                clients = db.Clients.Where(c =>c.BirthDate < apresNaissance);
 
             if (clients?.Count() == 0)
             {
                 Display("Aucun Résultat ");
-            }
-            return View("Index", clients);
+                return View("Index", null);
+            }           
 
+            return View("Index", clients.ToList());
         }
 
         public ActionResult Download()
