@@ -14,7 +14,7 @@
                 <input class="form-control" type="text" id="client" name="search" />
             </div>
             <div class="form-group col-md-2">
-                <label for="dateDebut"> Date Naissance apres le: </label>
+                <label for="dateDebut"> Date Naissance après le: </label>
                 <input class="form-control" type="text" id="client" name="dateDebut" />
             </div>
 
@@ -23,7 +23,7 @@
                 <input class="form-control" type="text" id="client" name="dateFin" />
             </div>
             <div class="form-group col-md-3">
-                <button type="submit" class="btn btn-primary">Recherche </button>
+                <button type="submit" class="btn btn-primary bigBtn">Recherche </button>
 
             </div>
         </div>
@@ -74,7 +74,7 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
+                @item.BirthDate.ToShortDateString())
             </td>
 
 

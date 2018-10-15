@@ -50,7 +50,7 @@
                         @Html.DisplayFor(modelItem => item.Destination.Region)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DepartureDate)
+                        @item.DepartureDate.ToShortDateString()
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.MaxCapacity)
