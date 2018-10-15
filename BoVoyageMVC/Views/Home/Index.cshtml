@@ -126,10 +126,6 @@
                         .GroupBy(v => v.Destination.Country)
                   .OrderByDescending(x => x.Count())
                   .SelectMany(voy => voy).Take(5).ToList();
-                    
-
-
-
 
                     for (int i = 0; i < top; i++)
                     {
