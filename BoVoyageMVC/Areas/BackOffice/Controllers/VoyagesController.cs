@@ -1,14 +1,12 @@
-﻿using System;
+﻿using BoVoyageMVC.Controllers;
+using BoVoyageMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BoVoyageMVC.Models;
-using BoVoyageMVC.Tools;
-using BoVoyageMVC.Controllers;
 
 namespace BoVoyageMVC.Areas.BackOffice.Controllers
 {
@@ -16,14 +14,14 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
     [Authorize(Roles = "Commercial,Admin")]
     public class VoyagesController : BaseController
     {
-       
+
         // GET: BackOffice/Voyages
         public ActionResult Index()
         {
-            var voyages = db.Voyages.Include(v => v.AgenceVoyage).Include("Destination");
-            return View(voyages.ToList());
+            List<Voyage> voyages = db.Voyages.Include(v => v.AgenceVoyage).Include("Destination").ToList();
+            return View(voyages);
         }
-        
+
         // GET: BackOffice/Voyages/Details/5
         public ActionResult Details(int? id)
         {
@@ -31,7 +29,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Include("Destination").Include(x => x.Destination.Images).Include(u => u.AgenceVoyage).SingleOrDefault(x=>x.Id == id);
+            Voyage voyage = db.Voyages.Include("Destination").Include(x => x.Destination.Images).Include(u => u.AgenceVoyage).SingleOrDefault(x => x.Id == id);
             if (voyage == null)
             {
                 return HttpNotFound();
@@ -40,13 +38,13 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
         }
 
-        
+
         // GET: BackOffice/Voyages/Create
         public ActionResult Create()
         {
             ViewBag.AgenceVoyageId = new SelectList(db.AgencesVoyages, "Id", "Name");
             ViewBag.DestinationId = new SelectList(db.Destinations, "Id", "Name");
-           
+
             return View();
         }
 
@@ -57,7 +55,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DepartureDate,ReturnDate,MaxCapacity,UnitPrice,Margin,AgenceVoyageId,DestinationId")] Voyage voyage)
         {
-            
+
             if (ModelState.IsValid)
             {
                 if (voyage.ReturnDate >= voyage.DepartureDate.AddDays(2))
@@ -117,46 +115,30 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [Route("Search")]
         public ActionResult Search(string search, DateTime? departureDate, int? maxprice)
         {
-            if (search != "" && departureDate == null && maxprice == null)
+            IEnumerable<Voyage> voyages = db.Voyages.Include(u => u.AgenceVoyage).
+                Include(x => x.Destination).Include(x => x.Destination.Images);
+
+            if (!string.IsNullOrWhiteSpace(search))
             {
-                ICollection<Voyage> voyages = db.Voyages.Include(u => u.AgenceVoyage).Include(x => x.Destination).Include(x => x.Destination.Images)
-            .Where(x => x.Destination.Description.Contains(search)
+                voyages = voyages.Where(x => x.Destination.Description.Contains(search)
             || x.Destination.Continent.Contains(search)
             || x.Destination.Country.Contains(search)
-            || x.Destination.Region.Contains(search)).ToList();
-
-                if (voyages != null)
-                {
-                    return View(voyages);
-                }
+            || x.Destination.Region.Contains(search));
             }
-            if (search == "" && departureDate != null && maxprice == null)
+
+            if (departureDate != null)            
+                voyages = voyages.Where(x => x.DepartureDate <= departureDate);
+            
+
+            if (maxprice != null)            
+                voyages = voyages.Where(x => x.UnitPrice <= maxprice);            
+
+            if (voyages.Count() == 0)
             {
-
-                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
-            .Where(x => x.DepartureDate <= departureDate).ToList();
-
-                if (voyages != null)
-                {
-                    return View(voyages);
-                }
+                Display("Aucun résultat");
             }
-            if (search == "" && departureDate == null && maxprice != null)
-            {
 
-                ICollection<Voyage> voyages = db.Voyages.Include(x => x.Destination).Include(x => x.Destination.Images)
-            .ToList().Where(x => x.UnitPrice <= maxprice).ToList();
-
-                if (voyages != null)
-                {
-                    return View(voyages);
-                }
-            }
-            Display("Aucun résultat");
-           
-            return RedirectToAction("Index", "Voyages");
-
-
+            return View("Index", voyages.ToList());
         }
 
         // GET: BackOffice/Voyages/Delete/5
@@ -166,18 +148,18 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Include(t => t.DossiersReservations).Include(x => x.AgenceVoyage).SingleOrDefault(y => y.Id==id);
+            Voyage voyage = db.Voyages.Include(t => t.DossiersReservations).Include(x => x.AgenceVoyage).SingleOrDefault(y => y.Id == id);
             if (voyage == null)
             {
                 return HttpNotFound();
             }
-            if (voyage.DossiersReservations?.Count() >0)
+            if (voyage.DossiersReservations?.Count() > 0)
             {
                 Display("Impossible, Dossier en cours", MessageType.ERROR);
                 return RedirectToAction("Index");
             }
 
-                return View(voyage);
+            return View(voyage);
         }
 
         // POST: BackOffice/Voyages/Delete/5
@@ -186,11 +168,11 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Voyage voyage = db.Voyages.Find(id);
-            
-                db.Voyages.Remove(voyage);
-                db.SaveChanges();
-               
-            
+
+            db.Voyages.Remove(voyage);
+            db.SaveChanges();
+
+
             Display("Le Voyage a été supprimé", MessageType.SUCCES);
 
             return RedirectToAction("Index");

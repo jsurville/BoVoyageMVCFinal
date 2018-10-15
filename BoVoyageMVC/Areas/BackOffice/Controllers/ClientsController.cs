@@ -16,7 +16,6 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         // GET: BackOffice/Clients
         public ActionResult Index()
         {
-
             List<Client> clients = db.Clients.ToList();
             return View(clients);
         }
