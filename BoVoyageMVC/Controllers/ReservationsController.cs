@@ -81,7 +81,7 @@ namespace BoVoyageMVC.Controllers
                     return RedirectToAction("Index");
                 } else
                 {                   
-                    ModelState.AddModelError("CreditCardNumber", "Carte Bancaire Invalide");                   
+                    ModelState.AddModelError("CreditCardNumber", "Le numéro CB doit comporter 10 chiffres maximimum");                   
                 }
 
             }
