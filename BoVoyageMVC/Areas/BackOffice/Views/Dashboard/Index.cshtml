@@ -44,33 +44,24 @@
 
             @foreach (var item in Model.Voyages)
             {
-                if (item.DepartureDate.AddDays(-15)<DateTime.Now)
-                  
-                {
                 <tr>                  
                     <td>
                         @Html.DisplayFor(modelItem => item.Destination.Country)
                         @Html.DisplayFor(modelItem => item.Destination.Region)
                     </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.DepartureDate)
-                    </td>*@
                     <td>
-                        @Html.DisplayFor(modelItem => item.ReturnDate)
+                        @Html.DisplayFor(modelItem => item.DepartureDate)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.MaxCapacity)
                     </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.UnitPublicPrice)
-                    </td>*@                   
+                                    
                     <td>
                         <a href="@Url.Action("Edit","Voyages", new { id = item.Id })"><i class="glyphicon glyphicon-edit text-warning"></i></a> |
                         <a href="@Url.Action("Details","Voyages", new { id = item.Id })"><i class="glyphicon glyphicon-search"></i></a> |
                         <a href="@Url.Action("Delete","Voyages", new { id = item.Id })"><i class="glyphicon glyphicon-trash"></i></a>
                     </td>
                 </tr>
-                }
             }
 
         </table>

@@ -17,9 +17,9 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
     {
         public ActionResult Index()
         {
-            var voyages = db.Voyages.Include("Destination").ToList();
-            var dossiers = db.DossiersReservations.Include("Client").ToList();
-            Dashboard dashboard = new Dashboard()
+            var voyages = db.Voyages.Include("Destination").ToList().Where(x => x.DepartureDate <= DateTime.Now.AddDays(15)).ToList();
+            var dossiers = db.DossiersReservations.Include("Client").ToList().Where(y => y.EtatDossier== EtatDossierReservation.EnAttente).ToList();
+            Dashboard dashboard = new Dashboard
             {
                 Voyages = voyages,
                 DossiersReservations = dossiers
