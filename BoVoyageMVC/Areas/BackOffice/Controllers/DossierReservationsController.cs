@@ -149,8 +149,8 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
             var voyage = db.Voyages.Find(dossierReservation.VoyageId);
             if (dossierReservation.Participants.Count < voyage.MaxCapacity)
-            {                
-                dossierReservation.EtatDossier = EtatDossierReservation.Accepte;               
+            {
+                dossierReservation.EtatDossier = EtatDossierReservation.Accepte;
                 voyage.MaxCapacity -= dossierReservation.Participants.Count;
                 db.Entry(voyage).State = EntityState.Modified;
                 Display("La réservation a été acceptée");
@@ -162,7 +162,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 Display("La réservation a été refusée pour cause de places non disponibles");
             }
 
-            db.Entry(dossierReservation).State = EntityState.Modified;           
+            db.Entry(dossierReservation).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -182,24 +182,23 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 Display("L'état du Dossier ne permet pas de l'Annuler", MessageType.ERROR);
                 return RedirectToAction("Index");
             }
-            if (dossierReservation.EtatDossier != EtatDossierReservation.Refusee)
+
+            if (dossierReservation.EtatDossier == EtatDossierReservation.Accepte)
             {
-                if (dossierReservation.EtatDossier == EtatDossierReservation.Accepte)
+                if (dossierReservation.Assurances.Where(x => x.TypeAssurance == TypeAssurance.Annulation).Count() > 0)
                 {
-                    if (dossierReservation.Assurances.Where(x => x.TypeAssurance == TypeAssurance.Annulation).Count() > 0)
-                    {
-                        var rembourser = new CarteBancaireService().Rembourser(dossierReservation.CreditCardNumber,
-                            dossierReservation.TotalPrice);
-                        Display("Vous serez remboursé grâce à votre Assurance Annulation", MessageType.SUCCES);
-                    }
-                    dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
+                    var rembourser = new CarteBancaireService().Rembourser(dossierReservation.CreditCardNumber,
+                        dossierReservation.TotalPrice);
+                    Display("Vous serez remboursé grâce à votre Assurance Annulation", MessageType.SUCCES);
                 }
-                
-                dossierReservation.EtatDossier = EtatDossierReservation.Annule;
-                db.Entry(dossierReservation).State = EntityState.Modified;
-                db.SaveChanges();
-                Display("La réservation a été annulée", MessageType.SUCCES);
+                dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.Client;
             }
+
+            dossierReservation.EtatDossier = EtatDossierReservation.Annule;
+            db.Entry(dossierReservation).State = EntityState.Modified;
+            db.SaveChanges();
+            Display("La réservation est annulée", MessageType.SUCCES);
+
 
             return RedirectToAction("Index");
         }

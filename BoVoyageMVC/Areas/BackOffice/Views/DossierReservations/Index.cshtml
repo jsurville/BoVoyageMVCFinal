@@ -66,13 +66,18 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
+                <a href="@Url.Action("Details", "DossierReservations", new { id = item.Id })" class="btn btn-info">DETAILS</a>
                 
-                <p class="btn btn-info">@Html.ActionLink("Details", "Details", new { id = item.Id }, null)</p>
-                <a href="@Url.Action("Validate", "DossierReservations", new { id = item.Id })" class="btn btn-default">VALIDER</a>
-                <a href="@Url.Action("Accept", "DossierReservations", new { id = item.Id })" class="btn btn-success">ACCEPTER</a>
-                <a href="@Url.Action("Cancel", "DossierReservations", new { id = item.Id })" class="btn btn-warning">ANNULER</a>
-                <a href="@Url.Action("Close", "DossierReservations", new { id = item.Id })" class="btn btn-danger">CLOTURER</a>
-              
+                @if (item.EtatDossier == BoVoyageMVC.Models.EtatDossierReservation.EnAttente)
+                {<a href="@Url.Action("Validate", "DossierReservations", new { id = item.Id })" class="btn btn-default">VALIDER</a>}
+                @if (item.EtatDossier == BoVoyageMVC.Models.EtatDossierReservation.EnCours)
+                {<a href="@Url.Action("Accept", "DossierReservations", new { id = item.Id })" class="btn btn-success">ACCEPTER</a>}
+                @if (item.EtatDossier != BoVoyageMVC.Models.EtatDossierReservation.Annule &&
+                     item.EtatDossier != BoVoyageMVC.Models.EtatDossierReservation.Clos)
+                {<a href="@Url.Action("Cancel", "DossierReservations", new { id = item.Id })" class="btn btn-warning">ANNULER</a>}
+                @if (item.EtatDossier == BoVoyageMVC.Models.EtatDossierReservation.Accepte)
+                {<a href="@Url.Action("Close", "DossierReservations", new { id = item.Id })" class="btn btn-danger">CLOTURER</a>}
+
             </td>
         </tr>
     }

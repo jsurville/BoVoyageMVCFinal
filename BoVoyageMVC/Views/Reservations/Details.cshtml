@@ -80,9 +80,19 @@
                 @Html.DisplayNameFor(model => model.Assurances)
             </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Assurances.First().TypeAssurance)
-            </dd>
+
+            @if (Model.Assurances == null || Model.Assurances.Count() == 0)
+            {
+                <dd>
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.Raw(Model.Assurances.First().TypeAssurance)
+                </dd>
+            }
+
             <dt>
                 @Html.DisplayNameFor(model => model.EtatDossier)
             </dt>
@@ -90,7 +100,16 @@
             <dd>
                 @Html.DisplayFor(model => model.EtatDossier)
             </dd>
-
+            @if (Model.EtatDossier == BoVoyageMVC.Models.EtatDossierReservation.Annule ||
+                Model.EtatDossier == BoVoyageMVC.Models.EtatDossierReservation.Refusee)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.RaisonAnnulationDossier)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.RaisonAnnulationDossier)
+                </dd>
+            }
 
             <dt>
                 @Html.DisplayNameFor(model => model.CreditCardNumber)
@@ -104,11 +123,11 @@
                 @Html.DisplayNameFor(model => model.Participants)
             </dt>
 
-            @{ if (Model.Participants == null)
+            @{ if (Model.Participants == null || Model.Participants.Count() == 0)
                 {
-                    <dt>
-                        dfsg dfgsdfgsdf gsdf gsdf
-                    </dt>
+                    <dd>
+
+                    </dd>
                 }
                 else
                 {

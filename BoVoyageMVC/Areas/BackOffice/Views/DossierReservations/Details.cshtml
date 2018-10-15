@@ -102,6 +102,17 @@
             @Html.DisplayFor(model => model.EtatDossier)
         </dd>
 
+        @if (Model.EtatDossier == BoVoyageMVC.Models.EtatDossierReservation.Annule ||
+            Model.EtatDossier == BoVoyageMVC.Models.EtatDossierReservation.Refusee)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.RaisonAnnulationDossier)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RaisonAnnulationDossier)
+            </dd>
+        }
+
         <dt>
             @Html.DisplayNameFor(model => model.CreditCardNumber)
         </dt>
