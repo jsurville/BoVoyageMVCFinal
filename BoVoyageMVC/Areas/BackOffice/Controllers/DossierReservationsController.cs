@@ -159,7 +159,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 dossierReservation.EtatDossier = EtatDossierReservation.Refusee;
                 dossierReservation.RaisonAnnulationDossier = RaisonAnnulationDossier.PlacesInsuffisantes;
-                Display("La réservation a été refusée pour cause places non disponibles");
+                Display("La réservation a été refusée pour cause de places non disponibles");
             }
 
             db.Entry(dossierReservation).State = EntityState.Modified;           
