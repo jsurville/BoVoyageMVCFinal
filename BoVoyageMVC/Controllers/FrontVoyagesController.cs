@@ -64,7 +64,7 @@ namespace BoVoyageMVC.Controllers
                 Display("Aucun résultat");
             }
 
-            return View("Index", voyages.ToList());
+            return View("Search",voyages.ToList());
 
         }
     }

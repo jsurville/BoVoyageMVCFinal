@@ -9,11 +9,11 @@
         <dl class="dl-horizontal">
 
             <dt>
-                @Html.DisplayNameFor(model => model.Voyage.Destination.Name)
+                @Html.DisplayNameFor(model => model.Voyage.Destination.Country)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Voyage.Destination.Name)
+                @Html.DisplayFor(model => model.Voyage.Destination.Country)
             </dd>           
 
             <dt>
@@ -31,15 +31,6 @@
             <dd>
                 @Html.DisplayFor(model => model.EtatDossier)
             </dd>
-
-            <dt>
-            @Html.DisplayNameFor(model => model.Id)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Id)
-            </dd>
-
         </dl>
 
         @using (Html.BeginForm())

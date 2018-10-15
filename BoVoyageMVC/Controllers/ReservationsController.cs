@@ -103,7 +103,10 @@ namespace BoVoyageMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+            DossierReservation dossierReservation = db.DossiersReservations.Include(d => d.Client)
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
+                .Include(d => d.Participants)
+                .Include(d => d.Assurances).SingleOrDefault(d => d.Id == id);
             if (dossierReservation == null)
             {
                 return HttpNotFound();
@@ -128,7 +131,10 @@ namespace BoVoyageMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+            DossierReservation dossierReservation = db.DossiersReservations.Include(d => d.Client)
+                .Include(d => d.Voyage).Include(d => d.Voyage.Destination)
+                .Include(d => d.Participants)
+                .Include(d => d.Assurances).SingleOrDefault(d => d.Id == id);
             if (ModelState.IsValid)
             {
                 if (dossierReservation.EtatDossier == EtatDossierReservation.Accepte)
