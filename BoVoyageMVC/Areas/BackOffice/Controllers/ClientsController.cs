@@ -69,12 +69,11 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 clients = clients.Where(c => c.BirthDate > avantNaissance);
 
             if (DateTime.TryParse(dateFin, out apresNaissance))
-                clients = db.Clients.Where(c =>c.BirthDate < apresNaissance);
+                clients = clients.Where(c =>c.BirthDate < apresNaissance);
 
             if (clients?.Count() == 0)
             {
-                Display("Aucun Résultat ");
-                return View("Index", null);
+                Display("Aucun Résultat ");              
             }           
 
             return View("Index", clients.ToList());
