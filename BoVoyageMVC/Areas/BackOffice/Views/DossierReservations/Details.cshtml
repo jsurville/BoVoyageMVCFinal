@@ -80,26 +80,19 @@
             @Html.DisplayNameFor(model => model.Assurances)
         </dt>
 
-        <dd>
 
-            @if (Model.Assurances == null)
-            {
-                <dt>
 
-                </dt>
-                }
-            else
-            {
-                foreach (BoVoyageMVC.Models.Participant participant in Model.Participants)
-                {
-                <dd>
-                    @Html.DisplayFor(model => model.Assurances.First().TypeAssurance)
-                </dd>
-                }
-            }   
-
-                   
-        </dd>
+        @if (Model.Assurances == null || Model.Assurances.Count() == 0)
+        {
+            <dd>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.Raw(Model.Assurances.First().TypeAssurance)
+            </dd>
+        }
 
         <dt>
             @Html.DisplayNameFor(model => model.EtatDossier)
@@ -122,11 +115,11 @@
             @Html.DisplayNameFor(model => model.Participants)
         </dt>
 
-        @{ if (Model.Participants == null)
+        @{ if (Model.Participants == null || Model.Participants.Count() == 0)
             {
-                <dt>
+                <dd>
 
-                </dt>
+                </dd>
             }
             else
             {
@@ -138,12 +131,12 @@
                 }
             }
         }
-        <p>
 
-            @Html.ActionLink("Retour", "Index", null, new { @style = "float:left" })
-        </p>
+
+        @Html.ActionLink("Retour", "Index", null, new { @style = "float:left" })
+
     </dl>
 
-    
+
 </div>
 
