@@ -74,13 +74,13 @@ namespace BoVoyageMVC.Models
         [StringLength(20, MinimumLength = 1, ErrorMessage = "La civilite doit avoir de 1 à 20 caractères")]
         public string Title { get; set; }
 
-        [RegularExpression(@"([a-zA-Zéàèïëüêâîôöç\-])*\s*$", ErrorMessage = "Le champ {0} ne doit contenir que des lettres")]
+        [RegularExpression(@"([a-zA-Zéàèïëüêâîôöç\-\s])*$", ErrorMessage = "Le champ {0} ne doit contenir que des lettres")]
         [Display(Name = "Nom")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         [StringLength(30, MinimumLength = 2, ErrorMessage = "Le nom doit avoir de 2 à 30 caractères")]
         public string LastName { get; set; }
 
-        [RegularExpression(@"([a-zA-Zéàèïëüêâîôöç\-])*\s*$", ErrorMessage = "Le champ {0} ne doit contenir que des lettres")]
+        [RegularExpression(@"([a-zA-Zéàèïëüêâîôöç\-\s])*$", ErrorMessage = "Le champ {0} ne doit contenir que des lettres")]
         [Display(Name = "Prénom")]
         [Required(ErrorMessage = "Le champ {0} est obligatoire.")]
         [StringLength(30, MinimumLength = 2, ErrorMessage = "La prénom doit avoir de 2 à 30 caractères")]
