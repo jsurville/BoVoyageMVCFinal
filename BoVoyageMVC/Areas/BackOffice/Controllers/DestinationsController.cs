@@ -64,10 +64,15 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Destination destination = db.Destinations.Include("Images").SingleOrDefault(x => x.Id == id);
+            Destination destination = db.Destinations.Include("Images").Include("Voyages").SingleOrDefault(x => x.Id == id);
             if (destination == null)
             {
                 return HttpNotFound();
+            }
+            if (destination.Voyages?.Count() > 0)
+            {
+                Display("Impossible, Voyage en cours", MessageType.ERROR);
+                return RedirectToAction("Index");
             }
             return View(destination);
         }

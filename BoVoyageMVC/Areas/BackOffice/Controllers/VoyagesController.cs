@@ -82,10 +82,15 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Find(id);
+            Voyage voyage = db.Voyages.Include(t => t.DossiersReservations).SingleOrDefault(y => y.Id == id);
             if (voyage == null)
             {
                 return HttpNotFound();
+            }
+            if (voyage.DossiersReservations?.Count() > 0)
+            {
+                Display("Impossible, Dossier en cours", MessageType.ERROR);
+                return RedirectToAction("Index");
             }
             ViewBag.AgenceVoyageId = new SelectList(db.AgencesVoyages, "Id", "Name", voyage.AgenceVoyageId);
             ViewBag.DestinationId = new SelectList(db.Destinations, "Id", "Continent", voyage.DestinationId);
