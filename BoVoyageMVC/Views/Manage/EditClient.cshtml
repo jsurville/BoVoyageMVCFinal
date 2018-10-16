@@ -66,7 +66,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                <input class="form-control" type="text" id="BirthDate" name="BirthDate" value="@Model.BirthDate" />
+                @*@Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -93,11 +94,11 @@
         $(function () {
             $('#BirthDate').datetimepicker({
                 lang: 'fr',
-                format: 'd/M/Y H:i'
+                format: 'd/M/Y'
             });
             
             $('#BirthDate').attr('autocomplete', 'off');
-            tinymce.init({ selector: '#Description', lang: 'fr' });
+            
         });
     </script>
 }
