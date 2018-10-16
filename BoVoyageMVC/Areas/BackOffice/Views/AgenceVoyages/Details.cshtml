@@ -22,11 +22,9 @@
     </div>
     <p>
 
-        <div class="btn btn-warning">
-            @Html.ActionLink("Editer", "Edit", new { id = Model.Id })
+        <div >
+            @Html.ActionLink("Modifier", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })  @Html.ActionLink("Annuler", "Index", null, new { @class = "btn btn-default" })
         </div>
-        <div class="btn btn-info">
-            @Html.ActionLink("Retour", "Index")
-        </div>
+       
     </p>
 </div>

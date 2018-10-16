@@ -97,31 +97,31 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         }
 
         // GET: BackOffice/Assurances/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Assurance assurance = db.Assurances.Find(id);
-            if (assurance == null)
-            {
-                return HttpNotFound();
-            }
-           // if(db.DossiersReservations.Any(d=>d.Assurances. ))
-            return View(assurance);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Assurance assurance = db.Assurances.Find(id);
+        //    if (assurance == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //   // if(db.DossiersReservations.Any(d=>d.Assurances. ))
+        //    return View(assurance);
+        //}
 
-        // POST: BackOffice/Assurances/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Assurance assurance = db.Assurances.Find(id);
-            db.Assurances.Remove(assurance);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: BackOffice/Assurances/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Assurance assurance = db.Assurances.Find(id);
+        //    db.Assurances.Remove(assurance);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         
     }

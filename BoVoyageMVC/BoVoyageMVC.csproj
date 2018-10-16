@@ -398,10 +398,7 @@
     <Content Include="Areas\BackOffice\Views\Destinations\Details.cshtml" />
     <Content Include="Areas\BackOffice\Views\Destinations\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\Destinations\Index.cshtml" />
-    <Content Include="Areas\BackOffice\Views\DossierReservations\Create.cshtml" />
-    <Content Include="Areas\BackOffice\Views\DossierReservations\Delete.cshtml" />
     <Content Include="Areas\BackOffice\Views\DossierReservations\Details.cshtml" />
-    <Content Include="Areas\BackOffice\Views\DossierReservations\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\DossierReservations\Index.cshtml" />
     <Content Include="Areas\BackOffice\Views\Voyages\Create.cshtml" />
     <Content Include="Areas\BackOffice\Views\Voyages\Delete.cshtml" />
@@ -412,16 +409,11 @@
     <Content Include="ConnectionStrings.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\BackOffice\Views\ContactMessages\Create.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Delete.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Details.cshtml" />
-    <Content Include="Areas\BackOffice\Views\ContactMessages\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\ContactMessages\Index.cshtml" />
     <Content Include="Areas\BackOffice\Views\Voyages\Search.cshtml" />
     <Content Include="Areas\BackOffice\Views\Shared\_LayoutSearch.cshtml" />
-    <Content Include="Areas\BackOffice\Views\Commercials\Create.cshtml" />
-    <Content Include="Areas\BackOffice\Views\Clients\Create.cshtml" />
-    <Content Include="Areas\BackOffice\Views\Clients\Delete.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Details.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Edit.cshtml" />
     <Content Include="Areas\BackOffice\Views\Clients\Index.cshtml" />
