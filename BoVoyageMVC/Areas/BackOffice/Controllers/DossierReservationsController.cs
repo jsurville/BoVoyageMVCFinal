@@ -136,7 +136,9 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         // POST: BackOffice/DossierReservations/
         public ActionResult Accept(int? id)
         {
-            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+            DossierReservation dossierReservation = db.DossiersReservations.Include(m => m.Assurances)
+                .Include(d => d.Client).Include(z => z.Participants).Include(d => d.Voyage)
+                .Include(u => u.Voyage.Destination).SingleOrDefault(d=>d.Id== id) ;
             if (dossierReservation == null)
             {
                 return HttpNotFound();
