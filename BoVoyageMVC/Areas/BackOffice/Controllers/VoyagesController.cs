@@ -82,7 +82,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Find(id);
+            Voyage voyage = db.Voyages.Include(y => y.AgenceVoyage).Include(t =>t.Destination).SingleOrDefault(v => v.Id == id);
             if (voyage == null)
             {
                 return HttpNotFound();
