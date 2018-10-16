@@ -52,7 +52,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         {
             if (assurance.Montant < 0)
             { 
-                Display("Assurance doit etre possitive");
+                Display("Assurance doit etre possitive",MessageType.ERROR);
                 return View();
             }
             if (ModelState.IsValid)
