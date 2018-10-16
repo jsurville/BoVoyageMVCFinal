@@ -172,7 +172,6 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             db.Voyages.Remove(voyage);
             db.SaveChanges();
 
-
             Display("Le Voyage a été supprimé", MessageType.SUCCES);
 
             return RedirectToAction("Index");

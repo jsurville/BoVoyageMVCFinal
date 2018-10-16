@@ -67,39 +67,39 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         }
 
         // GET: BackOffice/DossierReservations/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DossierReservation dossierReservation = db.DossiersReservations.Find(id);
-            if (dossierReservation == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "UserId", dossierReservation.ClientId);
-            ViewBag.VoyageId = new SelectList(db.Voyages, "Id", "Id", dossierReservation.VoyageId);
-            return View(dossierReservation);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    DossierReservation dossierReservation = db.DossiersReservations.Find(id);
+        //    if (dossierReservation == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.ClientId = new SelectList(db.Clients, "Id", "UserId", dossierReservation.ClientId);
+        //    ViewBag.VoyageId = new SelectList(db.Voyages, "Id", "Id", dossierReservation.VoyageId);
+        //    return View(dossierReservation);
+        //}
 
         // POST: BackOffice/DossierReservations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreditCardNumber,UnitPrice,EtatDossier,ClientId,VoyageId")] DossierReservation dossierReservation)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(dossierReservation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "UserId", dossierReservation.ClientId);
-            ViewBag.VoyageId = new SelectList(db.Voyages, "Id", "Id", dossierReservation.VoyageId);
-            return View(dossierReservation);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,CreditCardNumber,UnitPrice,EtatDossier,ClientId,VoyageId")] DossierReservation dossierReservation)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(dossierReservation).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.ClientId = new SelectList(db.Clients, "Id", "UserId", dossierReservation.ClientId);
+        //    ViewBag.VoyageId = new SelectList(db.Voyages, "Id", "Id", dossierReservation.VoyageId);
+        //    return View(dossierReservation);
+        //}
 
         // POST: BackOffice/DossierReservations/
         public ActionResult Validate(int? id)
