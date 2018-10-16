@@ -62,6 +62,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
                 {
                     db.Voyages.Add(voyage);
                     db.SaveChanges();
+                    Display("Le Nouveau Voyage a bien été créé");
                     return RedirectToAction("Index");
                 }
                 else

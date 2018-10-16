@@ -72,8 +72,8 @@ namespace BoVoyageMVC.Controllers
             {
                 if (AssuranceIds != null && AssuranceIds.Count() > 0)
                     dossierReservation.Assurances = db.Assurances.Where(x => AssuranceIds.Contains(x.ID)).ToList();
-                int cardNumber = 0;
-                if (int.TryParse(dossierReservation.CreditCardNumber, out cardNumber) && cardNumber > 0)
+                double cardNumber = 0;
+                if (double.TryParse(dossierReservation.CreditCardNumber, out cardNumber) && cardNumber > 0)
                 {
                     dossierReservation.UnitPrice = db.Voyages.Find(dossierReservation.VoyageId).UnitPublicPrice;
                     db.DossiersReservations.Add(dossierReservation);
@@ -81,7 +81,7 @@ namespace BoVoyageMVC.Controllers
                     return RedirectToAction("Index");
                 } else
                 {                   
-                    ModelState.AddModelError("CreditCardNumber", "Le numéro CB doit comporter 10 chiffres maximimum");                   
+                    ModelState.AddModelError("CreditCardNumber", "Le numéro CB doit comporter 20 chiffres maximimum");                   
                 }
 
             }

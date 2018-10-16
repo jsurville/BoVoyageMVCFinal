@@ -89,9 +89,18 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(assurance).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                
+                if (assurance.Montant > 0)
+                {
+                    db.Entry(assurance).State = EntityState.Modified;
+                    db.SaveChanges();
+                    Display("L'Assurance a bien été modifiée");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("Montant", "Le Montant de l'Assurance doit être positif");
+                }
             }
             return View(assurance);
         }
