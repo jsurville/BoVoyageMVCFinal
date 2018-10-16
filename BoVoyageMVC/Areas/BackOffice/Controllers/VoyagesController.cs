@@ -148,7 +148,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voyage voyage = db.Voyages.Include(t => t.DossiersReservations).Include(x => x.AgenceVoyage).SingleOrDefault(y => y.Id == id);
+            Voyage voyage = db.Voyages.Include(t => t.DossiersReservations).Include(x => x.AgenceVoyage).Include(x => x.Destination).SingleOrDefault(y => y.Id == id);
             if (voyage == null)
             {
                 return HttpNotFound();
@@ -167,7 +167,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Voyage voyage = db.Voyages.Find(id);
+            Voyage voyage = db.Voyages.Include(t => t.DossiersReservations).Include(x => x.AgenceVoyage).Include(x => x.Destination).SingleOrDefault(y => y.Id == id);
 
             db.Voyages.Remove(voyage);
             db.SaveChanges();

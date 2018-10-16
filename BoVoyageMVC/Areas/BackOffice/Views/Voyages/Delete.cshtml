@@ -19,11 +19,11 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Destination.Continent)
+                @Html.DisplayNameFor(model => model.Destination.Country)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Destination.Continent)
+                @Html.DisplayFor(model => model.Destination.Country)
             </dd>
 
             <dt>
@@ -73,7 +73,7 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
+                <input type="submit" value="Supprimer" class="btn btn-default" /> |
                 <div class="btn btn-info">
                     @Html.ActionLink("Retour", "Index")
                 </div>

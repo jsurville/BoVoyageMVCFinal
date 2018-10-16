@@ -19,25 +19,18 @@
 
                 <th>
                     Destination
-                    @*@Html.DisplayNameFor(model => model.Voyages.Destination.Country)
-            @Html.DisplayNameFor(model => model.Item1.Destination.Region)*@
+             
                 </th>
                 <th>
                     Date aller
-                    @*@Html.DisplayNameFor(model => model.Item1.DepartureDate)*@
+                   
                 </th>
-                <th>
-                    @*Date de retour*@
-                    @*@Html.DisplayNameFor(model => model.Item1.ReturnDate)*@
-                </th>
+               
                 <th>
                     Places
-                    @*@Html.DisplayNameFor(model => model.Item1.MaxCapacity)*@
+                    
                 </th>
-                @*<th>
-                    Prix public
-                    @Html.DisplayNameFor(model => model.Item1.UnitPrice)
-                </th>*@
+             
                 <th></th>
 
             </tr>
@@ -73,16 +66,15 @@
             <tr>
                 <th>
                     Client
-                    @*@Html.DisplayNameFor(model => model.Client.FisrtName)
-                    @Html.DisplayNameFor(model => model.Client.LastName)*@
+                   
                 </th>
                 <th>
                     Numero de dossier
-                    @*@Html.DisplayNameFor(model => model.Id)*@
+                   
                 </th>                            
                 <th>
                     Etat du dossier
-                    @*@Html.DisplayNameFor(model => model.EtatDossier)*@
+                 
                 </th>
                 <th></th>
             </tr>
@@ -104,8 +96,8 @@
                     </td>
                     <td>
                         <a href="@Url.Action("Edit","DossierReservations", new { id=item.Id })"><i class="glyphicon glyphicon-edit text-warning"></i></a> |
-                        <a href="@Url.Action("Details","DossierReservations", new { id=item.Id })"><i class="glyphicon glyphicon-search"></i></a> |
-                        <a href="@Url.Action("Delete","DossierReservations", new { id=item.Id })"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a href="@Url.Action("Details","DossierReservations", new { id=item.Id })"><i class="glyphicon glyphicon-search"></i></a> 
+                        
                     </td>
                 </tr>
                 }
