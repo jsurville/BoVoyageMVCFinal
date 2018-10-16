@@ -73,10 +73,10 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Supprimer" class="btn btn-default" /> |
-                <div class="btn btn-info">
-                    @Html.ActionLink("Retour", "Index")
-                </div>
+                <input type="submit" value="Supprimer" class="btn btn-danger" /> 
+                
+                    @Html.ActionLink("Annuler", "Index", null, new {@class="btn btn-default" })
+               
             </div>
         }
     </div>
