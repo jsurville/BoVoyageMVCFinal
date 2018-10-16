@@ -86,8 +86,8 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Ajouter" />
-                @Html.ActionLink("Retour", "Index", "Home")
+                <input type="submit" class="btn btn-info" value="Ajouter" />
+                @Html.ActionLink("Retour", "Index", "Dashboard", new {area="BackOffice"}, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
             $(function () {
                 $('#BirthDate').datetimepicker({
                     lang: 'fr',
-                    format: 'd/M/Y H:i'
+                    format: 'd/M/Y'
                 });
 
                 $('#BirthDate').attr('autocomplete', 'off');

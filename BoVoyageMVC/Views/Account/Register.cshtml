@@ -85,7 +85,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" class="btn btn-info" value="S’inscrire" />
-                @Html.ActionLink("Retour", "Index", "Home")
+                @Html.ActionLink("Retour", "Index", "Home", null, new { @class = "btn btn-default" })
             </div>
 
         </div>
@@ -97,7 +97,7 @@
          $(function () {
              $('#BirthDate').datetimepicker({
                     lang: 'fr',
-                    format: 'd/M/Y H:i'
+                    format: 'd/M/Y'
                 });
              $('#BirthDate').attr('autocomplete', 'off');
             });
