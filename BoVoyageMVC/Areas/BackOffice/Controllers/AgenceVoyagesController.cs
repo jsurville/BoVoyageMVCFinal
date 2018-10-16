@@ -96,10 +96,15 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AgenceVoyage agenceVoyage = db.AgencesVoyages.Find(id);
+            AgenceVoyage agenceVoyage = db.AgencesVoyages.Include(a=>a.Voyages).SingleOrDefault(u=>u.Id==id);
             if (agenceVoyage == null)
             {
                 return HttpNotFound();
+            }
+            if(agenceVoyage.Voyages !=null && agenceVoyage.Voyages.Count()>0)
+            {
+                Display("Impossible de supprimer une Agence de Voyage pour un Voyage en Cours",MessageType.ERROR);
+                return RedirectToAction("Index");
             }
             return View(agenceVoyage);
         }
@@ -109,7 +114,7 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AgenceVoyage agenceVoyage = db.AgencesVoyages.Find(id);
+            AgenceVoyage agenceVoyage = db.AgencesVoyages.Include(a => a.Voyages).SingleOrDefault(u => u.Id == id);
             db.AgencesVoyages.Remove(agenceVoyage);
             db.SaveChanges();
             return RedirectToAction("Index");

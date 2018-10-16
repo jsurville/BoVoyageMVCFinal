@@ -36,21 +36,21 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
         }
 
 
-        public ActionResult Edit(int id)
-        {
-            if (id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Client client = db.Clients.Find(id);
-            if (client == null)
-            {
-                return HttpNotFound();
-            }
+        //public ActionResult Edit(int id)
+        //{
+        //    if (id == 0)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Client client = db.Clients.Find(id);
+        //    if (client == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            return View(client);
+        //    return View(client);
 
-        }
+        //}
 
         public ActionResult Search(string search, string dateDebut, string dateFin)
         {

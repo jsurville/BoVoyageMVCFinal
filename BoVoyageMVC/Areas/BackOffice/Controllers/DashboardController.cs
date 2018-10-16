@@ -27,18 +27,6 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
             return View(dashboard);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "PAGE ADMIN";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Numéro Contact Agence";
-
-            return View();
-        }
+       
     }
 }

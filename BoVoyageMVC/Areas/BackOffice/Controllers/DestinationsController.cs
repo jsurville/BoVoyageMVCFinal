@@ -126,49 +126,49 @@ namespace BoVoyageMVC.Areas.BackOffice.Controllers
 
 
         // GET: BackOffice/Destinations/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Destination destination = db.Destinations.Find(id);
-            var voyages = db.Voyages.Where(x => x.DestinationId == destination.Id);
-            if (voyages != null)
-            {
-                Display("Impossible de supprimer une Destination pour un Voyage en Cours ", type: MessageType.ERROR);
-            }
-            if (destination == null)
-            {
-                return HttpNotFound();
-            }
-            return View(destination);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Destination destination = db.Destinations.Find(id);
+        //    var voyages = db.Voyages.Where(x => x.DestinationId == destination.Id);
+        //    if (voyages != null)
+        //    {
+        //        Display("Impossible de supprimer une Destination pour un Voyage en Cours ", type: MessageType.ERROR);
+        //    }
+        //    if (destination == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(destination);
+        //}
 
         // POST: BackOffice/Destinations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Destination destination = db.Destinations.Include("Images").SingleOrDefault(x => x.Id == id);
-            var voyages = db.Voyages.Where(x => x.DestinationId == id);
-            if (voyages != null)
-            {
-                Display("Impossible de supprimer une Destination pour un Voyage en Cours ", type: MessageType.ERROR);
-            }
-            else
-            {
-                foreach (var item in voyages)
-                {
-                    db.Entry(item).State = EntityState.Deleted;  // équivalent à db.Shooters.Remove(item);
-                }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Destination destination = db.Destinations.Include("Images").SingleOrDefault(x => x.Id == id);
+        //    var voyages = db.Voyages.Where(x => x.DestinationId == id);
+        //    if (voyages != null)
+        //    {
+        //        Display("Impossible de supprimer une Destination pour un Voyage en Cours ", type: MessageType.ERROR);
+        //    }
+        //    else
+        //    {
+        //        foreach (var item in voyages)
+        //        {
+        //            db.Entry(item).State = EntityState.Deleted;  // équivalent à db.Shooters.Remove(item);
+        //        }
 
-                db.Destinations.Remove(destination);
+        //        db.Destinations.Remove(destination);
 
-                db.SaveChanges();
-            }
+        //        db.SaveChanges();
+        //    }
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
     }
 }
